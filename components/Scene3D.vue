@@ -39,6 +39,7 @@ const PARTICLE_COUNT = 2048
 const LINE_COUNT = 40
 const TEAL_DEEP = 0x1a6b5c
 const TEAL_BRIGHT = 0x22a088
+const TEAL_PARTICLE_LIGHT = 0x0a4a3c
 
 
 function clamp01(value: number): number {
@@ -68,6 +69,27 @@ let lastFrameTime = 0
 let flagMesh: import('three').Mesh | null = null
 let flagBasePositions: Float32Array | null = null
 let flagHalfWidth = 1
+let outerWireMaterial: import('three').MeshBasicMaterial | null = null
+let particleMaterialRef: import('three').PointsMaterial | null = null
+
+function applySceneTheme(mode: string): void {
+  const isLight = mode === 'light'
+  if (outerWireMaterial) {
+    outerWireMaterial.opacity = isLight ? 0.58 : 0.82
+  }
+  if (particleMaterialRef) {
+    particleMaterialRef.color.setHex(isLight ? TEAL_PARTICLE_LIGHT : TEAL_BRIGHT)
+    particleMaterialRef.opacity = isLight ? 0.82 : 0.55
+  }
+}
+
+const colorMode = useColorMode()
+
+watch(
+  () => colorMode.value,
+  (mode) => applySceneTheme(mode),
+  { immediate: true },
+)
 
 const disposables: Array<{
   geometry?: BufferGeometry
@@ -146,6 +168,17 @@ function createGhanaFlagCanvas(): HTMLCanvasElement {
   }
   ctx.closePath()
   ctx.fill()
+
+  const borderWidth = 22
+  ctx.strokeStyle = '#0d1210'
+  ctx.lineWidth = borderWidth
+  ctx.lineJoin = 'miter'
+  ctx.strokeRect(
+    borderWidth / 2,
+    borderWidth / 2,
+    canvas.width - borderWidth,
+    canvas.height - borderWidth,
+  )
 
   return canvas
 }
@@ -400,6 +433,8 @@ function disposeScene(): void {
   mainGroup = null
   flagMesh = null
   flagBasePositions = null
+  outerWireMaterial = null
+  particleMaterialRef = null
 
   renderer?.dispose()
   renderer = null
@@ -444,6 +479,7 @@ async function initScene(): Promise<void> {
     transparent: true,
     opacity: 0.82,
   })
+  outerWireMaterial = outerMaterial
   const outerMesh = new THREE.Mesh(outerGeometry, outerMaterial)
   mainGroup.add(outerMesh)
   trackDisposable({ geometry: outerGeometry, material: outerMaterial, object: outerMesh })
@@ -487,6 +523,7 @@ async function initScene(): Promise<void> {
     depthWrite: false,
     sizeAttenuation: true,
   })
+  particleMaterialRef = particleMaterial
 
   particlePoints = new THREE.Points(particleGeometry, particleMaterial)
   mainGroup.add(particlePoints)
@@ -495,6 +532,8 @@ async function initScene(): Promise<void> {
     material: particleMaterial,
     object: particlePoints,
   })
+
+  applySceneTheme(colorMode.value)
 
   const nodePositions = collectNodePoints(THREE, outerMesh, flagGroup)
   buildConnectionLines(THREE, nodePositions, mainGroup)

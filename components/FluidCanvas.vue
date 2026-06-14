@@ -39,6 +39,7 @@ uniform vec2 uResolution;
 uniform float uTime;
 uniform vec2 uMouse;
 uniform float uScroll;
+uniform float uLight;
 
 out vec4 fragColor;
 
@@ -46,9 +47,21 @@ out vec4 fragColor;
 #define MAX_DIST 12.0
 #define SURF_DIST 0.0015
 
-const vec3 BG_COLOR = vec3(0.039, 0.047, 0.059);
 const vec3 TEAL_DEEP = vec3(0.051, 0.310, 0.290);
 const vec3 TEAL_BRIGHT = vec3(0.102, 0.420, 0.361);
+const vec3 PARTICLE_DEEP = vec3(0.039, 0.235, 0.195);
+
+vec3 sceneBg() {
+  return mix(vec3(0.039, 0.047, 0.059), vec3(0.949, 0.965, 0.957), uLight);
+}
+
+vec3 particleTint() {
+  return mix(TEAL_BRIGHT, PARTICLE_DEEP, uLight);
+}
+
+float particleStrength() {
+  return mix(0.12 + uScroll * 0.22, 0.34 + uScroll * 0.18, uLight);
+}
 
 float hash(vec3 p) {
   p = fract(p * 0.3183099 + vec3(0.1, 0.2, 0.3));
@@ -165,7 +178,7 @@ vec3 iridescence(vec3 normal, vec3 viewDir, vec3 pos) {
     fresnel * 0.4
   );
 
-  vec3 colorA = mix(BG_COLOR, TEAL_DEEP, 0.85);
+  vec3 colorA = mix(sceneBg(), TEAL_DEEP, 0.85);
   vec3 colorB = mix(TEAL_DEEP, TEAL_BRIGHT, 0.75);
   vec3 colorC = TEAL_BRIGHT * 1.15;
 
@@ -265,7 +278,7 @@ void main() {
 
   float hit = rayMarch(ro, rd);
 
-  vec3 color = BG_COLOR;
+  vec3 color = sceneBg();
 
   if (hit > 0.0) {
     vec3 normal = calcNormal(gHitPos);
@@ -275,20 +288,20 @@ void main() {
     float glow = exp(-hit * 0.22);
     color = mix(color, surface, glow);
 
-    vec3 fogColor = mix(BG_COLOR, TEAL_DEEP, 0.25 + uScroll * 0.15);
+    vec3 fogColor = mix(sceneBg(), TEAL_DEEP, 0.25 + uScroll * 0.15);
     color = mix(color, fogColor, 1.0 - exp(-hit * 0.08));
   } else {
     vec2 bgUv = uvRippled;
     float bgVignette = smoothstep(1.15, 0.25, length(bgUv));
-    vec3 ambient = mix(BG_COLOR, TEAL_DEEP, 0.08 + uScroll * 0.06);
-    color = mix(BG_COLOR, ambient, bgVignette * 0.35);
+    vec3 ambient = mix(sceneBg(), TEAL_DEEP, 0.08 + uScroll * 0.06);
+    color = mix(sceneBg(), ambient, bgVignette * 0.35);
   }
 
   float particles = dataParticles(uvRippled);
   vec2 mouseUv = mouseScreenUv();
   float mouseProximity = exp(-length(uvRippled - mouseUv) * 2.8);
-  color += TEAL_BRIGHT * particles * (0.12 + uScroll * 0.22);
-  color += vec3(0.035, 0.07, 0.055) * particles * mouseProximity;
+  color += particleTint() * particles * particleStrength();
+  color += mix(vec3(0.035, 0.07, 0.055), PARTICLE_DEEP * 0.85, uLight) * particles * mouseProximity;
 
   color += vec3(0.018, 0.028, 0.024) * dataStreamLines(uv);
   color += vec3(0.01, 0.015, 0.012) * sin(uTime * 2.0 + uv.y * 3.0);
@@ -308,14 +321,27 @@ uniform vec2 uResolution;
 uniform float uTime;
 uniform vec2 uMouse;
 uniform float uScroll;
+uniform float uLight;
 
 #define MAX_STEPS 80
 #define MAX_DIST 12.0
 #define SURF_DIST 0.0015
 
-const vec3 BG_COLOR = vec3(0.039, 0.047, 0.059);
 const vec3 TEAL_DEEP = vec3(0.051, 0.310, 0.290);
 const vec3 TEAL_BRIGHT = vec3(0.102, 0.420, 0.361);
+const vec3 PARTICLE_DEEP = vec3(0.039, 0.235, 0.195);
+
+vec3 sceneBg() {
+  return mix(vec3(0.039, 0.047, 0.059), vec3(0.949, 0.965, 0.957), uLight);
+}
+
+vec3 particleTint() {
+  return mix(TEAL_BRIGHT, PARTICLE_DEEP, uLight);
+}
+
+float particleStrength() {
+  return mix(0.12 + uScroll * 0.22, 0.34 + uScroll * 0.18, uLight);
+}
 
 float hash(vec3 p) {
   p = fract(p * 0.3183099 + vec3(0.1, 0.2, 0.3));
@@ -431,7 +457,7 @@ vec3 iridescence(vec3 normal, vec3 viewDir, vec3 pos) {
     fresnel * 0.4
   );
 
-  vec3 colorA = mix(BG_COLOR, TEAL_DEEP, 0.85);
+  vec3 colorA = mix(sceneBg(), TEAL_DEEP, 0.85);
   vec3 colorB = mix(TEAL_DEEP, TEAL_BRIGHT, 0.75);
   vec3 colorC = TEAL_BRIGHT * 1.15;
 
@@ -531,7 +557,7 @@ void main() {
 
   float hit = rayMarch(ro, rd);
 
-  vec3 color = BG_COLOR;
+  vec3 color = sceneBg();
 
   if (hit > 0.0) {
     vec3 normal = calcNormal(gHitPos);
@@ -541,20 +567,20 @@ void main() {
     float glow = exp(-hit * 0.22);
     color = mix(color, surface, glow);
 
-    vec3 fogColor = mix(BG_COLOR, TEAL_DEEP, 0.25 + uScroll * 0.15);
+    vec3 fogColor = mix(sceneBg(), TEAL_DEEP, 0.25 + uScroll * 0.15);
     color = mix(color, fogColor, 1.0 - exp(-hit * 0.08));
   } else {
     vec2 bgUv = uvRippled;
     float bgVignette = smoothstep(1.15, 0.25, length(bgUv));
-    vec3 ambient = mix(BG_COLOR, TEAL_DEEP, 0.08 + uScroll * 0.06);
-    color = mix(BG_COLOR, ambient, bgVignette * 0.35);
+    vec3 ambient = mix(sceneBg(), TEAL_DEEP, 0.08 + uScroll * 0.06);
+    color = mix(sceneBg(), ambient, bgVignette * 0.35);
   }
 
   float particles = dataParticles(uvRippled);
   vec2 mouseUv = mouseScreenUv();
   float mouseProximity = exp(-length(uvRippled - mouseUv) * 2.8);
-  color += TEAL_BRIGHT * particles * (0.12 + uScroll * 0.22);
-  color += vec3(0.035, 0.07, 0.055) * particles * mouseProximity;
+  color += particleTint() * particles * particleStrength();
+  color += mix(vec3(0.035, 0.07, 0.055), PARTICLE_DEEP * 0.85, uLight) * particles * mouseProximity;
 
   color += vec3(0.018, 0.028, 0.024) * dataStreamLines(uv);
   color += vec3(0.01, 0.015, 0.012) * sin(uTime * 2.0 + uv.y * 3.0);
@@ -574,6 +600,7 @@ interface UniformLocations {
   time: WebGLUniformLocation | null
   mouse: WebGLUniformLocation | null
   scroll: WebGLUniformLocation | null
+  light: WebGLUniformLocation | null
 }
 
 let gl: GL | null = null
@@ -589,6 +616,10 @@ let isWebGL2 = false
 const mouse = reactive({ x: 0.5, y: 0.5 })
 const targetMouse = reactive({ x: 0.5, y: 0.5 })
 const internalScroll = ref(0)
+
+const colorMode = useColorMode()
+
+const lightMix = computed(() => (colorMode.value === 'light' ? 1 : 0))
 
 function clamp01(value: number): number {
   return Math.min(1, Math.max(0, value))
@@ -689,6 +720,7 @@ function initWebGL(canvas: HTMLCanvasElement): boolean {
     time: gl.getUniformLocation(program, 'uTime'),
     mouse: gl.getUniformLocation(program, 'uMouse'),
     scroll: gl.getUniformLocation(program, 'uScroll'),
+    light: gl.getUniformLocation(program, 'uLight'),
   }
 
   return true
@@ -722,6 +754,7 @@ function renderFrame(timestamp: number): void {
   gl.uniform1f(uniforms.time, elapsed)
   gl.uniform2f(uniforms.mouse, mouse.x, 1 - mouse.y)
   gl.uniform1f(uniforms.scroll, internalScroll.value)
+  gl.uniform1f(uniforms.light, lightMix.value)
 
   gl.drawArrays(gl.TRIANGLES, 0, 6)
 

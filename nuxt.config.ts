@@ -20,6 +20,13 @@ export default defineNuxtConfig({
 		"@nuxtjs/tailwindcss",
 	],
 
+	colorMode: {
+		classSuffix: "",
+		preference: "system",
+		fallback: "dark",
+		storageKey: "quenginedev-color-mode",
+	},
+
 	googleFonts: {
 		families: {
 			Syne: [400, 500, 600, 700, 800],
@@ -42,6 +49,12 @@ export default defineNuxtConfig({
 						colors: {
 							background: '#0A0C0F',
 							surface: '#0F1216',
+						},
+					},
+					light: {
+						colors: {
+							background: '#F2F6F4',
+							surface: '#FFFFFF',
 						},
 					},
 				},

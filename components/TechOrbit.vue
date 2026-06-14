@@ -217,9 +217,9 @@ const rings = computed<ComputedRing[]>(() => {
   letter-spacing: 0.06em;
   text-transform: uppercase;
   white-space: nowrap;
-  color: #e8f0ed;
-  background: rgba(10, 12, 15, 0.82);
-  border: 1px solid rgba(232, 240, 237, 0.18);
+  color: var(--orbit-pill-text);
+  background: var(--orbit-pill-bg);
+  border: 1px solid var(--orbit-pill-border);
   backdrop-filter: blur(8px);
   transform: translate(-50%, -50%) rotateY(calc(-1 * var(--angle))) rotateX(calc(-1 * var(--tilt)));
   animation: counter-spin var(--duration) linear infinite;
@@ -283,7 +283,7 @@ const rings = computed<ComputedRing[]>(() => {
   width: 6px;
   height: 6px;
   margin: -3px 0 0 -3px;
-  background: #22a088;
+  background: var(--accent-bright);
   border-radius: 50%;
   box-shadow: 0 0 16px rgba(34, 160, 136, 0.65);
 }

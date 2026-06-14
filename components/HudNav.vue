@@ -8,6 +8,14 @@
 
     <div class="hud-nav__corner hud-nav__corner--tr">
       <div class="hud-panel hud-socials">
+        <button
+          type="button"
+          class="hud-theme-toggle"
+          :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
+          @click="toggleTheme"
+        >
+          <Icon :name="isDark ? 'mdi:weather-sunny' : 'mdi:weather-night'" size="16" />
+        </button>
         <a
           v-for="link in navSocialLinks"
           :key="link.platform"
@@ -63,6 +71,14 @@ const navSocialLinks = socialLinks.filter((link) => link.platform !== 'Email')
 const scrollPercent = computed(() =>
   Math.round((props.scrollProgress ?? 0) * 100),
 )
+
+const colorMode = useColorMode()
+
+const isDark = computed(() => colorMode.value === 'dark')
+
+function toggleTheme() {
+  colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
+}
 
 function scrollTo(selector: string) {
   const el = document.querySelector(selector)

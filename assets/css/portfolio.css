@@ -13,6 +13,19 @@
   --border-strong: rgba(232, 240, 237, 0.22);
   --grid-line: rgba(232, 240, 237, 0.06);
 
+  --orbit-pill-text: #e8f0ed;
+  --orbit-pill-bg: rgba(10, 12, 15, 0.82);
+  --orbit-pill-border: rgba(232, 240, 237, 0.18);
+  --pillar-title: #e8f0ed;
+  --pillar-desc: rgba(232, 240, 237, 0.55);
+  --pillar-bg: rgba(15, 18, 22, 0.72);
+  --pillar-grid-bg: rgba(232, 240, 237, 0.12);
+  --pillar-grid-border: rgba(232, 240, 237, 0.12);
+  --pillar-icon-bg: rgba(10, 12, 15, 0.55);
+  --pillar-icon-border: rgba(232, 240, 237, 0.12);
+  --pillar-hover-bg: rgba(15, 18, 22, 0.88);
+  --pillar-hover-shadow: rgba(10, 12, 15, 0.45);
+
   --font-display: 'Syne', system-ui, sans-serif;
   --font-body: 'Instrument Sans', system-ui, sans-serif;
 
@@ -33,6 +46,53 @@
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+html.light {
+  color-scheme: light;
+
+  --bg: #f4f7f5;
+  --bg-elevated: #ffffff;
+  --bg-panel: #ffffff;
+  --text: #080c0a;
+  --text-muted: rgba(8, 12, 10, 0.78);
+  --text-dim: rgba(8, 12, 10, 0.55);
+  --accent: #1a6b5c;
+  --accent-bright: #126b58;
+  --accent-glow: rgba(26, 107, 92, 0.32);
+  --border: rgba(8, 12, 10, 0.14);
+  --border-strong: rgba(8, 12, 10, 0.24);
+  --grid-line: rgba(8, 12, 10, 0.06);
+
+  --orbit-pill-text: #080c0a;
+  --orbit-pill-bg: #ffffff;
+  --orbit-pill-border: rgba(8, 12, 10, 0.14);
+  --pillar-title: #080c0a;
+  --pillar-desc: rgba(8, 12, 10, 0.76);
+  --pillar-bg: #ffffff;
+  --pillar-grid-bg: rgba(8, 12, 10, 0.1);
+  --pillar-grid-border: rgba(8, 12, 10, 0.14);
+  --pillar-icon-bg: rgba(26, 107, 92, 0.07);
+  --pillar-icon-border: rgba(26, 107, 92, 0.22);
+  --pillar-hover-bg: #ffffff;
+  --pillar-hover-shadow: rgba(8, 12, 10, 0.14);
+}
+
+html.light .panel {
+  box-shadow: 0 1px 0 rgba(8, 12, 10, 0.04);
+}
+
+html.light .label-caps {
+  color: rgba(8, 12, 10, 0.58);
+}
+
+html.light .constellation-lead,
+html.light .section-lead {
+  color: rgba(8, 12, 10, 0.8);
 }
 
 /* ─── Base ─── */
@@ -234,7 +294,33 @@
 
 .hud-panel:hover {
   border-color: var(--border-strong);
+}
+
+html.dark .hud-panel:hover {
   mix-blend-mode: difference;
+}
+
+.hud-theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.125rem;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  line-height: 1;
+  transition: color 0.25s var(--ease-out-expo);
+}
+
+.hud-theme-toggle:hover {
+  color: var(--accent-bright);
+}
+
+.hud-socials {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.125rem;
 }
 
 .hud-wordmark {
@@ -246,12 +332,6 @@
   letter-spacing: 0.06em;
   text-transform: lowercase;
   white-space: nowrap;
-}
-
-.hud-socials {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.125rem;
 }
 
 .hud-social-link {

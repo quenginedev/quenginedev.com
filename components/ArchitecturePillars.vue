@@ -41,8 +41,8 @@ withDefaults(
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1px;
-  background: rgba(232, 240, 237, 0.12);
-  border: 1px solid rgba(232, 240, 237, 0.12);
+  background: var(--pillar-grid-bg);
+  border: 1px solid var(--pillar-grid-border);
 }
 
 .pillar {
@@ -51,7 +51,7 @@ withDefaults(
   gap: var(--space-md, 1rem);
   padding: var(--space-xl, 2rem) var(--space-lg, 1.5rem);
   min-height: 100%;
-  background: rgba(15, 18, 22, 0.72);
+  background: var(--pillar-bg);
   border: none;
   border-radius: 0;
   transition:
@@ -63,12 +63,12 @@ withDefaults(
 
 .pillar:hover {
   transform: translateY(-4px);
-  border-color: #1a6b5c;
+  border-color: var(--accent);
   box-shadow:
-    0 0 0 1px rgba(26, 107, 92, 0.45),
+    0 0 0 1px var(--accent-glow),
     inset 0 0 32px rgba(26, 107, 92, 0.06),
-    0 12px 40px rgba(10, 12, 15, 0.45);
-  background: rgba(15, 18, 22, 0.88);
+    0 12px 40px var(--pillar-hover-shadow);
+  background: var(--pillar-hover-bg);
 }
 
 .pillar__icon-wrap {
@@ -77,8 +77,8 @@ withDefaults(
   justify-content: flex-start;
   width: 3.5rem;
   height: 3.5rem;
-  border: 1px solid rgba(232, 240, 237, 0.12);
-  background: rgba(10, 12, 15, 0.55);
+  border: 1px solid var(--pillar-icon-border);
+  background: var(--pillar-icon-bg);
   transition:
     border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
     color 0.35s ease;
@@ -86,17 +86,17 @@ withDefaults(
 
 .pillar:hover .pillar__icon-wrap {
   border-color: rgba(34, 160, 136, 0.45);
-  color: #22a088;
+  color: var(--accent-bright);
 }
 
 .pillar__icon {
   margin: auto;
-  color: #1a6b5c;
+  color: var(--accent);
   transition: color 0.35s ease;
 }
 
 .pillar:hover .pillar__icon {
-  color: #22a088;
+  color: var(--accent-bright);
 }
 
 .pillar__title {
@@ -107,7 +107,7 @@ withDefaults(
   letter-spacing: 0.04em;
   line-height: 1.15;
   text-transform: uppercase;
-  color: #e8f0ed;
+  color: var(--pillar-title);
 }
 
 .pillar__desc {
@@ -115,7 +115,7 @@ withDefaults(
   font-family: var(--font-body, 'Instrument Sans', system-ui, sans-serif);
   font-size: clamp(0.8125rem, 1.2vw, 0.9375rem);
   line-height: 1.6;
-  color: rgba(232, 240, 237, 0.55);
+  color: var(--pillar-desc);
 }
 
 @media (max-width: 1024px) {
