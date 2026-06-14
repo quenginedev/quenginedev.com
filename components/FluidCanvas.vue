@@ -214,6 +214,15 @@ vec3 chromaticBlob(vec3 normal, vec3 viewDir, vec3 pos) {
   return mix(surfG, vec3(surfR.r, surfG.g, surfB.b), edge);
 }
 
+float fourPointStar(vec2 p, float size) {
+  vec2 ap = abs(p);
+  float armX = smoothstep(size * 1.2, size * 0.05, ap.y) * smoothstep(size * 1.3, size * 0.08, ap.x);
+  float armY = smoothstep(size * 1.2, size * 0.05, ap.x) * smoothstep(size * 1.3, size * 0.08, ap.y);
+  float core = smoothstep(size * 0.5, size * 0.04, length(p));
+  float diamond = smoothstep(size * 1.1, size * 0.08, (ap.x + ap.y) * 0.70710678);
+  return max(core, max(max(armX, armY), diamond));
+}
+
 float dataParticles(vec2 uv) {
   float aspect = uResolution.x / uResolution.y;
   vec2 puv = vec2(uv.x, uv.y);
@@ -232,9 +241,9 @@ float dataParticles(vec2 uv) {
       cos(uTime * 0.22 + fi * 0.87) * 0.07
     );
 
-    float d = length(puv - pos);
+    vec2 local = puv - pos;
     float size = 0.0025 + hash(seed + vec3(2.3, 0.5, 1.1)) * 0.0035;
-    float pt = smoothstep(size, size * 0.15, d);
+    float pt = fourPointStar(local, size * 2.0);
 
     float mouseGlow = exp(-length(pos - mouseUv) * 3.5);
     pt *= 0.45 + mouseGlow * 2.2;
@@ -493,6 +502,15 @@ vec3 chromaticBlob(vec3 normal, vec3 viewDir, vec3 pos) {
   return mix(surfG, vec3(surfR.r, surfG.g, surfB.b), edge);
 }
 
+float fourPointStar(vec2 p, float size) {
+  vec2 ap = abs(p);
+  float armX = smoothstep(size * 1.2, size * 0.05, ap.y) * smoothstep(size * 1.3, size * 0.08, ap.x);
+  float armY = smoothstep(size * 1.2, size * 0.05, ap.x) * smoothstep(size * 1.3, size * 0.08, ap.y);
+  float core = smoothstep(size * 0.5, size * 0.04, length(p));
+  float diamond = smoothstep(size * 1.1, size * 0.08, (ap.x + ap.y) * 0.70710678);
+  return max(core, max(max(armX, armY), diamond));
+}
+
 float dataParticles(vec2 uv) {
   float aspect = uResolution.x / uResolution.y;
   vec2 puv = vec2(uv.x, uv.y);
@@ -511,9 +529,9 @@ float dataParticles(vec2 uv) {
       cos(uTime * 0.22 + fi * 0.87) * 0.07
     );
 
-    float d = length(puv - pos);
+    vec2 local = puv - pos;
     float size = 0.0025 + hash(seed + vec3(2.3, 0.5, 1.1)) * 0.0035;
-    float pt = smoothstep(size, size * 0.15, d);
+    float pt = fourPointStar(local, size * 2.0);
 
     float mouseGlow = exp(-length(pos - mouseUv) * 3.5);
     pt *= 0.45 + mouseGlow * 2.2;

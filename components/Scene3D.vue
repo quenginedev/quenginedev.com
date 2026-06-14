@@ -71,6 +71,7 @@ let flagBasePositions: Float32Array | null = null
 let flagHalfWidth = 1
 let outerWireMaterial: import('three').MeshBasicMaterial | null = null
 let particleMaterialRef: import('three').PointsMaterial | null = null
+let particleStarTexture: import('three').CanvasTexture | null = null
 
 function applySceneTheme(mode: string): void {
   const isLight = mode === 'light'
@@ -134,6 +135,39 @@ function sampleMeshVertices(
     temp.applyMatrix4(mesh.matrixWorld)
     nodes.push(temp.x, temp.y, temp.z)
   }
+}
+
+function createStarParticleTexture(
+  THREE: typeof import('three'),
+): import('three').CanvasTexture {
+  const canvasSize = 64
+  const canvas = document.createElement('canvas')
+  canvas.width = canvasSize
+  canvas.height = canvasSize
+  const ctx = canvas.getContext('2d')
+  if (!ctx) return new THREE.CanvasTexture(canvas)
+
+  const center = canvasSize / 2
+  const outerRadius = canvasSize * 0.34
+  const innerRadius = outerRadius * 0.38
+
+  ctx.clearRect(0, 0, canvasSize, canvasSize)
+  ctx.fillStyle = '#ffffff'
+  ctx.beginPath()
+  for (let i = 0; i < 10; i++) {
+    const radius = i % 2 === 0 ? outerRadius : innerRadius
+    const angle = (i / 10) * Math.PI * 2 - Math.PI / 2
+    const x = center + Math.cos(angle) * radius
+    const y = center + Math.sin(angle) * radius
+    if (i === 0) ctx.moveTo(x, y)
+    else ctx.lineTo(x, y)
+  }
+  ctx.closePath()
+  ctx.fill()
+
+  const texture = new THREE.CanvasTexture(canvas)
+  texture.colorSpace = THREE.SRGBColorSpace
+  return texture
 }
 
 function createGhanaFlagCanvas(): HTMLCanvasElement {
@@ -435,6 +469,8 @@ function disposeScene(): void {
   flagBasePositions = null
   outerWireMaterial = null
   particleMaterialRef = null
+  particleStarTexture?.dispose()
+  particleStarTexture = null
 
   renderer?.dispose()
   renderer = null
@@ -514,14 +550,18 @@ async function initScene(): Promise<void> {
     new THREE.BufferAttribute(particlePositions, 3),
   )
 
+  particleStarTexture = createStarParticleTexture(THREE)
+
   const particleMaterial = new THREE.PointsMaterial({
     color: TEAL_BRIGHT,
-    size: 0.028 * (props.fullscreen ? 1.5 : 1),
+    size: 0.036 * (props.fullscreen ? 1.5 : 1),
+    map: particleStarTexture,
     transparent: true,
     opacity: 0.55,
     blending: THREE.AdditiveBlending,
     depthWrite: false,
     sizeAttenuation: true,
+    alphaTest: 0.08,
   })
   particleMaterialRef = particleMaterial
 

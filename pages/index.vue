@@ -300,11 +300,6 @@
           Open to senior full-stack roles, platform architecture consulting, and
           partnerships across frontend, backend, and cloud infrastructure.
         </p>
-        <a :href="`mailto:${contact.email}`" class="contact-cta magnetic items-center" data-reveal
-          @mousemove="onMagneticMove" @mouseleave="onMagneticLeave">
-          <Icon name="mdi:email-outline" size="18" aria-hidden="true" />
-          <span class="contact-cta__text">{{ contact.email }}</span>
-        </a>
         <div class="contact-socials" data-reveal>
           <a v-for="link in socialLinks" :key="link.platform" :href="link.url" class="contact-social-link"
             target="_blank" rel="noopener noreferrer">

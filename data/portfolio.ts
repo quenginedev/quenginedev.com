@@ -112,21 +112,9 @@ export const socialLinks: SocialLink[] = [
   },
   {
     platform: 'LinkedIn',
-    url: 'https://linkedin.com/in/ernestquaye',
+    url: 'https://www.linkedin.com/in/ernest-hayford/',
     icon: 'mdi:linkedin',
-    handle: 'ernestquaye',
-  },
-  {
-    platform: 'Twitter',
-    url: 'https://twitter.com/quenginedev',
-    icon: 'mdi:twitter',
-    handle: 'quenginedev',
-  },
-  {
-    platform: 'Email',
-    url: 'mailto:quenginedev@gmail.com',
-    icon: 'mdi:email',
-    handle: 'quenginedev@gmail.com',
+    handle: 'ernest-hayford',
   },
 ]
 
@@ -226,6 +214,13 @@ export const architecturePillars: ArchitecturePillar[] = [
 ]
 
 export const polyglotLanguages: PolyglotLanguage[] = [
+  {
+    name: 'TypeScript',
+    proficiency: 'production',
+    focus:
+      'Home base for full-stack delivery — typed Vue/React frontends, Node services, shared contracts, and the layer where most production systems are designed and shipped.',
+    icon: 'mdi:language-typescript',
+  },
   {
     name: 'Rust',
     proficiency: 'experimenting',

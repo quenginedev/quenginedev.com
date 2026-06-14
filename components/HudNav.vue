@@ -49,24 +49,19 @@
         >
           Resume ↗
         </a>
-        <a :href="`mailto:${email}`" class="hud-contact__email">
-          {{ email }}
-        </a>
       </div>
     </div>
   </nav>
 </template>
 
 <script setup lang="ts">
-import { socialLinks, contact, resumeLink } from '~/data/portfolio'
+import { socialLinks, resumeLink } from '~/data/portfolio'
 
 const props = defineProps<{
   scrollProgress?: number
 }>()
 
-const email = contact.email
-
-const navSocialLinks = socialLinks.filter((link) => link.platform !== 'Email')
+const navSocialLinks = socialLinks
 
 const scrollPercent = computed(() =>
   Math.round((props.scrollProgress ?? 0) * 100),
