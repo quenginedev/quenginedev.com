@@ -35,11 +35,12 @@ const props = withDefaults(
 
 const containerRef = ref<HTMLDivElement | null>(null)
 
-const PARTICLE_COUNT = 2048
-const LINE_COUNT = 40
 const TEAL_DEEP = 0x1a6b5c
 const TEAL_BRIGHT = 0x22a088
 const TEAL_PARTICLE_LIGHT = 0x0a4a3c
+
+let particleCount = 2048
+let lineCount = 40
 
 
 function clamp01(value: number): number {
@@ -50,6 +51,7 @@ let renderer: WebGLRenderer | null = null
 let scene: Scene | null = null
 let camera: PerspectiveCamera | null = null
 let mainGroup: Group | null = null
+let particleGroup: Group | null = null
 let particlePoints: Points | null = null
 let particleBasePositions: Float32Array | null = null
 let connectionLines: Line[] = []
@@ -58,6 +60,8 @@ let animationFrameId = 0
 let resizeObserver: ResizeObserver | null = null
 let isVisible = true
 let isDisposed = false
+let isMobilePerfMode = false
+let skipFlagWave = false
 
 const mouse = { x: 0, y: 0 }
 const targetMouse = { x: 0, y: 0 }
@@ -249,6 +253,7 @@ function applyFlagWave(time: number): void {
 function buildGhanaFlagGroup(
   THREE: typeof import('three'),
   scale: number,
+  segments: { width: number; height: number },
 ): { group: Group; disposables: Array<{ geometry?: BufferGeometry; material?: Material | Material[]; object?: Object3D }> } {
   const group = new THREE.Group()
   const localDisposables: Array<{
@@ -266,7 +271,7 @@ function buildGhanaFlagGroup(
   texture.colorSpace = THREE.SRGBColorSpace
   texture.anisotropy = 4
 
-  const geometry = new THREE.PlaneGeometry(flagWidth, flagHeight, 28, 18)
+  const geometry = new THREE.PlaneGeometry(flagWidth, flagHeight, segments.width, segments.height)
   const material = new THREE.MeshBasicMaterial({
     map: texture,
     side: THREE.DoubleSide,
@@ -317,7 +322,7 @@ function buildConnectionLines(
   const nodeCount = nodePositions.length / 3
   if (nodeCount < 2) return
 
-  for (let i = 0; i < LINE_COUNT; i++) {
+  for (let i = 0; i < lineCount; i++) {
     const a = Math.floor(Math.random() * nodeCount)
     let b = Math.floor(Math.random() * nodeCount)
     while (b === a) {
@@ -355,21 +360,8 @@ function buildConnectionLines(
 }
 
 function updateParticleSpread(spread: number): void {
-  if (!particlePoints || !particleBasePositions) return
-
-  const geometry = particlePoints.geometry
-  const positionAttr = geometry.getAttribute('position')
-  const positions = positionAttr.array as Float32Array
-  const spreadScale = 1 + spread * 0.65
-
-  for (let i = 0; i < PARTICLE_COUNT; i++) {
-    const i3 = i * 3
-    positions[i3] = particleBasePositions[i3] * spreadScale
-    positions[i3 + 1] = particleBasePositions[i3 + 1] * spreadScale
-    positions[i3 + 2] = particleBasePositions[i3 + 2] * spreadScale
-  }
-
-  positionAttr.needsUpdate = true
+  if (!particleGroup) return
+  particleGroup.scale.setScalar(1 + spread * 0.65)
 }
 
 function resizeRenderer(): void {
@@ -378,7 +370,9 @@ function resizeRenderer(): void {
 
   const width = Math.max(1, container.clientWidth)
   const height = Math.max(1, container.clientHeight)
-  const dpr = Math.min(window.devicePixelRatio || 1, 2)
+  const dpr = isMobilePerfMode
+    ? 1
+    : Math.min(window.devicePixelRatio || 1, 2)
 
   renderer.setPixelRatio(dpr)
   renderer.setSize(width, height, false)
@@ -428,7 +422,9 @@ function animate(timestamp: number): void {
   mainGroup.rotation.y = scroll * Math.PI * 1.35 + elapsed * 0.08
   mainGroup.rotation.x = scroll * Math.PI * 0.42 + Math.sin(elapsed * 0.25) * 0.06
 
-  applyFlagWave(elapsed)
+  if (!skipFlagWave) {
+    applyFlagWave(elapsed)
+  }
 
   for (let i = 0; i < connectionLines.length; i++) {
     const line = connectionLines[i]
@@ -463,6 +459,7 @@ function disposeScene(): void {
   connectionLines = []
   linePhases = []
   particlePoints = null
+  particleGroup = null
   particleBasePositions = null
   mainGroup = null
   flagMesh = null
@@ -482,6 +479,11 @@ async function initScene(): Promise<void> {
   const container = containerRef.value
   if (!container) return
 
+  isMobilePerfMode = detectMobilePerf()
+  particleCount = isMobilePerfMode ? 512 : 2048
+  lineCount = isMobilePerfMode ? 12 : 40
+  skipFlagWave = isMobilePerfMode
+
   const THREE = await import('three')
 
   scene = new THREE.Scene()
@@ -493,7 +495,7 @@ async function initScene(): Promise<void> {
   camera.position.set(0, 0, props.fullscreen ? 6.8 : 5.5)
 
   renderer = new THREE.WebGLRenderer({
-    antialias: true,
+    antialias: !isMobilePerfMode,
     alpha: true,
     powerPreference: 'high-performance',
   })
@@ -508,7 +510,7 @@ async function initScene(): Promise<void> {
   mainGroup = new THREE.Group()
   scene.add(mainGroup)
 
-  const outerGeometry = new THREE.IcosahedronGeometry(2.15 * meshScale, 2)
+  const outerGeometry = new THREE.IcosahedronGeometry(2.15 * meshScale, isMobilePerfMode ? 1 : 2)
   const outerMaterial = new THREE.MeshBasicMaterial({
     color: TEAL_DEEP,
     wireframe: true,
@@ -523,6 +525,7 @@ async function initScene(): Promise<void> {
   const { group: flagGroup, disposables: flagDisposables } = buildGhanaFlagGroup(
     THREE,
     meshScale,
+    isMobilePerfMode ? { width: 12, height: 8 } : { width: 28, height: 18 },
   )
   flagGroup.rotation.x = Math.PI * 0.08
   mainGroup.add(flagGroup)
@@ -530,10 +533,10 @@ async function initScene(): Promise<void> {
     trackDisposable(entry)
   }
 
-  const particlePositions = new Float32Array(PARTICLE_COUNT * 3)
-  particleBasePositions = new Float32Array(PARTICLE_COUNT * 3)
+  const particlePositions = new Float32Array(particleCount * 3)
+  particleBasePositions = new Float32Array(particleCount * 3)
 
-  for (let i = 0; i < PARTICLE_COUNT; i++) {
+  for (let i = 0; i < particleCount; i++) {
     const [x, y, z] = sampleSpherePoint((2.55 + Math.random() * 1.35) * particleScale)
     const i3 = i * 3
     particlePositions[i3] = x
@@ -566,7 +569,9 @@ async function initScene(): Promise<void> {
   particleMaterialRef = particleMaterial
 
   particlePoints = new THREE.Points(particleGeometry, particleMaterial)
-  mainGroup.add(particlePoints)
+  particleGroup = new THREE.Group()
+  particleGroup.add(particlePoints)
+  mainGroup.add(particleGroup)
   trackDisposable({
     geometry: particleGeometry,
     material: particleMaterial,

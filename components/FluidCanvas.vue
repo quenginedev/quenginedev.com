@@ -810,6 +810,8 @@ onMounted(() => {
   const canvas = canvasRef.value
   if (!canvas) return
 
+  if (detectMobilePerf()) return
+
   if (!initWebGL(canvas)) return
 
   startTime = performance.now()

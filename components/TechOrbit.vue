@@ -318,6 +318,17 @@ const rings = computed<ComputedRing[]>(() => {
   border: 0;
 }
 
+@media (max-width: 768px) {
+  .tech-orbit__ring,
+  .tech-orbit__pill {
+    animation: none;
+  }
+
+  .tech-orbit__pill {
+    backdrop-filter: none;
+  }
+}
+
 @media (max-width: 640px) {
   .tech-orbit {
     min-height: 360px;

@@ -25,7 +25,24 @@ export function useSmoothScroll(options: UseSmoothScrollOptions = {}) {
     scrollProgress.value = limit > 0 ? instance.scroll / limit : 0
   }
 
+  let nativeScrollCleanup: (() => void) | null = null
+
   onMounted(async () => {
+    const isMobilePerf = detectMobilePerf()
+
+    if (isMobilePerf) {
+      const onNativeScroll = () => {
+        const limit = document.documentElement.scrollHeight - window.innerHeight
+        scrollProgress.value = limit > 0 ? window.scrollY / limit : 0
+      }
+
+      window.addEventListener('scroll', onNativeScroll, { passive: true })
+      onNativeScroll()
+      nativeScrollCleanup = () => window.removeEventListener('scroll', onNativeScroll)
+
+      return
+    }
+
     const [{ default: LenisConstructor }, gsapModule] = await Promise.all([
       import('lenis'),
       useGsapTicker ? import('gsap') : Promise.resolve(null),
@@ -79,6 +96,9 @@ export function useSmoothScroll(options: UseSmoothScrollOptions = {}) {
     gsapTicker = null
 
     cancelAnimationFrame(rafId)
+
+    nativeScrollCleanup?.()
+    nativeScrollCleanup = null
 
     lenis.value?.destroy()
     lenis.value = null

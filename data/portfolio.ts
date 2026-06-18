@@ -155,7 +155,7 @@ export const engineeringLanes: EngineeringLane[] = [
 ]
 
 export const resumeLink =
-  'https://docs.google.com/document/d/1SfoVMRcwj6X3S1AOwTZFLRzd3gIZ7fOUm2DgOj0z1x0/edit?usp=sharing'
+  'https://docs.google.com/document/d/1Qpblrp82H-Cpgz1eRfoqbGezkNoiR8B0-rxU9fvdHL4/edit?usp=sharing'
 
 export const capabilities: string[] = [
   'Module Federation',
