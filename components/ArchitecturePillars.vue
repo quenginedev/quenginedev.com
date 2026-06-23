@@ -63,10 +63,10 @@ withDefaults(
 
 .pillar:hover {
   transform: translateY(-4px);
-  border-color: var(--accent);
+  border-color: var(--gold);
   box-shadow:
-    0 0 0 1px var(--accent-glow),
-    inset 0 0 32px rgba(26, 107, 92, 0.06),
+    0 0 0 1px var(--gold-glow),
+    inset 0 0 32px rgba(201, 162, 39, 0.05),
     0 12px 40px var(--pillar-hover-shadow);
   background: var(--pillar-hover-bg);
 }
@@ -85,8 +85,8 @@ withDefaults(
 }
 
 .pillar:hover .pillar__icon-wrap {
-  border-color: rgba(34, 160, 136, 0.45);
-  color: var(--accent-bright);
+  border-color: rgba(201, 162, 39, 0.45);
+  color: var(--gold-bright);
 }
 
 .pillar__icon {

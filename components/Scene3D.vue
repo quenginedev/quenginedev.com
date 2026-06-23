@@ -38,6 +38,11 @@ const containerRef = ref<HTMLDivElement | null>(null)
 const TEAL_DEEP = 0x1a6b5c
 const TEAL_BRIGHT = 0x22a088
 const TEAL_PARTICLE_LIGHT = 0x0a4a3c
+const GOLD_DEEP = 0x9a7b1a
+const GOLD_BRIGHT = 0xc9a227
+const GOLD_PARTICLE_LIGHT = 0x7a6318
+
+const LINE_COLORS = [TEAL_DEEP, TEAL_BRIGHT, GOLD_DEEP, GOLD_BRIGHT]
 
 let particleCount = 2048
 let lineCount = 40
@@ -76,6 +81,7 @@ let flagHalfWidth = 1
 let outerWireMaterial: import('three').MeshBasicMaterial | null = null
 let particleMaterialRef: import('three').PointsMaterial | null = null
 let particleStarTexture: import('three').CanvasTexture | null = null
+let particleColorAttr: import('three').BufferAttribute | null = null
 
 function applySceneTheme(mode: string): void {
   const isLight = mode === 'light'
@@ -83,8 +89,21 @@ function applySceneTheme(mode: string): void {
     outerWireMaterial.opacity = isLight ? 0.58 : 0.82
   }
   if (particleMaterialRef) {
-    particleMaterialRef.color.setHex(isLight ? TEAL_PARTICLE_LIGHT : TEAL_BRIGHT)
     particleMaterialRef.opacity = isLight ? 0.82 : 0.55
+  }
+  if (particleColorAttr) {
+    const teal = isLight ? TEAL_PARTICLE_LIGHT : TEAL_BRIGHT
+    const gold = isLight ? GOLD_PARTICLE_LIGHT : GOLD_BRIGHT
+    for (let i = 0; i < particleColorAttr.count; i++) {
+      const hex = i % 4 === 0 ? gold : teal
+      particleColorAttr.setXYZ(
+        i,
+        ((hex >> 16) & 255) / 255,
+        ((hex >> 8) & 255) / 255,
+        (hex & 255) / 255,
+      )
+    }
+    particleColorAttr.needsUpdate = true
   }
 }
 
@@ -188,17 +207,20 @@ async function createAvatarCanvas(): Promise<HTMLCanvasElement> {
   const canvas = document.createElement('canvas')
   canvas.width = size
   canvas.height = size
-  const ctx = canvas.getContext('2d')
+  const ctx = canvas.getContext('2d', { alpha: true })
   if (!ctx) return canvas
 
   const image = await loadAvatarImage()
   const radius = size / 2
 
+  ctx.clearRect(0, 0, size, size)
+  ctx.drawImage(image, 0, 0, size, size)
+
+  ctx.globalCompositeOperation = 'destination-in'
   ctx.beginPath()
   ctx.arc(radius, radius, radius, 0, Math.PI * 2)
-  ctx.closePath()
-  ctx.clip()
-  ctx.drawImage(image, 0, 0, size, size)
+  ctx.fill()
+  ctx.globalCompositeOperation = 'source-over'
 
   return canvas
 }
@@ -254,6 +276,8 @@ async function buildAvatarGroup(
   const geometry = new THREE.PlaneGeometry(avatarSize, avatarSize, 1, 1)
   const material = new THREE.MeshBasicMaterial({
     map: texture,
+    transparent: true,
+    alphaTest: 0.05,
     side: THREE.DoubleSide,
     depthWrite: true,
   })
@@ -323,7 +347,7 @@ function buildConnectionLines(
     )
 
     const material = new THREE.LineBasicMaterial({
-      color: i % 2 === 0 ? TEAL_DEEP : TEAL_BRIGHT,
+      color: LINE_COLORS[i % LINE_COLORS.length],
       transparent: true,
       opacity: 0.15 + Math.random() * 0.25,
       blending: THREE.AdditiveBlending,
@@ -448,6 +472,7 @@ function disposeScene(): void {
   particleMaterialRef = null
   particleStarTexture?.dispose()
   particleStarTexture = null
+  particleColorAttr = null
 
   renderer?.dispose()
   renderer = null
@@ -532,10 +557,23 @@ async function initScene(): Promise<void> {
     new THREE.BufferAttribute(particlePositions, 3),
   )
 
+  const particleColors = new Float32Array(particleCount * 3)
+  const initialTeal = TEAL_BRIGHT
+  for (let i = 0; i < particleCount; i++) {
+    const hex = i % 4 === 0 ? GOLD_BRIGHT : initialTeal
+    const i3 = i * 3
+    particleColors[i3] = ((hex >> 16) & 255) / 255
+    particleColors[i3 + 1] = ((hex >> 8) & 255) / 255
+    particleColors[i3 + 2] = (hex & 255) / 255
+  }
+  particleColorAttr = new THREE.BufferAttribute(particleColors, 3)
+  particleGeometry.setAttribute('color', particleColorAttr)
+
   particleStarTexture = createStarParticleTexture(THREE)
 
   const particleMaterial = new THREE.PointsMaterial({
-    color: TEAL_BRIGHT,
+    color: 0xffffff,
+    vertexColors: true,
     size: 0.036 * (props.fullscreen ? 1.5 : 1),
     map: particleStarTexture,
     transparent: true,

@@ -9,6 +9,10 @@
   --accent: #1a6b5c;
   --accent-bright: #22a088;
   --accent-glow: rgba(26, 107, 92, 0.45);
+  --gold: #c9a227;
+  --gold-bright: #e8c547;
+  --gold-dim: rgba(201, 162, 39, 0.55);
+  --gold-glow: rgba(201, 162, 39, 0.35);
   --border: rgba(232, 240, 237, 0.12);
   --border-strong: rgba(232, 240, 237, 0.22);
   --grid-line: rgba(232, 240, 237, 0.06);
@@ -64,6 +68,8 @@ html.light {
   --accent: #1a6b5c;
   --accent-bright: #126b58;
   --accent-glow: rgba(26, 107, 92, 0.32);
+  --gold-dim: rgba(154, 123, 26, 0.62);
+  --gold-glow: rgba(201, 162, 39, 0.28);
   --border: rgba(8, 12, 10, 0.14);
   --border-strong: rgba(8, 12, 10, 0.24);
   --grid-line: rgba(8, 12, 10, 0.06);
@@ -156,6 +162,10 @@ html.light .section-lead {
   color: var(--accent-bright);
 }
 
+.text-gold {
+  color: var(--gold-bright);
+}
+
 .label-caps {
   font-family: var(--font-body);
   font-size: 0.6875rem;
@@ -215,7 +225,7 @@ html.light .section-lead {
   font-weight: 800;
   line-height: 1;
   color: transparent;
-  -webkit-text-stroke: 1px var(--border-strong);
+  -webkit-text-stroke: 1px var(--gold-dim);
 }
 
 /* ─── Brutalist panels ─── */
@@ -234,10 +244,10 @@ html.light .section-lead {
 }
 
 .panel--glow:hover {
-  border-color: var(--accent);
+  border-color: var(--gold);
   box-shadow:
-    0 0 0 1px var(--accent-glow),
-    inset 0 0 24px rgba(26, 107, 92, 0.06);
+    0 0 0 1px var(--gold-glow),
+    inset 0 0 24px rgba(201, 162, 39, 0.05);
 }
 
 .panel--accent {
@@ -383,7 +393,7 @@ html.dark .hud-panel:hover {
   inset-block: 0;
   left: 0;
   width: 0%;
-  background: var(--accent-bright);
+  background: linear-gradient(90deg, var(--accent-bright), var(--gold-bright));
   transition: width 0.08s linear;
 }
 
@@ -542,6 +552,17 @@ html.dark .hud-panel:hover {
   perspective: 900px;
 }
 
+.hero__location::before {
+  content: '';
+  display: inline-block;
+  width: 0.375rem;
+  height: 0.375rem;
+  margin-right: 0.5rem;
+  border-radius: 50%;
+  background: var(--gold-bright);
+  vertical-align: middle;
+}
+
 .hero__content .section-reveal {
   display: flex;
   flex-direction: column;
@@ -562,10 +583,16 @@ html.dark .hud-panel:hover {
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  border: 1px solid rgba(26, 107, 92, 0.45);
+  border: 1px solid rgba(201, 162, 39, 0.45);
+  background: rgba(201, 162, 39, 0.08);
+  color: var(--gold-bright);
+  backdrop-filter: blur(8px);
+}
+
+.hero__cap-tag:nth-child(3n) {
+  border-color: rgba(26, 107, 92, 0.45);
   background: rgba(26, 107, 92, 0.1);
   color: var(--accent-bright);
-  backdrop-filter: blur(8px);
 }
 
 .hero__top {
@@ -592,7 +619,7 @@ html.dark .hud-panel:hover {
 }
 
 .hero__name-line--accent {
-  color: var(--accent-bright);
+  color: var(--gold-bright);
 }
 
 @media (min-width: 640px) {
@@ -635,7 +662,7 @@ html.dark .hud-panel:hover {
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--accent-bright);
+  color: var(--gold-bright);
   border-bottom: 1px solid transparent;
   transition:
     border-color 0.25s ease,
@@ -643,7 +670,7 @@ html.dark .hud-panel:hover {
 }
 
 .hero__resume-link:hover {
-  border-color: var(--accent-bright);
+  border-color: var(--gold-bright);
   color: var(--text);
 }
 
@@ -722,7 +749,12 @@ html.dark .hud-panel:hover {
 .capabilities-belt {
   overflow: hidden;
   border-block: 1px solid var(--border);
-  background: rgba(26, 107, 92, 0.04);
+  background: linear-gradient(
+    90deg,
+    rgba(26, 107, 92, 0.04),
+    rgba(201, 162, 39, 0.06),
+    rgba(26, 107, 92, 0.04)
+  );
   margin-block: var(--space-2xl);
   mask-image: linear-gradient(90deg, transparent, black 6%, black 94%, transparent);
 }
@@ -749,11 +781,19 @@ html.dark .hud-panel:hover {
   color: var(--text-dim);
 }
 
+.capabilities-belt__item:nth-child(3n) {
+  color: var(--gold-dim);
+}
+
 .capabilities-belt__item::after {
   content: '▸';
   margin-left: var(--space-2xl);
-  color: var(--accent);
+  color: var(--gold);
   font-size: 0.75em;
+}
+
+.capabilities-belt__item:nth-child(3n)::after {
+  color: var(--accent);
 }
 
 @keyframes capabilities-scroll {
@@ -894,13 +934,17 @@ html.dark .hud-panel:hover {
   -webkit-text-stroke: 1px var(--border-strong);
 }
 
+.ai-depth-kicker span:nth-child(3) {
+  -webkit-text-stroke-color: var(--gold);
+}
+
 .ai-depth-headline {
   font-family: var(--font-display);
   font-size: clamp(1.25rem, 2.5vw, 1.75rem);
   font-weight: 700;
   letter-spacing: -0.02em;
   margin-bottom: var(--space-md);
-  color: var(--accent-bright);
+  color: var(--gold-bright);
 }
 
 .ai-depth-summary {
@@ -1038,9 +1082,13 @@ html.dark .hud-panel:hover {
   font-weight: 500;
 }
 
+.signal-kicker span:nth-child(3) {
+  -webkit-text-stroke-color: var(--gold);
+}
+
 .signal-body em {
   font-style: normal;
-  color: var(--accent-bright);
+  color: var(--gold-bright);
 }
 
 /* ─── Experience timeline ─── */
@@ -1184,8 +1232,8 @@ html.dark .hud-panel:hover {
 }
 
 .project-card:hover {
-  background: rgba(26, 107, 92, 0.06);
-  box-shadow: inset 0 0 0 1px var(--accent-glow);
+  background: rgba(201, 162, 39, 0.04);
+  box-shadow: inset 0 0 0 1px var(--gold-glow);
 }
 
 .project-card__header {
@@ -1375,7 +1423,7 @@ html.dark .hud-panel:hover {
 
 .contact-headline span {
   display: block;
-  color: var(--accent-bright);
+  color: var(--gold-bright);
 }
 
 .contact-cta {
@@ -1480,7 +1528,7 @@ html.dark .hud-panel:hover {
   height: 8px;
   margin: -4px 0 0 -4px;
   border-radius: 50%;
-  background: var(--accent-bright);
+  background: var(--gold-bright);
   pointer-events: none;
   z-index: 9999;
   mix-blend-mode: difference;
@@ -1497,7 +1545,7 @@ html.dark .hud-panel:hover {
   height: 40px;
   margin: -20px 0 0 -20px;
   background: transparent;
-  border: 1px solid var(--accent-bright);
+  border: 1px solid var(--gold-bright);
 }
 
 /* ─── Responsive ─── */

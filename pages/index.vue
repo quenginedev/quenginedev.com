@@ -15,7 +15,7 @@
       <div class="hero__content">
         <SectionReveal :stagger="0.1" scroll-start="top 82%">
           <div class="hero__foreground" data-reveal>
-            <p class="label-caps">{{ contact.location }}</p>
+            <p class="label-caps hero__location">{{ contact.location }}</p>
             <h1 class="hero__name">
               <span class="hero__name-line">ERNEST</span>
               <span class="hero__name-line hero__name-line--accent">/ HAYFORD</span>
