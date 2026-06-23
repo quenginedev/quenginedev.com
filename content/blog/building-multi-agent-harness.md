@@ -10,6 +10,8 @@ tags:
   - orchestration
   - cursor
   - missions
+  - multi-agent
+  - harness
 cover: /blog/multi-agent-cover.jpeg
 ---
 

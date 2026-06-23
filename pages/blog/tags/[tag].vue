@@ -1,10 +1,12 @@
 <template>
   <div class="blog-page">
     <header class="blog-header">
-      <span class="label-caps">Writing / Field notes</span>
-      <h1 class="blog-header__title">Blog</h1>
+      <NuxtLink to="/blog" class="blog-back">← All posts</NuxtLink>
+      <span class="label-caps">Tag / Filter</span>
+      <h1 class="blog-header__title">{{ tagLabel }}</h1>
       <p class="blog-header__lead">
-        Tutorials and architecture notes on systems, agents, and the tooling I use to ship them.
+        {{ posts?.length ?? 0 }} {{ posts?.length === 1 ? 'post' : 'posts' }} tagged
+        <BlogTag v-if="tagLabel" :tag="tagLabel" />
       </p>
     </header>
 
@@ -24,8 +26,7 @@
             <time v-if="post.date" class="blog-card__date" :datetime="post.date">
               {{ formatDate(post.date) }}
             </time>
-            <span v-if="readingMinutes(post)" class="blog-card__reading">{{ readingMinutes(post) }}</span>
-            <BlogTag v-for="tag in post.tags ?? []" :key="tag" :tag="tag" />
+            <BlogTag v-for="item in post.tags ?? []" :key="item" :tag="item" />
           </div>
           <h2 class="blog-card__title">
             <NuxtLink :to="post._path">{{ post.title }}</NuxtLink>
@@ -35,20 +36,37 @@
       </article>
     </div>
 
-    <p v-else class="blog-header__lead">No posts yet.</p>
+    <p v-else class="blog-header__lead">No posts with this tag.</p>
   </div>
 </template>
 
 <script setup lang="ts">
-import type { BlogPost } from '~/composables/useBlogPosts'
-
 import '~/assets/css/blog.css'
 
-const { data: posts } = await useAsyncData('blog-index', () => fetchPublishedBlogPosts())
+const route = useRoute()
+const tagSlug = computed(() => String(route.params.tag ?? ''))
+
+const { data: allPosts } = await useAsyncData('blog-tags-all', () => fetchPublishedBlogPosts())
+
+const allTags = computed(() => {
+  const tags = new Set<string>()
+  for (const post of allPosts.value ?? []) {
+    for (const tag of post.tags ?? []) tags.add(tag)
+  }
+  return [...tags]
+})
+
+const tagLabel = computed(() => slugToTag(tagSlug.value, allTags.value) ?? tagSlug.value)
+
+const posts = computed(() =>
+  (allPosts.value ?? []).filter((post) =>
+    (post.tags ?? []).some((tag) => tagToSlug(tag) === tagSlug.value.toLowerCase()),
+  ),
+)
 
 useSeoMeta({
-  title: 'Blog — quenginedev',
-  description: 'Tutorials and architecture notes on multi-agent systems, Nuxt, and full-stack engineering.',
+  title: () => `${tagLabel.value} — Blog — quenginedev`,
+  description: () => `Posts tagged ${tagLabel.value} on quenginedev.`,
 })
 
 function formatDate(value: string) {
@@ -57,9 +75,5 @@ function formatDate(value: string) {
     month: 'long',
     day: 'numeric',
   })
-}
-
-function readingMinutes(post: BlogPost) {
-  return readingTimeLabel(estimateReadingTime(textFromPage(post)))
 }
 </script>

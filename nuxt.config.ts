@@ -7,12 +7,29 @@ export default defineNuxtConfig({
 		head: {
 			link: [
 				{ rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
+				{ rel: "alternate", type: "application/rss+xml", title: "quenginedev Blog", href: "/feed.xml" },
 			],
 		},
 	},
 
 	nitro: {
 		preset: "cloudflare-pages",
+	},
+
+	content: {
+		markdown: {
+			toc: {
+				depth: 3,
+				searchDepth: 4,
+			},
+		},
+		highlight: {
+			theme: {
+				default: 'material-theme-darker',
+				dark: 'material-theme-darker',
+				light: 'github-light',
+			},
+		},
 	},
 
 	modules: [

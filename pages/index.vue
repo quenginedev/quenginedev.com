@@ -75,6 +75,31 @@
       </SectionReveal>
     </section>
 
+    <!-- Latest writing -->
+    <section v-if="latestPost" id="writing" class="section section--writing">
+      <SectionReveal>
+        <div class="section-header">
+          <span class="section-index">01b</span>
+          <span class="label-caps" data-reveal>Writing / Latest</span>
+        </div>
+        <article class="writing-teaser panel panel--glow" data-reveal>
+          <div class="writing-teaser__meta">
+            <time v-if="latestPost.date" :datetime="latestPost.date" class="writing-teaser__date">
+              {{ formatBlogDate(latestPost.date) }}
+            </time>
+            <span v-if="latestReadingTime" class="writing-teaser__reading">{{ latestReadingTime }}</span>
+          </div>
+          <h2 class="writing-teaser__title">
+            <NuxtLink :to="latestPost._path">{{ latestPost.title }}</NuxtLink>
+          </h2>
+          <p v-if="latestPost.description" class="writing-teaser__desc">{{ latestPost.description }}</p>
+          <NuxtLink :to="latestPost._path" class="writing-teaser__cta">
+            Read article →
+          </NuxtLink>
+        </article>
+      </SectionReveal>
+    </section>
+
     <!-- Constellation -->
     <section id="constellation" class="section section--constellation">
       <SectionReveal :stagger="0.08">
@@ -339,6 +364,21 @@
   } from '~/data/portfolio'
 
   const scrollProgress = useScrollProgress()
+
+  const { data: latestPosts } = await useAsyncData('home-latest-post', () => fetchPublishedBlogPosts())
+  const latestPost = computed(() => latestPosts.value?.[0] ?? null)
+  const latestReadingTime = computed(() => {
+    if (!latestPost.value) return null
+    return readingTimeLabel(estimateReadingTime(textFromPage(latestPost.value)))
+  })
+
+  function formatBlogDate(value: string) {
+    return new Date(value).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    })
+  }
 
   const pageRef = ref<HTMLElement | null>(null)
   const cursorRef = ref<HTMLElement | null>(null)

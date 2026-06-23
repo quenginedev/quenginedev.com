@@ -118,13 +118,14 @@ export const socialLinks: SocialLink[] = [
   },
 ]
 
+
 export const hero: Hero = {
   headline: 'Senior Full-Stack Engineer',
   subheadline:
     'Microservices · Serverless · Micro-Frontends · Vue / React / Svelte across fintech & distributed systems',
   summary:
     '8+ years shipping full-stack products from UI to infrastructure. Sole architect of HustleSasa platform ($50K→$900K+/mo payments). Module federation, edge/serverless, and production-grade systems across fintech, agritech, and automotive.',
-  avatar: '/assets/me.png',
+  avatar: '/me.png',
 }
 
 export const engineeringLanes: EngineeringLane[] = [
