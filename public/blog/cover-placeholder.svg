@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none">
+  <rect width="1200" height="630" fill="#0F1216"/>
+  <rect x="1" y="1" width="1198" height="628" stroke="#1A6B5C" stroke-width="2" stroke-dasharray="12 8"/>
+  <text x="600" y="300" text-anchor="middle" fill="#22A088" font-family="system-ui,sans-serif" font-size="28" font-weight="600">Cover image placeholder</text>
+  <text x="600" y="340" text-anchor="middle" fill="rgba(232,240,237,0.45)" font-family="system-ui,sans-serif" font-size="16">Replace via frontmatter cover path</text>
+</svg>

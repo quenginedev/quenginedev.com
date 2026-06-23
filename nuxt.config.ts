@@ -17,6 +17,7 @@ export default defineNuxtConfig({
 
 	modules: [
 		"nitro-cloudflare-dev",
+		"@nuxt/content",
 		// "@pinia/nuxt",
 		"@vueuse/nuxt",
 		"pinia-plugin-persistedstate",
@@ -73,5 +74,5 @@ export default defineNuxtConfig({
 				}
 			}
 		}
-	}
+	},
 });

@@ -1,9 +1,9 @@
 <template>
   <nav class="hud-nav" aria-label="Site navigation">
     <div class="hud-nav__corner hud-nav__corner--tl">
-      <a href="#hero" class="hud-panel hud-wordmark" @click.prevent="scrollTo('#hero')">
+      <NuxtLink to="/" class="hud-panel hud-wordmark">
         quenginedev
-      </a>
+      </NuxtLink>
     </div>
 
     <div class="hud-nav__corner hud-nav__corner--tr">
@@ -41,6 +41,9 @@
 
     <div class="hud-nav__corner hud-nav__corner--br">
       <div class="hud-panel hud-contact">
+        <NuxtLink to="/blog" class="hud-contact__link">
+          Blog
+        </NuxtLink>
         <a
           :href="resumeLink"
           class="hud-contact__link"
@@ -73,10 +76,5 @@ const isDark = computed(() => colorMode.value === 'dark')
 
 function toggleTheme() {
   colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
-}
-
-function scrollTo(selector: string) {
-  const el = document.querySelector(selector)
-  el?.scrollIntoView({ behavior: 'smooth' })
 }
 </script>
