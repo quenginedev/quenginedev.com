@@ -2,29 +2,19 @@
   <nav class="hud-nav" aria-label="Site navigation">
     <div class="hud-nav__corner hud-nav__corner--tl">
       <NuxtLink to="/" class="hud-panel hud-wordmark">
-        quenginedev
+        <img src="/me.png" alt="quenginedev" class="hud-wordmark__avatar" width="20" height="20" />
+        <span class="hud-wordmark__text">quenginedev</span>
       </NuxtLink>
     </div>
 
     <div class="hud-nav__corner hud-nav__corner--tr">
       <div class="hud-panel hud-socials">
-        <button
-          type="button"
-          class="hud-theme-toggle"
-          :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
-          @click="toggleTheme"
-        >
+        <button type="button" class="hud-theme-toggle"
+          :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'" @click="toggleTheme">
           <Icon :name="isDark ? 'mdi:weather-sunny' : 'mdi:weather-night'" size="16" />
         </button>
-        <a
-          v-for="link in navSocialLinks"
-          :key="link.platform"
-          :href="link.url"
-          :aria-label="link.platform"
-          class="hud-social-link"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <a v-for="link in navSocialLinks" :key="link.platform" :href="link.url" :aria-label="link.platform"
+          class="hud-social-link" target="_blank" rel="noopener noreferrer">
           <Icon :name="link.icon" size="16" />
         </a>
       </div>
@@ -44,12 +34,7 @@
         <NuxtLink to="/blog" class="hud-contact__link">
           Blog
         </NuxtLink>
-        <a
-          :href="resumeLink"
-          class="hud-contact__link"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <a :href="resumeLink" class="hud-contact__link" target="_blank" rel="noopener noreferrer">
           Resume ↗
         </a>
       </div>
@@ -57,24 +42,33 @@
   </nav>
 </template>
 
-<script setup lang="ts">
-import { socialLinks, resumeLink } from '~/data/portfolio'
+<script
+  setup
+  lang="ts"
+>
+  import { socialLinks, resumeLink } from '~/data/portfolio'
 
-const props = defineProps<{
-  scrollProgress?: number
-}>()
+  const props = defineProps<{
+    scrollProgress?: number
+  }>()
 
-const navSocialLinks = socialLinks
+  const navSocialLinks = socialLinks
 
-const scrollPercent = computed(() =>
-  Math.round((props.scrollProgress ?? 0) * 100),
-)
+  const scrollPercent = computed(() =>
+    Math.round((props.scrollProgress ?? 0) * 100),
+  )
 
-const colorMode = useColorMode()
+  const colorMode = useColorMode()
 
-const isDark = computed(() => colorMode.value === 'dark')
+  const isDark = computed(() => colorMode.value === 'dark')
 
-function toggleTheme() {
-  colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
-}
+  function toggleTheme() {
+    colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
+  }
 </script>
+<style scoped>
+  .hud-wordmark__avatar {
+    border-radius: 50%;
+    margin-right: 0.5rem;
+  }
+</style>

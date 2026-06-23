@@ -6,7 +6,7 @@ export default defineNuxtConfig({
 	app: {
 		head: {
 			link: [
-				{ rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
+				{ rel: "icon", type: "image/png", href: "/me.png" },
 				{ rel: "alternate", type: "application/rss+xml", title: "quenginedev Blog", href: "/feed.xml" },
 			],
 		},
