@@ -69,6 +69,8 @@
 <style scoped>
   .hud-wordmark__avatar {
     border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
     margin-right: 0.5rem;
   }
 </style>

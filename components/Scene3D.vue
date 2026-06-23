@@ -174,49 +174,31 @@ function createStarParticleTexture(
   return texture
 }
 
-function createGhanaFlagCanvas(): HTMLCanvasElement {
+function loadAvatarImage(): Promise<HTMLImageElement> {
+  return new Promise((resolve, reject) => {
+    const image = new Image()
+    image.onload = () => resolve(image)
+    image.onerror = reject
+    image.src = '/me.png'
+  })
+}
+
+async function createAvatarCanvas(): Promise<HTMLCanvasElement> {
+  const size = 512
   const canvas = document.createElement('canvas')
-  canvas.width = 900
-  canvas.height = 600
+  canvas.width = size
+  canvas.height = size
   const ctx = canvas.getContext('2d')
   if (!ctx) return canvas
 
-  const stripeHeight = canvas.height / 3
-  const stripes = ['#CE1126', '#FCD116', '#006B3F']
+  const image = await loadAvatarImage()
+  const radius = size / 2
 
-  for (let i = 0; i < 3; i++) {
-    ctx.fillStyle = stripes[i]
-    ctx.fillRect(0, i * stripeHeight, canvas.width, stripeHeight)
-  }
-
-  const centerX = canvas.width / 2
-  const centerY = stripeHeight * 1.5
-  const outerRadius = canvas.height * 0.15
-  const innerRadius = outerRadius * 0.382
-
-  ctx.fillStyle = '#000000'
   ctx.beginPath()
-  for (let i = 0; i < 10; i++) {
-    const radius = i % 2 === 0 ? outerRadius : innerRadius
-    const angle = (i / 10) * Math.PI * 2 - Math.PI / 2
-    const x = centerX + Math.cos(angle) * radius
-    const y = centerY + Math.sin(angle) * radius
-    if (i === 0) ctx.moveTo(x, y)
-    else ctx.lineTo(x, y)
-  }
+  ctx.arc(radius, radius, radius, 0, Math.PI * 2)
   ctx.closePath()
-  ctx.fill()
-
-  const borderWidth = 22
-  ctx.strokeStyle = '#0d1210'
-  ctx.lineWidth = borderWidth
-  ctx.lineJoin = 'miter'
-  ctx.strokeRect(
-    borderWidth / 2,
-    borderWidth / 2,
-    canvas.width - borderWidth,
-    canvas.height - borderWidth,
-  )
+  ctx.clip()
+  ctx.drawImage(image, 0, 0, size, size)
 
   return canvas
 }
@@ -250,11 +232,10 @@ function applyFlagWave(time: number): void {
   positionAttr.needsUpdate = true
 }
 
-function buildGhanaFlagGroup(
+async function buildAvatarGroup(
   THREE: typeof import('three'),
   scale: number,
-  segments: { width: number; height: number },
-): { group: Group; disposables: Array<{ geometry?: BufferGeometry; material?: Material | Material[]; object?: Object3D }> } {
+): Promise<{ group: Group; disposables: Array<{ geometry?: BufferGeometry; material?: Material | Material[]; object?: Object3D }> }> {
   const group = new THREE.Group()
   const localDisposables: Array<{
     geometry?: BufferGeometry
@@ -262,16 +243,15 @@ function buildGhanaFlagGroup(
     object?: Object3D
   }> = []
 
-  const flagWidth = 1.85 * scale
-  const flagHeight = flagWidth * (2 / 3)
-  flagHalfWidth = flagWidth / 2
+  const avatarSize = 1.85 * scale
+  flagHalfWidth = avatarSize / 2
 
-  const canvas = createGhanaFlagCanvas()
+  const canvas = await createAvatarCanvas()
   const texture = new THREE.CanvasTexture(canvas)
   texture.colorSpace = THREE.SRGBColorSpace
   texture.anisotropy = 4
 
-  const geometry = new THREE.PlaneGeometry(flagWidth, flagHeight, segments.width, segments.height)
+  const geometry = new THREE.PlaneGeometry(avatarSize, avatarSize, 1, 1)
   const material = new THREE.MeshBasicMaterial({
     map: texture,
     side: THREE.DoubleSide,
@@ -482,7 +462,7 @@ async function initScene(): Promise<void> {
   isMobilePerfMode = detectMobilePerf()
   particleCount = isMobilePerfMode ? 512 : 2048
   lineCount = isMobilePerfMode ? 12 : 40
-  skipFlagWave = isMobilePerfMode
+  skipFlagWave = true
 
   const THREE = await import('three')
 
@@ -522,14 +502,13 @@ async function initScene(): Promise<void> {
   mainGroup.add(outerMesh)
   trackDisposable({ geometry: outerGeometry, material: outerMaterial, object: outerMesh })
 
-  const { group: flagGroup, disposables: flagDisposables } = buildGhanaFlagGroup(
+  const { group: avatarGroup, disposables: avatarDisposables } = await buildAvatarGroup(
     THREE,
     meshScale,
-    isMobilePerfMode ? { width: 12, height: 8 } : { width: 28, height: 18 },
   )
-  flagGroup.rotation.x = Math.PI * 0.08
-  mainGroup.add(flagGroup)
-  for (const entry of flagDisposables) {
+  avatarGroup.rotation.x = Math.PI * 0.08
+  mainGroup.add(avatarGroup)
+  for (const entry of avatarDisposables) {
     trackDisposable(entry)
   }
 
@@ -580,7 +559,7 @@ async function initScene(): Promise<void> {
 
   applySceneTheme(colorMode.value)
 
-  const nodePositions = collectNodePoints(THREE, outerMesh, flagGroup)
+  const nodePositions = collectNodePoints(THREE, outerMesh, avatarGroup)
   buildConnectionLines(THREE, nodePositions, mainGroup)
 
   updateParticleSpread(internalScroll.value)

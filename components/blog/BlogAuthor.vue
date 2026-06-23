@@ -15,10 +15,3 @@
 >
   import { contact, hero } from '~/data/portfolio'
 </script>
-<style scoped>
-  .blog-author__avatar {
-    border-radius: 50%;
-    margin-right: 0.5rem;
-  }
-
-</style>
