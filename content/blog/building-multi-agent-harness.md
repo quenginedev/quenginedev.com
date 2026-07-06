@@ -13,6 +13,11 @@ tags:
   - multi-agent
   - harness
 cover: /blog/multi-agent-cover.jpeg
+tldr: >-
+  Split agent work into Orchestrator (plan), Worker (code), and Validator (verify)
+  with serial gates and local `.missions/` state. No application code until the
+  validation contract is approved. Handoffs carry evidence, not vibes; one editor
+  mutates the tree at a time.
 ---
 
 Single-agent coding sessions hit a ceiling fast: context drifts, edits collide, and “it works in chat” rarely survives review. A **multi-agent harness** separates **planning**, **implementation**, and **verification** into distinct roles with explicit artifacts and gates—so each agent does one job well and the system stays auditable.

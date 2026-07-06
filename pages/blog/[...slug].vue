@@ -19,6 +19,11 @@
       <h1 class="blog-article__title">{{ page.title }}</h1>
       <p v-if="page.description" class="blog-article__description">{{ page.description }}</p>
 
+      <aside v-if="page.tldr" class="blog-tldr">
+        <p class="blog-tldr__label">TL;DR</p>
+        <p class="blog-tldr__text">{{ page.tldr }}</p>
+      </aside>
+
       <div class="blog-article__layout">
         <BlogToc v-if="tocLinks.length" :links="tocLinks" class="blog-article__toc" />
         <ContentRenderer :value="page" class="blog-prose prose max-w-none lg:prose-lg" />

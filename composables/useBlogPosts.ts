@@ -2,6 +2,7 @@ export interface BlogPost {
 	_path: string
 	title: string
 	description?: string
+	tldr?: string
 	date: string
 	updated?: string
 	tags?: string[]

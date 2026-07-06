@@ -14,6 +14,11 @@ tags:
   - orchestration
   - multi-agent
 cover: /blog/loop-goal-harness.jpeg
+tldr: >-
+  Wrap agent work in a plan → implement → verify loop until the goal is met or
+  blocked. Skills (markdown instructions) plus shell script gates travel across
+  Cursor, Claude, OpenAI, and LangGraph without SDK lock-in. Simplicity skills
+  keep agents from over-building.
 ---
 
 You ask an agent to "build the feature." It writes code, says done, and moves on. Two sessions later you discover half the tests fail, scope drifted, and nobody verified the original constraints. The problem is not the model—it is the **missing loop**. A one-shot prompt has no gate, no retry, and no memory of what "done" meant.

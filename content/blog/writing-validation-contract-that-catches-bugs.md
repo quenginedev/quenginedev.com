@@ -12,6 +12,11 @@ tags:
   - validation
   - harness
 cover: /blog/validation-contract-cover.jpeg
+tldr: >-
+  A validation contract is the gate between "worker says done" and "actually done."
+  Write assertions with stable IDs, observable behavior (not implementation),
+  executable verify steps, and explicit edge cases so the laziest shortcut still
+  fails. Validators disprove each ID using the contract and diff only.
 ---
 
 In a [multi-agent harness](/blog/building-multi-agent-harness), the **validation contract** is the gate between "the worker said it's done" and "it's actually done." A weak contract lets bugs through with a clean handoff. A strong one turns vague success criteria into **checkable behavior** that workers, orchestrators, and validators can disagree about—with evidence.
