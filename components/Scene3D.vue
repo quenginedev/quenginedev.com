@@ -61,6 +61,11 @@ let particlePoints: Points | null = null
 let particleBasePositions: Float32Array | null = null
 let connectionLines: Line[] = []
 let linePhases: number[] = []
+let lineTargetOpacities: number[] = []
+let outerMesh: import('three').Mesh | null = null
+let avatarGroup: Group | null = null
+let entranceComplete = true
+let entranceTimeline: { kill: () => void } | null = null
 let animationFrameId = 0
 let resizeObserver: ResizeObserver | null = null
 let isVisible = true
@@ -98,7 +103,7 @@ function applySceneTheme(mode: string): void {
       const hex = i % 4 === 0 ? gold : teal
       particleColorAttr.setXYZ(
         i,
-        ((hex >> 16) & 255) / 255,
+        ((hex >> 16) & 255) / 255, 
         ((hex >> 8) & 255) / 255,
         (hex & 255) / 255,
       )
@@ -346,13 +351,15 @@ function buildConnectionLines(
       new THREE.Float32BufferAttribute(new Float32Array([ax, ay, az, bx, by, bz]), 3),
     )
 
+    const targetOpacity = 0.15 + Math.random() * 0.25
     const material = new THREE.LineBasicMaterial({
       color: LINE_COLORS[i % LINE_COLORS.length],
       transparent: true,
-      opacity: 0.15 + Math.random() * 0.25,
+      opacity: targetOpacity,
       blending: THREE.AdditiveBlending,
       depthWrite: false,
     })
+    lineTargetOpacities.push(targetOpacity)
 
     const line = new THREE.Line(geometry, material)
     parent.add(line)
@@ -430,10 +437,12 @@ function animate(timestamp: number): void {
     applyFlagWave(elapsed)
   }
 
-  for (let i = 0; i < connectionLines.length; i++) {
-    const line = connectionLines[i]
-    const material = line.material as import('three').LineBasicMaterial
-    material.opacity = 0.08 + (Math.sin(elapsed * 1.6 + linePhases[i]) * 0.5 + 0.5) * 0.42
+  if (entranceComplete) {
+    for (let i = 0; i < connectionLines.length; i++) {
+      const line = connectionLines[i]
+      const material = line.material as import('three').LineBasicMaterial
+      material.opacity = 0.08 + (Math.sin(elapsed * 1.6 + linePhases[i]) * 0.5 + 0.5) * 0.42
+    }
   }
 
   if (particlePoints) {
@@ -444,8 +453,75 @@ function animate(timestamp: number): void {
   animationFrameId = requestAnimationFrame(animate)
 }
 
+async function runEntranceAnimation(): Promise<void> {
+  if (
+    isDisposed
+    || !outerMesh
+    || !avatarGroup
+    || !outerWireMaterial
+    || !particleMaterialRef
+    || !particleGroup
+    || !flagMesh
+  ) {
+    return
+  }
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    entranceComplete = true
+    return
+  }
+
+  const duration = isMobilePerfMode ? 0.65 : 1.0
+  const avatarDelay = isMobilePerfMode ? 0.15 : 0.25
+  const ease = 'expo.out'
+  const finalWireOpacity = outerWireMaterial.opacity
+  const finalParticleOpacity = particleMaterialRef.opacity
+  const avatarMaterial = flagMesh.material as import('three').MeshBasicMaterial
+
+  outerMesh.scale.setScalar(0.42)
+  outerWireMaterial.opacity = 0
+  particleGroup.scale.setScalar(0.55)
+  particleMaterialRef.opacity = 0
+  avatarGroup.scale.setScalar(0.62)
+  avatarMaterial.opacity = 0
+
+  for (let i = 0; i < connectionLines.length; i++) {
+    const material = connectionLines[i].material as import('three').LineBasicMaterial
+    material.opacity = 0
+  }
+
+  entranceComplete = false
+
+  const { gsap } = await import('gsap')
+  entranceTimeline = gsap.timeline({
+    onComplete: () => {
+      entranceComplete = true
+      entranceTimeline = null
+    },
+  })
+
+  entranceTimeline.to(outerMesh.scale, { x: 1, y: 1, z: 1, duration, ease }, 0)
+  entranceTimeline.to(outerWireMaterial, { opacity: finalWireOpacity, duration, ease }, 0)
+  entranceTimeline.to(particleGroup.scale, { x: 1, y: 1, z: 1, duration, ease }, 0)
+  entranceTimeline.to(particleMaterialRef, { opacity: finalParticleOpacity, duration, ease }, 0)
+
+  for (let i = 0; i < connectionLines.length; i++) {
+    const material = connectionLines[i].material as import('three').LineBasicMaterial
+    entranceTimeline.to(
+      material,
+      { opacity: lineTargetOpacities[i] ?? 0.2, duration: duration * 0.85, ease },
+      duration * 0.12,
+    )
+  }
+
+  entranceTimeline.to(avatarGroup.scale, { x: 1, y: 1, z: 1, duration: duration * 0.82, ease }, avatarDelay)
+  entranceTimeline.to(avatarMaterial, { opacity: 1, duration: duration * 0.72, ease }, avatarDelay)
+}
+
 function disposeScene(): void {
   isDisposed = true
+  entranceTimeline?.kill()
+  entranceTimeline = null
   cancelAnimationFrame(animationFrameId)
 
   for (const entry of disposables) {
@@ -462,6 +538,10 @@ function disposeScene(): void {
   disposables.length = 0
   connectionLines = []
   linePhases = []
+  lineTargetOpacities = []
+  outerMesh = null
+  avatarGroup = null
+  entranceComplete = true
   particlePoints = null
   particleGroup = null
   particleBasePositions = null
@@ -484,7 +564,7 @@ async function initScene(): Promise<void> {
   const container = containerRef.value
   if (!container) return
 
-  isMobilePerfMode = detectMobilePerf()
+  isMobilePerfMode = shouldUseLiteGpu() || detectMobilePerf()
   particleCount = isMobilePerfMode ? 512 : 2048
   lineCount = isMobilePerfMode ? 12 : 40
   skipFlagWave = true
@@ -523,14 +603,15 @@ async function initScene(): Promise<void> {
     opacity: 0.82,
   })
   outerWireMaterial = outerMaterial
-  const outerMesh = new THREE.Mesh(outerGeometry, outerMaterial)
+  outerMesh = new THREE.Mesh(outerGeometry, outerMaterial)
   mainGroup.add(outerMesh)
   trackDisposable({ geometry: outerGeometry, material: outerMaterial, object: outerMesh })
 
-  const { group: avatarGroup, disposables: avatarDisposables } = await buildAvatarGroup(
+  const { group: builtAvatarGroup, disposables: avatarDisposables } = await buildAvatarGroup(
     THREE,
     meshScale,
   )
+  avatarGroup = builtAvatarGroup
   avatarGroup.rotation.x = Math.PI * 0.08
   mainGroup.add(avatarGroup)
   for (const entry of avatarDisposables) {
@@ -602,6 +683,8 @@ async function initScene(): Promise<void> {
 
   updateParticleSpread(internalScroll.value)
   resizeRenderer()
+
+  await runEntranceAnimation()
 
   lastFrameTime = performance.now()
   animationFrameId = requestAnimationFrame(animate)

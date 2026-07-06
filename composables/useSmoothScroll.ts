@@ -28,9 +28,9 @@ export function useSmoothScroll(options: UseSmoothScrollOptions = {}) {
   let nativeScrollCleanup: (() => void) | null = null
 
   onMounted(async () => {
-    const isMobilePerf = detectMobilePerf()
+    const { useNativeScroll } = usePerfProfile()
 
-    if (isMobilePerf) {
+    if (useNativeScroll.value) {
       const onNativeScroll = () => {
         const limit = document.documentElement.scrollHeight - window.innerHeight
         scrollProgress.value = limit > 0 ? window.scrollY / limit : 0

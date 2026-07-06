@@ -21,7 +21,7 @@
 
       <div class="blog-article__layout">
         <BlogToc v-if="tocLinks.length" :links="tocLinks" class="blog-article__toc" />
-        <ContentRenderer :value="page" class="blog-prose prose prose-invert max-w-none lg:prose-lg" />
+        <ContentRenderer :value="page" class="blog-prose prose max-w-none lg:prose-lg" />
       </div>
 
       <footer class="blog-article__footer">

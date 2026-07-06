@@ -13,7 +13,7 @@ tags:
   - loop
   - orchestration
   - multi-agent
-cover: /blog/cover-placeholder.svg
+cover: /blog/loop-goal-harness.jpeg
 ---
 
 You ask an agent to "build the feature." It writes code, says done, and moves on. Two sessions later you discover half the tests fail, scope drifted, and nobody verified the original constraints. The problem is not the model—it is the **missing loop**. A one-shot prompt has no gate, no retry, and no memory of what "done" meant.
@@ -52,15 +52,7 @@ A loop goal harness treats these as **engineering problems**, not prompt-enginee
 
 Every serious multi-agent system—regardless of vendor—maps to this stack:
 
-```text
-┌─────────────────────────────────────────┐
-│  Coordinator loop (plan → delegate)     │
-├─────────────────────────────────────────┤
-│  Worker loops (isolated context, act)     │
-├─────────────────────────────────────────┤
-│  Gate layer (scripts, contracts, ticks) │
-└─────────────────────────────────────────┘
-```
+![The loop goal harness: portable skills-and-scripts architecture — goal verification loop, coordinator, isolated workers, script gates, and portable skills](/blog/loop-goal-harness-flow.jpeg)
 
 ### Layer 1 — Coordinator loop
 

@@ -1,6 +1,6 @@
 <template>
   <nav v-if="links.length" class="blog-toc panel" aria-label="Table of contents">
-    <p class="blog-toc__label label-caps">On this page</p>
+    <h2 class="blog-section-heading">On this page</h2>
     <ol class="blog-toc__list">
       <li v-for="link in links" :key="link.id" :class="`blog-toc__item blog-toc__item--depth-${link.depth}`">
         <a :href="`#${link.id}`" class="blog-toc__link">{{ link.text }}</a>

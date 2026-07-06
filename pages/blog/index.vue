@@ -1,7 +1,6 @@
 <template>
   <div class="blog-page">
     <header class="blog-header">
-      <span class="label-caps">Writing / Field notes</span>
       <h1 class="blog-header__title">Blog</h1>
       <p class="blog-header__lead">
         Tutorials and architecture notes on systems, agents, and the tooling I use to ship them.

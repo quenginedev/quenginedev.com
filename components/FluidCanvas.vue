@@ -747,7 +747,7 @@ function initWebGL(canvas: HTMLCanvasElement): boolean {
 function resizeCanvas(canvas: HTMLCanvasElement): void {
   if (!gl || !uniforms) return
 
-  const dpr = Math.min(window.devicePixelRatio || 1, 2)
+  const dpr = shouldUseLiteGpu() ? 1 : Math.min(window.devicePixelRatio || 1, 2)
   const width = Math.max(1, Math.floor(canvas.clientWidth * dpr))
   const height = Math.max(1, Math.floor(canvas.clientHeight * dpr))
 

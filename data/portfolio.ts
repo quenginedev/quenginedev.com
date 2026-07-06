@@ -197,7 +197,7 @@ export const architecturePillars: ArchitecturePillar[] = [
   {
     title: 'Serverless',
     description:
-      'Event-driven, pay-per-use architectures on AWS and edge runtimes — from API gateways to background workers with zero idle cost.',
+      'Event-driven, pay-per-use architectures on AWS and edge runtimes, from API gateways to background workers with zero idle cost.',
     icon: 'mdi:cloud-outline',
   },
   {
@@ -209,7 +209,7 @@ export const architecturePillars: ArchitecturePillar[] = [
   {
     title: 'Edge / Cloud',
     description:
-      'Global delivery via Cloudflare Workers, CDN caching, and cloud-native infra — low latency from browser to database.',
+      'Global delivery via Cloudflare Workers, CDN caching, and cloud-native infra with low latency from browser to database.',
     icon: 'mdi:earth',
   },
 ]
@@ -219,34 +219,34 @@ export const polyglotLanguages: PolyglotLanguage[] = [
     name: 'TypeScript',
     proficiency: 'production',
     focus:
-      'Home base for full-stack delivery — typed Vue/React frontends, Node services, shared contracts, and the layer where most production systems are designed and shipped.',
+      'Home base for full-stack delivery: typed Vue/React frontends, Node services, shared contracts, and the layer where most production systems are designed and shipped.',
     icon: 'mdi:language-typescript',
   },
   {
     name: 'Rust',
     proficiency: 'experimenting',
     focus:
-      'Hands-on experimentation with systems programming — memory safety, concurrency, and performance patterns before committing them to production paths.',
+      'Hands-on experimentation with systems programming: memory safety, concurrency, and performance patterns before committing them to production paths.',
     icon: 'mdi:language-rust',
   },
   {
     name: 'Python',
     proficiency: 'active',
     focus:
-      'Heavy use when the problem calls for it — AI pipelines, data scripting, and fast backend prototyping — but a deliberate reach, not the default stack.',
+      'Heavy use when the problem calls for it: AI pipelines, data scripting, and fast backend prototyping, but a deliberate reach, not the default stack.',
     icon: 'mdi:language-python',
   },
   {
     name: 'Mojo',
     proficiency: 'exploring',
     focus:
-      'Early exploration for machine learning workloads — Python-like ergonomics with a path toward bare-metal performance for model-centric systems.',
+      'Early exploration for machine learning workloads: Python-like ergonomics with a path toward bare-metal performance for model-centric systems.',
     icon: 'mdi:lightning-bolt-outline',
   },
 ]
 
 export const aiEngineering: AiEngineering = {
-  headline: 'Beyond the API — into the machine',
+  headline: 'Beyond the API, into the machine',
   summary:
     'I build with AI models in production, but I am equally drawn to how they work under the hood: transformers, attention, training dynamics, evaluation methodology, and the engineering trade-offs that separate demos from reliable systems.',
   interests: [
@@ -259,13 +259,13 @@ export const aiEngineering: AiEngineering = {
     {
       title: 'Evaluation & benchmarking',
       description:
-        'Designing rigorous eval frameworks for LLM outputs — quality scoring, regression detection, and production safety gates.',
+        'Designing rigorous eval frameworks for LLM outputs: quality scoring, regression detection, and production safety gates.',
       icon: 'mdi:chart-timeline-variant-shimmer',
     },
     {
       title: 'Inference engineering',
       description:
-        'Latency, context windows, batching, and deployment patterns — making models fast, observable, and dependable in real products.',
+        'Latency, context windows, batching, and deployment patterns for making models fast, observable, and dependable in real products.',
       icon: 'mdi:speedometer',
     },
     {
@@ -281,37 +281,37 @@ export const hobbies: Hobby[] = [
   {
     name: 'Apex Legends',
     category: 'gaming',
-    detail: 'Fast-paced BR — movement mechanics and team coordination.',
+    detail: 'Fast-paced BR: movement mechanics and team coordination.',
     icon: 'mdi:crosshairs-gps',
   },
   {
     name: 'FIFA',
     category: 'gaming',
-    detail: 'Football on the couch — tactics, seasons, and the occasional rage quit.',
+    detail: 'Football on the couch: tactics, seasons, and the occasional rage quit.',
     icon: 'mdi:soccer',
   },
   {
     name: 'Rainbow Six Siege',
     category: 'gaming',
-    detail: 'Tactical FPS — map knowledge, operator synergy, and clutch rounds.',
+    detail: 'Tactical FPS: map knowledge, operator synergy, and clutch rounds.',
     icon: 'mdi:shield-half-full',
   },
   {
     name: 'Swimming',
     category: 'fitness',
-    detail: 'Laps for clarity — low-impact cardio and a reset from the screen.',
+    detail: 'Laps for clarity: low-impact cardio and a reset from the screen.',
     icon: 'mdi:pool',
   },
   {
     name: 'Football',
     category: 'fitness',
-    detail: 'Pickup matches with friends — the real kind, on grass.',
+    detail: 'Pickup matches with friends, the real kind, on grass.',
     icon: 'mdi:soccer-field',
   },
   {
     name: 'Basketball',
     category: 'fitness',
-    detail: 'Casual runs and shoot-arounds — competition without the league fees.',
+    detail: 'Casual runs and shoot-arounds: competition without the league fees.',
     icon: 'mdi:basketball',
   },
   {
@@ -407,7 +407,7 @@ export const projects: Project[] = [
   {
     name: 'HMS',
     description:
-      'Full-stack hospital management system for clinics in Ghana — patient registration, OPD triage, billing, and role-based access',
+      'Full-stack hospital management system for clinics in Ghana: patient registration, OPD triage, billing, and role-based access',
     stack: ['Vue 3', 'Hono', 'PostgreSQL', 'Drizzle', 'Better Auth', 'Cloudflare R2'],
     logo: '/logos/quengiendev.jpeg',
   },

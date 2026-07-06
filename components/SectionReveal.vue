@@ -22,6 +22,7 @@ const rootRef = ref<HTMLElement | null>(null)
 
 onMounted(async () => {
   if (!rootRef.value) return
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
   const [{ gsap }, { ScrollTrigger }] = await Promise.all([
     import('gsap'),

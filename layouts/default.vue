@@ -3,7 +3,7 @@
     <div class="grid-overlay" aria-hidden="true" />
 
     <ClientOnly>
-      <FluidCanvas :scroll-progress="scrollProgress" />
+      <FluidCanvas v-if="showFluidCanvas" :scroll-progress="scrollProgress" />
     </ClientOnly>
 
     <HudNav :scroll-progress="scrollProgress" />
@@ -17,5 +17,6 @@
 <script setup lang="ts">
 import '~/assets/css/portfolio.css'
 
-const { scrollProgress } = useSmoothScroll({ useGsapTicker: true })
+const { showFluidCanvas } = usePerfProfile()
+const { scrollProgress } = useSmoothScroll()
 </script>

@@ -1,6 +1,6 @@
 <template>
   <section v-if="related.length" class="blog-related">
-    <p class="blog-related__label label-caps">Related</p>
+    <h2 class="blog-section-heading">Related posts</h2>
     <div class="blog-related__grid">
       <article v-for="post in related" :key="post._path" class="blog-related__card panel">
         <time v-if="post.date" class="blog-related__date" :datetime="post.date">

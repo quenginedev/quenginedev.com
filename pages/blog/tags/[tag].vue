@@ -2,7 +2,6 @@
   <div class="blog-page">
     <header class="blog-header">
       <NuxtLink to="/blog" class="blog-back">← All posts</NuxtLink>
-      <span class="label-caps">Tag / Filter</span>
       <h1 class="blog-header__title">{{ tagLabel }}</h1>
       <p class="blog-header__lead">
         {{ posts?.length ?? 0 }} {{ posts?.length === 1 ? 'post' : 'posts' }} tagged

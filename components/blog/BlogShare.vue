@@ -1,6 +1,6 @@
 <template>
   <div class="blog-share">
-    <p class="blog-share__label label-caps">Share</p>
+    <h2 class="blog-section-heading">Share</h2>
     <div class="blog-share__actions">
       <button type="button" class="blog-share__btn" @click="copyLink">
         <Icon :name="copied ? 'mdi:check' : 'mdi:link-variant'" size="16" />

@@ -1,5 +1,5 @@
 <template>
-  <div ref="pageRef" class="cursor-zone">
+  <div class="page-home">
     <!-- Hero -->
     <section id="hero" class="section hero">
       <div class="hero__viewport">
@@ -9,13 +9,11 @@
             <TechOrbit :items="techOrbit" expanded />
           </ClientOnly>
         </div>
-        <p class="hero__scroll-hint label-caps">Scroll to enter</p>
       </div>
 
       <div class="hero__content">
         <SectionReveal :stagger="0.1" scroll-start="top 82%">
           <div class="hero__foreground" data-reveal>
-            <p class="label-caps hero__location">{{ contact.location }}</p>
             <h1 class="hero__name">
               <span class="hero__name-line">ERNEST</span>
               <span class="hero__name-line hero__name-line--accent">/ HAYFORD</span>
@@ -62,7 +60,7 @@
       <SectionReveal>
         <div class="section-header">
           <span class="section-index">01</span>
-          <span class="label-caps" data-reveal>Signal / Overview</span>
+          <h2 class="section-title" data-reveal>Overview</h2>
         </div>
         <div class="signal-layout">
           <div class="signal-kicker" data-reveal>
@@ -78,10 +76,6 @@
     <!-- Latest writing -->
     <section v-if="latestPost" id="writing" class="section section--writing">
       <SectionReveal>
-        <div class="section-header">
-          <span class="section-index">01b</span>
-          <span class="label-caps" data-reveal>Writing / Latest</span>
-        </div>
         <article class="writing-teaser panel panel--glow" data-reveal>
           <div class="writing-teaser__meta">
             <time v-if="latestPost.date" :datetime="latestPost.date" class="writing-teaser__date">
@@ -104,12 +98,11 @@
     <section id="constellation" class="section section--constellation">
       <SectionReveal :stagger="0.08">
         <div class="section-header">
-          <span class="section-index">02</span>
-          <span class="label-caps" data-reveal>Constellation / Architecture</span>
+          <h2 class="section-title" data-reveal>Architecture</h2>
         </div>
         <p class="constellation-lead" data-reveal>
           From Vue, React, and Svelte frontends to serverless backends, module federation,
-          and edge deployments — I build systems that scale across every layer.
+          and edge deployments. I build systems that scale across every layer.
         </p>
         <ArchitecturePillars :pillars="architecturePillars" />
       </SectionReveal>
@@ -120,7 +113,7 @@
       <SectionReveal :stagger="0.06">
         <div class="section-header">
           <span class="section-index">03</span>
-          <span class="label-caps" data-reveal>Experience / Timeline</span>
+          <h2 class="section-title" data-reveal>Experience</h2>
         </div>
         <div class="timeline">
           <article v-for="job in experience" :key="`${job.company}-${job.startDate}`"
@@ -153,12 +146,10 @@
     <section id="projects" class="section">
       <SectionReveal :stagger="0.08">
         <div class="section-header">
-          <span class="section-index">04</span>
-          <span class="label-caps" data-reveal>Projects / Selected Work</span>
+          <h2 class="section-title" data-reveal>Projects</h2>
         </div>
         <div class="projects-grid">
-          <article v-for="project in projects" :key="project.name" class="project-card panel panel--glow magnetic"
-            data-reveal @mousemove="onMagneticMove" @mouseleave="onMagneticLeave">
+          <article v-for="project in projects" :key="project.name" class="project-card panel panel--glow" data-reveal>
             <header class="project-card__header">
               <h3 class="project-card__name">{{ project.name }}</h3>
               <img v-if="project.logo" :src="project.logo" :alt="`${project.name} logo`" class="project-card__logo"
@@ -187,19 +178,7 @@
     <section id="stack" class="section">
       <SectionReveal>
         <div class="section-header">
-          <span class="section-index">05</span>
-          <span class="label-caps" data-reveal>Stack / Arsenal</span>
-        </div>
-
-        <div class="marquee-wrap" data-reveal aria-hidden="true">
-          <div class="marquee-track">
-            <span v-for="(skill, i) in marqueeSkills" :key="`a-${i}`" class="marquee-item">
-              {{ skill }}
-            </span>
-            <span v-for="(skill, i) in marqueeSkills" :key="`b-${i}`" class="marquee-item">
-              {{ skill }}
-            </span>
-          </div>
+          <h2 class="section-title" data-reveal>Stack</h2>
         </div>
 
         <div class="skills-grid">
@@ -220,10 +199,10 @@
       <SectionReveal :stagger="0.08">
         <div class="section-header">
           <span class="section-index">06</span>
-          <span class="label-caps" data-reveal>Polyglot / Beyond TypeScript</span>
+          <h2 class="section-title" data-reveal>Polyglot</h2>
         </div>
         <p class="section-lead" data-reveal>
-          TypeScript is home base — but I reach into other languages when the problem
+          TypeScript is home base, but I reach into other languages when the problem
           demands a different shape: memory safety, numeric performance, or AI-native tooling.
         </p>
         <div class="polyglot-grid">
@@ -247,8 +226,7 @@
     <section id="ai-depth" class="section section--ai">
       <SectionReveal :stagger="0.07">
         <div class="section-header">
-          <span class="section-index">07</span>
-          <span class="label-caps" data-reveal>Depth / AI Engineering</span>
+          <h2 class="section-title" data-reveal>AI Engineering</h2>
         </div>
         <div class="ai-depth-layout">
           <div class="ai-depth-kicker" data-reveal>
@@ -276,11 +254,10 @@
     <section id="life" class="section section--life">
       <SectionReveal :stagger="0.06">
         <div class="section-header">
-          <span class="section-index">08</span>
-          <span class="label-caps" data-reveal>Life / Off the Clock</span>
+          <h2 class="section-title" data-reveal>Life</h2>
         </div>
         <p class="section-lead" data-reveal>
-          Engineering is the craft — but balance keeps the edge sharp. Competitive games,
+          Engineering is the craft, but balance keeps the edge sharp. Competitive games,
           pitch time, and the occasional jog keep me grounded outside the terminal.
         </p>
 
@@ -336,9 +313,6 @@
         </p>
       </SectionReveal>
     </section>
-
-    <div ref="cursorRef" class="cursor-dot" :class="{ 'is-visible': cursorVisible, 'is-hover': cursorHover }"
-      aria-hidden="true" />
   </div>
 </template>
 
@@ -380,18 +354,7 @@
     })
   }
 
-  const pageRef = ref<HTMLElement | null>(null)
-  const cursorRef = ref<HTMLElement | null>(null)
-  const cursorVisible = ref(false)
-  const cursorHover = ref(false)
-
-  let cursorCleanup: (() => void) | null = null
-
   const currentYear = new Date().getFullYear()
-
-  const marqueeSkills = computed(() =>
-    skills.flatMap((cat) => cat.items),
-  )
 
   const capabilitiesBelt = computed(() => [...capabilities, ...capabilities])
 
@@ -406,7 +369,7 @@
   function proficiencyLabel(level: string): string {
     const labels: Record<string, string> = {
       production: 'Production',
-      active: 'Active — when needed',
+      active: 'Active, when needed',
       experimenting: 'Experimenting',
       exploring: 'Exploring',
     }
@@ -468,84 +431,18 @@
         href: contact.site,
       },
     ],
-  })
-
-  function onMagneticMove(event: MouseEvent) {
-    const target = event.currentTarget as HTMLElement
-    const rect = target.getBoundingClientRect()
-    const x = event.clientX - rect.left - rect.width / 2
-    const y = event.clientY - rect.top - rect.height / 2
-    target.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`
-  }
-
-  function onMagneticLeave(event: MouseEvent) {
-    const target = event.currentTarget as HTMLElement
-    target.style.transform = ''
-  }
-
-  function initCustomCursor() {
-    const dot = cursorRef.value
-    if (!dot || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-
-    let x = 0
-    let y = 0
-    let targetX = 0
-    let targetY = 0
-    let rafId = 0
-
-    const onMove = (e: PointerEvent) => {
-      targetX = e.clientX
-      targetY = e.clientY
-      cursorVisible.value = true
-    }
-
-    const onLeave = () => {
-      cursorVisible.value = false
-    }
-
-    const onOver = (e: Event) => {
-      const target = e.target as HTMLElement
-      if (target.closest('a, button, .magnetic, .project-card')) {
-        cursorHover.value = true
+    script: [
+      {
+        type: 'application/ld+json',
+        innerHTML: JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'Person',
+          'name': contact.name,
+          'jobTitle': contact.title,
+          'sameAs': socialLinks.map((link) => link.url),
+        })
       }
-    }
-
-    const onOut = (e: Event) => {
-      const target = e.target as HTMLElement
-      if (target.closest('a, button, .magnetic, .project-card')) {
-        cursorHover.value = false
-      }
-    }
-
-    const tick = () => {
-      x += (targetX - x) * 0.18
-      y += (targetY - y) * 0.18
-      dot.style.transform = `translate(${x}px, ${y}px)`
-      rafId = requestAnimationFrame(tick)
-    }
-
-    window.addEventListener('pointermove', onMove, { passive: true })
-    window.addEventListener('pointerleave', onLeave, { passive: true })
-    pageRef.value?.addEventListener('mouseover', onOver, { passive: true })
-    pageRef.value?.addEventListener('mouseout', onOut, { passive: true })
-    rafId = requestAnimationFrame(tick)
-
-    cursorCleanup = () => {
-      cancelAnimationFrame(rafId)
-      window.removeEventListener('pointermove', onMove)
-      window.removeEventListener('pointerleave', onLeave)
-      pageRef.value?.removeEventListener('mouseover', onOver)
-      pageRef.value?.removeEventListener('mouseout', onOut)
-    }
-  }
-
-  onMounted(() => {
-    if (window.matchMedia('(pointer: fine)').matches) {
-      initCustomCursor()
-    }
+    ],
   })
 
-  onUnmounted(() => {
-    cursorCleanup?.()
-  })
 </script>
