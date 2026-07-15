@@ -86,6 +86,44 @@ export interface AiEngineering {
   interests: AiInterest[]
 }
 
+export interface GtmInterest {
+  title: string
+  description: string
+  icon: string
+}
+
+export interface GtmEngineering {
+  headline: string
+  summary: string
+  interests: GtmInterest[]
+}
+
+export interface Overview {
+  kicker: string[]
+}
+
+export interface ContactSection {
+  headline: string[]
+  subline: string
+}
+
+export interface LinkedInProfile {
+  headline: string
+  about: string
+  featuredSkills: string[]
+}
+
+export interface LinkedInExperience {
+  title: string
+  company: string
+  employmentType: string
+  period: string
+  location: string
+  description: string
+  bullets: string[]
+  skills: string[]
+}
+
 export type HobbyCategory = 'gaming' | 'fitness'
 
 export interface Hobby {
@@ -97,7 +135,7 @@ export interface Hobby {
 
 export const contact: Contact = {
   name: 'Ernest De-Graft Hayford',
-  title: 'Senior Full-Stack Engineer',
+  title: 'Full-Stack · AI · GTM Engineer',
   location: 'Accra, Ghana',
   email: 'quenginedev@gmail.com',
   site: 'https://quenginedev.com',
@@ -120,13 +158,176 @@ export const socialLinks: SocialLink[] = [
 
 
 export const hero: Hero = {
-  headline: 'Senior Full-Stack Engineer',
+  headline: 'Full-Stack · AI · GTM Engineer',
   subheadline:
-    'Microservices · Serverless · Micro-Frontends · Vue / React / Svelte across fintech & distributed systems',
+    'AI-native automations · Revenue infrastructure · Production platforms across marketing, sales, ops & fintech',
   summary:
-    '8+ years shipping full-stack products from UI to infrastructure. Sole architect of HustleSasa platform ($50K→$900K+/mo payments). Module federation, edge/serverless, and production-grade systems across fintech, agritech, and automotive.',
+    '8+ years shipping full-stack products and AI systems that multiply team output. Sole architect of HustleSasa platform ($50K→$900K+/mo payments). I design GTM automations, agent workflows, and internal tools that give departments 5–10× leverage — engineered systems with eval gates and production reliability, not chatbots bolted on the side.',
   avatar: '/me.png',
 }
+
+export const overview: Overview = {
+  kicker: ['AI Systems', 'GTM Automation', 'Full-Stack'],
+}
+
+export const architectureLead =
+  'From AI agent pipelines and GTM automations to Vue, React, and Svelte frontends, serverless backends, and edge deployments. I build systems that scale across every layer — commercial and technical.'
+
+export const contactSection: ContactSection = {
+  headline: ['Build', 'Revenue', 'Systems'],
+  subline:
+    'Open to AI engineering, GTM automation consulting, fractional GTM engineering, and senior full-stack platform work.',
+}
+
+export const linkedInProfile: LinkedInProfile = {
+  headline:
+    'Full-Stack · AI · GTM Engineer | Revenue automations & agent systems that deliver 5–10× operational leverage',
+  about: `I build the systems behind revenue — not slide decks about them.
+
+Full-stack engineer, AI engineer, and GTM engineer in one seat. I design and ship AI-native automations, agent workflows, and internal tools that make marketing, sales, and ops teams dramatically more effective. Marketing, sales, CS, finance — if a department has a repetitive bottleneck, I map it and engineer the fix.
+
+What that looks like in practice:
+→ GTM automation stacks: Clay enrichment, n8n/Make orchestration, HubSpot CRM wiring, LLM agents for research and personalization
+→ Production AI systems with eval gates — not chatbots bolted onto features
+→ Full-stack platforms from UI to infrastructure when the problem needs a real product, not a Zapier chain
+
+Proof points:
+→ Sole architect of HustleSasa fintech platform — scaled payments from $50K to $900K+/mo, 1M+ transactions/month, 99%+ uptime
+→ AI Operator Consultant at Invisible Technologies — LLM evaluation frameworks and QA pipelines for production AI
+→ 8+ years shipping across fintech, agritech, automotive, and client GTM engagements
+
+I do not "use AI." I engineer it — orchestration, evaluation, inference, and the reliability layer that turns demos into systems companies can run on.
+
+Open to: fractional GTM engineering, AI automation consulting, senior full-stack/platform roles, and partnerships where engineering directly moves revenue.
+
+Accra, Ghana · quenginedev.com`,
+  featuredSkills: [
+    'GTM Engineering',
+    'AI Engineering',
+    'Agent Orchestration',
+    'Workflow Automation',
+    'Full-Stack Development',
+    'Clay',
+    'n8n',
+    'HubSpot',
+    'LLM Evaluation',
+    'TypeScript',
+    'Python',
+    'Serverless Architecture',
+  ],
+}
+
+export const linkedInExperience: LinkedInExperience[] = [
+  {
+    title: 'Lead Full-Stack Engineer',
+    company: 'HustleSasa',
+    employmentType: 'Full-time',
+    period: 'Jun 2023 – Present',
+    location: 'Nairobi County, Kenya · Remote',
+    description:
+      'Sole architect of 5+ core backend services and micro-frontend surfaces on a fintech platform that scaled from $50K to $900K+ in monthly transaction volume. Built the payment, campaign, and messaging infrastructure that powers revenue at scale.',
+    bullets: [
+      'Designed and built end-to-end payment processing infrastructure from scratch — scaled to $900K+ monthly volume, 1M+ transactions/month, 99%+ uptime',
+      'Built Campaign delivery service (email/SMS) on AWS Step Functions and SQS for high-volume async messaging — core outreach infrastructure for the platform',
+      'Integrated WhatsApp Business API (360dialog) for transactional and campaign messaging at scale',
+      'Reduced system latency by 65% through Redis caching strategy and CDN optimisation',
+      'Designed distributed rate limiting using Token Bucket algorithm for API stability at scale',
+      'Built real-time observability stack (ELK + Grafana) monitoring health across all services',
+      'Implemented streaming CSV customer export to S3 using Step Functions and S3 multipart upload',
+      'Co-developed Customers, Notifications, and Products services alongside the core engineering team',
+      'Led migration to micro-frontend architecture using Module Federation, improving deployment frequency by 300%',
+      'Managed and mentored a team of up to 4 engineers',
+    ],
+    skills: ['AWS', 'Microservices', 'Module Federation', 'Redis', 'TypeScript', 'Serverless'],
+  },
+  {
+    title: 'AI Operator Consultant',
+    company: 'Invisible Technologies',
+    employmentType: 'Part-time',
+    period: 'Sep 2023 – May 2025',
+    location: 'United States · Remote',
+    description:
+      'Contract role focused on production AI systems: LLM evaluation, safety testing, quality benchmarking, and eval frameworks for models shipping to real users — the same rigor applied to GTM agent workflows and automations.',
+    bullets: [
+      'Developed structured evaluation frameworks to benchmark LLM output accuracy, factual grounding, and reasoning quality',
+      'Built QA pipelines and eval gates for model output validation before production release',
+      'Red-teamed models to identify failure modes, safety gaps, and adversarial edge cases',
+      'Documented model breaks with detailed reproduction steps and recommended targeted improvements',
+      'Collaborated with ML engineers on iterative model refinement and safety protocol design',
+    ],
+    skills: ['LLM Evaluation', 'AI Engineering', 'Python', 'JavaScript', 'AWS'],
+  },
+  {
+    title: 'Automation & Frontend Engineer',
+    company: 'Simple Dealer',
+    employmentType: 'Full-time',
+    period: 'Sep 2021 – Jun 2023',
+    location: 'Atlanta, Georgia, United States · Remote',
+    description:
+      'US automotive lending automation platform — helps auto dealerships submit loan applications to multiple lenders automatically without re-filling forms manually. Built the workflow automation engine that eliminated repetitive manual work and drove platform revenue growth.',
+    bullets: [
+      'Automation Team (Jun 2021 – Sep 2021): Co-developed the core Autofill Engine (with 2 engineers) — a multi-threaded system that reads JSON instruction templates to automatically fill lender websites, eliminating manual form duplication across lenders',
+      'Contributed to maintaining the in-house autofill core library using clean architecture principles',
+      'Wrote integration and unit tests achieving 97% coverage',
+      'Built automation services generating 250%+ revenue growth for the platform',
+      'Frontend Team (Sep 2021 – Jun 2023): Shipped a new web application that accelerated product development by 400%',
+      'Built UI components using React.js with full unit and integration test coverage of 99%',
+      'Took additional roles across QA tooling, documentation, and customer success',
+    ],
+    skills: ['Workflow Automation', 'React.js', 'Microservices', 'TypeScript', 'Rust'],
+  },
+  {
+    title: 'Full Stack Engineer → Technical Lead',
+    company: 'Agro Innova Ltd',
+    employmentType: 'Full-time',
+    period: 'Jan 2020 – Jun 2021',
+    location: 'Accra, Greater Accra Region, Ghana · Hybrid',
+    description:
+      'Agriculture startup serving smallholder farmers, buyers, and sellers across Ghana. Built outreach automation, offline-first systems, and marketplace infrastructure at scale.',
+    bullets: [
+      'Technical Lead (Mar 2021 – Jun 2021): Led infrastructure scaling to handle 3× traffic spikes with zero downtime',
+      'Implemented blue-green deployment strategy reducing deployment risk',
+      'Built CI/CD pipelines for AkokoMarket and FBSInnova using GCP',
+      'Backend Engineer (Jul 2020 – Mar 2021): Solo-built USSD integration — enabling users without internet access to buy and sell goods. Still in production today',
+      'Built bulk notification service that increased platform interactions by 170%',
+      'Led design and implementation of services powering the Farmer Business School (FBS) platform',
+      'Contributed to an offline-first mobile app helping farmers manage farm activities',
+      'Frontend Developer (Jan 2020 – Jul 2020): Designed and implemented UI/UX for the AkokoMarket web platform',
+      'Built Sellers and Admin dashboards for AkokoMarket',
+    ],
+    skills: ['TypeScript', 'GCP', 'Infrastructure as Code', 'USSD', 'CI/CD'],
+  },
+  {
+    title: 'Freelance Software Engineer · AI & GTM Automation Consultant',
+    company: 'Self Employed',
+    employmentType: 'Part-time',
+    period: 'Jan 2019 – Present',
+    location: 'Accra, Ghana · Remote',
+    description:
+      'Independent consulting alongside full-time roles — full-stack products, AI agent workflows, and GTM automations for startups and SMEs across West Africa and remote US/EU clients.',
+    bullets: [
+      'Design GTM automation stacks: Clay enrichment, n8n/Make orchestration, HubSpot CRM wiring, LLM agents for lead research and personalized outbound',
+      'Build department workflows and internal tools that deliver 5–10× operational leverage for marketing, sales, and ops teams',
+      'Shipped My Approval — serverless platform for automating approval and workflow routing across departments (myapproval.app)',
+      'Deliver full-stack solutions: API design, payment integrations, cloud infrastructure, and production AI systems with eval gates',
+    ],
+    skills: ['GTM Engineering', 'Clay', 'n8n', 'HubSpot', 'AI Engineering', 'TypeScript', 'Python'],
+  },
+  {
+    title: 'Freelance Software Developer',
+    company: 'Self Employed',
+    employmentType: 'Self-employed',
+    period: 'Jan 2017 – Jan 2019',
+    location: 'Accra, Greater Accra Region, Ghana · On-site',
+    description:
+      'Independent software development for small businesses across Ghana during university and early career.',
+    bullets: [
+      'Delivered e-commerce builds, feature work, and code fixes for clients including MyKanta (e-commerce storefront) and House Party app',
+      'Worked across frontend and backend on client projects from 2017 through university and into full-time employment',
+    ],
+    skills: ['TypeScript', 'JavaScript', 'Full-Stack Development'],
+  },
+]
 
 export const engineeringLanes: EngineeringLane[] = [
   {
@@ -159,6 +360,10 @@ export const resumeLink =
   'https://docs.google.com/document/d/1Qpblrp82H-Cpgz1eRfoqbGezkNoiR8B0-rxU9fvdHL4/edit?usp=sharing'
 
 export const capabilities: string[] = [
+  'AI Agent Systems',
+  'GTM Automation',
+  'Workflow Orchestration',
+  'LLM Evaluation',
   'Module Federation',
   'Serverless Architecture',
   'Microservices',
@@ -172,6 +377,8 @@ export const capabilities: string[] = [
 ]
 
 export const techOrbit: TechOrbitItem[] = [
+  { name: 'LLMs', category: 'platform' },
+  { name: 'Agents', category: 'platform' },
   { name: 'Vue', category: 'frontend' },
   { name: 'Nuxt', category: 'frontend' },
   { name: 'React', category: 'frontend' },
@@ -188,6 +395,12 @@ export const techOrbit: TechOrbitItem[] = [
 ]
 
 export const architecturePillars: ArchitecturePillar[] = [
+  {
+    title: 'AI & GTM Systems',
+    description:
+      'Agent workflows, enrichment pipelines, and cross-department automations that wire CRMs, outbound tools, and LLMs into one revenue engine with guardrails and measurable outcomes.',
+    icon: 'mdi:robot-outline',
+  },
   {
     title: 'Microservices',
     description:
@@ -233,7 +446,7 @@ export const polyglotLanguages: PolyglotLanguage[] = [
     name: 'Python',
     proficiency: 'active',
     focus:
-      'Heavy use when the problem calls for it: AI pipelines, data scripting, and fast backend prototyping, but a deliberate reach, not the default stack.',
+      'Heavy use when the problem calls for it: AI agent pipelines, GTM automations, data scripting, and fast backend prototyping — the default reach for LLM-powered systems.',
     icon: 'mdi:language-python',
   },
   {
@@ -246,20 +459,20 @@ export const polyglotLanguages: PolyglotLanguage[] = [
 ]
 
 export const aiEngineering: AiEngineering = {
-  headline: 'Beyond the API, into the machine',
+  headline: 'AI engineer, not AI user',
   summary:
-    'I build with AI models in production, but I am equally drawn to how they work under the hood: transformers, attention, training dynamics, evaluation methodology, and the engineering trade-offs that separate demos from reliable systems.',
+    'I do not sprinkle GPT calls on features. I engineer AI systems: agent orchestration, evaluation frameworks, inference pipelines, and the reliability layer that turns demos into production. Current work includes LLM eval and QA at Invisible Technologies — the same rigor I bring to client automations.',
   interests: [
     {
-      title: 'Transformer internals',
+      title: 'Agent orchestration',
       description:
-        'Attention mechanisms, embeddings, positional encoding, and how architecture choices shape capability and cost at inference time.',
-      icon: 'mdi:brain',
+        'Multi-step LLM workflows for research, enrichment, routing, and follow-up — with tool use, guardrails, and human handoff when confidence is low.',
+      icon: 'mdi:robot-outline',
     },
     {
       title: 'Evaluation & benchmarking',
       description:
-        'Designing rigorous eval frameworks for LLM outputs: quality scoring, regression detection, and production safety gates.',
+        'Designing rigorous eval frameworks for LLM outputs: quality scoring, regression detection, and production safety gates before anything ships.',
       icon: 'mdi:chart-timeline-variant-shimmer',
     },
     {
@@ -269,10 +482,42 @@ export const aiEngineering: AiEngineering = {
       icon: 'mdi:speedometer',
     },
     {
-      title: 'Model behavior & alignment',
+      title: 'Model mechanics',
       description:
-        'Understanding failure modes, hallucination patterns, and how to reason about model limits when shipping AI-powered features.',
-      icon: 'mdi:shield-search',
+        'Transformers, attention, embeddings, and how architecture choices shape capability and cost — so production systems are designed with limits in mind.',
+      icon: 'mdi:brain',
+    },
+  ],
+}
+
+export const gtmEngineering: GtmEngineering = {
+  headline: 'Revenue infrastructure, not more headcount',
+  summary:
+    'GTM engineering is where commercial instinct meets code. I build the automated systems behind outbound, inbound routing, CRM enrichment, approval workflows, and cross-department ops — wired with LLMs and APIs so marketing, sales, and operations run faster without hiring linearly.',
+  interests: [
+    {
+      title: 'Cross-department automation',
+      description:
+        'Marketing, sales, CS, finance, HR — any team with repetitive workflows gets custom tooling. I map the bottleneck and ship the system, not a one-size template.',
+      icon: 'mdi:sitemap-outline',
+    },
+    {
+      title: 'AI-native GTM plays',
+      description:
+        'Lead research, personalization, enrichment cascades, and signal-triggered outbound — encoded as agent workflows with eval gates, not one-off prompts.',
+      icon: 'mdi:target-account',
+    },
+    {
+      title: 'Revenue stack integration',
+      description:
+        'CRM, enrichment, outbound, analytics, internal APIs — composed into one pipeline. Data flows in, qualified action flows out.',
+      icon: 'mdi:pipe',
+    },
+    {
+      title: '5–10× operational leverage',
+      description:
+        'Replace weeks of manual work with autonomous workflows. Outcomes: hours saved, pipeline velocity, conversion lift — engineered, measured, iterated.',
+      icon: 'mdi:chart-arc',
     },
   ],
 }
@@ -348,6 +593,7 @@ export const experience: Experience[] = [
     highlights: [
       'Design and implement LLM evaluation frameworks for production AI systems',
       'Build quality assurance pipelines for model output validation',
+      'Architect agent workflows with eval gates for reliable GTM and ops automation',
     ],
   },
   {
@@ -396,8 +642,9 @@ export const experience: Experience[] = [
     startDate: '2017-01',
     endDate: null,
     highlights: [
-      'Delivered full-stack solutions for startups and SMEs across West Africa',
-      'Specialized in API design, cloud infrastructure, payment integrations, and modern frontends',
+      'Deliver full-stack and AI automation solutions for startups and SMEs across West Africa',
+      'Build GTM systems, internal tools, and department workflows that multiply team output',
+      'Specialized in API design, agent orchestration, cloud infrastructure, and payment integrations',
     ],
     logo: '/logos/quengiendev.jpeg',
   },
@@ -418,8 +665,15 @@ export const projects: Project[] = [
     logo: '/logos/simple-dealer.jpeg',
   },
   {
+    name: 'Agent Revenue Pipeline',
+    description:
+      'Consulting GTM system: Clay enrichment and signal triggers feed n8n orchestration and HubSpot CRM, with LLM agents handling lead research, personalized outbound, and inbound routing — eval gates before anything reaches a prospect.',
+    stack: ['Clay', 'n8n', 'Make', 'HubSpot', 'Python', 'TypeScript', 'LLM APIs'],
+    logo: '/logos/quengiendev.jpeg',
+  },
+  {
     name: 'My Approval',
-    description: 'Serverless platform for automating approval workflows in organizations',
+    description: 'Serverless platform for automating approval and workflow routing across departments',
     stack: ['Nuxt', 'Serverless', 'AWS'],
     url: 'https://myapproval.app',
     logo: '/logos/my-approval.png',
@@ -441,6 +695,21 @@ export const projects: Project[] = [
 ]
 
 export const skills: SkillCategory[] = [
+  {
+    category: 'AI & Automation',
+    items: [
+      'AI Engineering',
+      'GTM Engineering',
+      'Agent Orchestration',
+      'LLM Evaluation',
+      'Workflow Automation',
+      'Prompt Engineering',
+    ],
+  },
+  {
+    category: 'GTM Stack',
+    items: ['Clay', 'n8n', 'Make', 'HubSpot'],
+  },
   {
     category: 'Languages & Frameworks',
     items: [
@@ -487,6 +756,6 @@ export const skills: SkillCategory[] = [
   },
   {
     category: 'Practices & Domains',
-    items: ['Fintech', 'AI Engineering', 'CI/CD', 'Test-Driven Development', 'Payment Infrastructure'],
+    items: ['Fintech', 'GTM Systems', 'AI Engineering', 'CI/CD', 'Test-Driven Development', 'Payment Infrastructure'],
   },
 ]

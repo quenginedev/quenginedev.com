@@ -64,9 +64,7 @@
         </div>
         <div class="signal-layout">
           <div class="signal-kicker" data-reveal>
-            <span>Full-Stack</span>
-            <span>Systems</span>
-            <span>Architect</span>
+            <span v-for="tag in overview.kicker" :key="tag">{{ tag }}</span>
           </div>
           <p class="signal-body" data-reveal v-html="signalHtml" />
         </div>
@@ -101,8 +99,7 @@
           <h2 class="section-title" data-reveal>Architecture</h2>
         </div>
         <p class="constellation-lead" data-reveal>
-          From Vue, React, and Svelte frontends to serverless backends, module federation,
-          and edge deployments. I build systems that scale across every layer.
+          {{ architectureLead }}
         </p>
         <ArchitecturePillars :pillars="architecturePillars" />
       </SectionReveal>
@@ -222,6 +219,34 @@
       </SectionReveal>
     </section>
 
+    <!-- GTM Engineering -->
+    <section id="gtm" class="section section--ai">
+      <SectionReveal :stagger="0.07">
+        <div class="section-header">
+          <h2 class="section-title" data-reveal>GTM Engineering</h2>
+        </div>
+        <div class="ai-depth-layout">
+          <div class="ai-depth-kicker" data-reveal>
+            <span>Revenue</span>
+            <span>Automation</span>
+            <span>Scale</span>
+          </div>
+          <div data-reveal>
+            <h3 class="ai-depth-headline">{{ gtmEngineering.headline }}</h3>
+            <p class="ai-depth-summary">{{ gtmEngineering.summary }}</p>
+          </div>
+        </div>
+        <div class="ai-interests-grid">
+          <article v-for="interest in gtmEngineering.interests" :key="interest.title"
+            class="ai-interest panel panel--glow" data-reveal>
+            <Icon :name="interest.icon" class="ai-interest__icon" size="26" />
+            <h4 class="ai-interest__title">{{ interest.title }}</h4>
+            <p class="ai-interest__desc">{{ interest.description }}</p>
+          </article>
+        </div>
+      </SectionReveal>
+    </section>
+
     <!-- AI Depth -->
     <section id="ai-depth" class="section section--ai">
       <SectionReveal :stagger="0.07">
@@ -295,12 +320,12 @@
     <section id="contact" class="section contact-section">
       <SectionReveal :stagger="0.1">
         <h2 class="contact-headline" data-reveal>
-          <span>Engineer The</span>
-          Full Stack
+          <span>{{ contactSection.headline[0] }}</span>
+          {{ contactSection.headline[1] }}
+          <span>{{ contactSection.headline[2] }}</span>
         </h2>
         <p class="text-muted max-w-xl mx-auto mb-8" data-reveal>
-          Open to senior full-stack roles, platform architecture consulting, and
-          partnerships across frontend, backend, and cloud infrastructure.
+          {{ contactSection.subline }}
         </p>
         <div class="contact-socials" data-reveal>
           <a v-for="link in socialLinks" :key="link.platform" :href="link.url" class="contact-social-link"
@@ -323,6 +348,9 @@
   import {
     contact,
     hero,
+    overview,
+    architectureLead,
+    contactSection,
     experience,
     projects,
     skills,
@@ -334,6 +362,7 @@
     resumeLink,
     polyglotLanguages,
     aiEngineering,
+    gtmEngineering,
     hobbies,
   } from '~/data/portfolio'
 
@@ -384,8 +413,8 @@
         '<strong>HustleSasa platform ($50K→$900K+/mo payments)</strong>',
       )
       .replace(
-        'Module federation, edge/serverless',
-        '<em>Module federation, edge/serverless</em>',
+        '5–10× leverage',
+        '<strong>5–10× leverage</strong>',
       )
   })
 
