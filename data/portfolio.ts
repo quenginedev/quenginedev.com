@@ -135,7 +135,7 @@ export interface Hobby {
 
 export const contact: Contact = {
   name: 'Ernest De-Graft Hayford',
-  title: 'Full-Stack · AI · GTM Engineer',
+  title: 'Lead Back-End · AI · GTM Engineer',
   location: 'Accra, Ghana',
   email: 'quenginedev@gmail.com',
   site: 'https://quenginedev.com',
@@ -158,87 +158,98 @@ export const socialLinks: SocialLink[] = [
 
 
 export const hero: Hero = {
-  headline: 'Full-Stack · AI · GTM Engineer',
+  headline: 'Lead Back-End · AI · GTM Engineer',
   subheadline:
-    'AI-native automations · Revenue infrastructure · Production platforms across marketing, sales, ops & fintech',
+    'APIs, payments & event-driven platforms at scale · AI systems · GTM automation',
   summary:
-    '8+ years shipping full-stack products and AI systems that multiply team output. Sole architect of HustleSasa platform ($50K→$900K+/mo payments). I design GTM automations, agent workflows, and internal tools that give departments 5–10× leverage — engineered systems with eval gates and production reliability, not chatbots bolted on the side.',
+    '8+ years owning backend architecture, APIs, and production reliability — sole architect of HustleSasa services that scaled payments of 1M+ transactions daily with 99%+ uptime. I design Node/TypeScript microservices, payment rails, and cloud-native infrastructure for high-traffic platforms across African markets, with affinity for live entertainment and online ticketing workloads. AI engineering and GTM automation remain secondary lanes: agent workflows, eval gates, and revenue systems that give teams 5–10× leverage.',
   avatar: '/me.png',
 }
 
 export const overview: Overview = {
-  kicker: ['AI Systems', 'GTM Automation', 'Full-Stack'],
+  kicker: ['Back-End Platforms', 'APIs & Scale', 'AI · GTM'],
 }
 
 export const architectureLead =
-  'From AI agent pipelines and GTM automations to Vue, React, and Svelte frontends, serverless backends, and edge deployments. I build systems that scale across every layer — commercial and technical.'
+  'From Node/TypeScript APIs, payment services, and event-driven backends on Postgres, Mongo, Redis, and AWS/Kubernetes to Vue, React, and Svelte surfaces — plus AI agent pipelines and GTM automations when the problem needs them. I build systems that scale across every layer — platform first, commercial and technical.'
 
 export const contactSection: ContactSection = {
-  headline: ['Build', 'Revenue', 'Systems'],
+  headline: ['Build', 'Platform', 'Systems'],
   subline:
-    'Open to AI engineering, GTM automation consulting, fractional GTM engineering, and senior full-stack platform work.',
+    'Open to Lead Back-End and platform engineering roles first; AI engineering and GTM automation consulting still welcome.',
 }
 
 export const linkedInProfile: LinkedInProfile = {
   headline:
-    'Full-Stack · AI · GTM Engineer | Revenue automations & agent systems that deliver 5–10× operational leverage',
-  about: `I build the systems behind revenue — not slide decks about them.
+    'Lead Back-End · AI · GTM Engineer | APIs, payments & scalable platforms — plus AI systems and revenue automations',
+  about: `I own backend architecture — APIs, services, payments, and reliability — and still ship AI and GTM systems when teams need leverage.
 
-Full-stack engineer, AI engineer, and GTM engineer in one seat. I design and ship AI-native automations, agent workflows, and internal tools that make marketing, sales, and ops teams dramatically more effective. Marketing, sales, CS, finance — if a department has a repetitive bottleneck, I map it and engineer the fix.
+Lead back-end / platform engineer first: Node/TypeScript microservices, REST and GraphQL APIs, event-driven messaging, Postgres/Mongo/Redis, and AWS/Docker/Kubernetes delivery. AI engineer and GTM engineer in the same seat when the bottleneck is automation, agents, or revenue ops.
 
 What that looks like in practice:
-→ GTM automation stacks: Clay enrichment, n8n/Make orchestration, HubSpot CRM wiring, LLM agents for research and personalization
+→ Backend platforms: payment rails, campaign/messaging services, caching and rate limiting, observability, and high-traffic reliability
 → Production AI systems with eval gates — not chatbots bolted onto features
-→ Full-stack platforms from UI to infrastructure when the problem needs a real product, not a Zapier chain
+→ GTM automation stacks: Clay enrichment, n8n/Make orchestration, HubSpot CRM wiring, LLM agents for research and personalization
 
 Proof points:
-→ Sole architect of HustleSasa fintech platform — scaled payments from $50K to $900K+/mo, 1M+ transactions/month, 99%+ uptime
+→ Sole architect of HustleSasa backend services on a fintech platform serving African markets — scaled payments from $50K to $900K+/mo, 1M+ transactions/month, 99%+ uptime; experience that maps cleanly to live-entertainment and online-ticketing scale patterns
+→ Mentored up to 4 engineers on practices, reviews, and service ownership
 → AI Operator Consultant at Invisible Technologies — LLM evaluation frameworks and QA pipelines for production AI
 → 8+ years shipping across fintech, agritech, automotive, and client GTM engagements
 
-I do not "use AI." I engineer it — orchestration, evaluation, inference, and the reliability layer that turns demos into systems companies can run on.
+I engineer systems companies can run on — services, data, and infra first; AI and GTM as retained secondary lanes.
 
-Open to: fractional GTM engineering, AI automation consulting, senior full-stack/platform roles, and partnerships where engineering directly moves revenue.
+Open to: Lead Back-End and platform roles first; AI automation consulting, fractional GTM engineering, and partnerships where engineering moves revenue.
 
 Accra, Ghana · quenginedev.com`,
   featuredSkills: [
-    'GTM Engineering',
-    'AI Engineering',
-    'Agent Orchestration',
-    'Workflow Automation',
-    'Full-Stack Development',
-    'Clay',
-    'n8n',
-    'HubSpot',
-    'LLM Evaluation',
+    'Backend Architecture',
+    'Microservices',
+    'API Design',
+    'Payment Infrastructure',
+    'Event-Driven Systems',
     'TypeScript',
-    'Python',
+    'Node.js',
+    'PostgreSQL',
+    'MongoDB',
+    'Redis',
+    'AWS',
+    'Docker',
+    'Kubernetes',
+    'GraphQL',
+    'Full-Stack Development',
+    'AI Engineering',
+    'GTM Engineering',
+    'LLM Evaluation',
+    'Workflow Automation',
     'Serverless Architecture',
   ],
 }
 
 export const linkedInExperience: LinkedInExperience[] = [
   {
-    title: 'Lead Full-Stack Engineer',
+    title: 'Lead Back-End / Full-Stack Engineer',
     company: 'HustleSasa',
     employmentType: 'Full-time',
     period: 'Jun 2023 – Present',
     location: 'Nairobi County, Kenya · Remote',
     description:
-      'Sole architect of 5+ core backend services and micro-frontend surfaces on a fintech platform that scaled from $50K to $900K+ in monthly transaction volume. Built the payment, campaign, and messaging infrastructure that powers revenue at scale.',
+      'Sole architect of 5+ core backend services (and micro-frontend surfaces) on a fintech platform serving African markets — scaled from $50K to $900K+ in monthly transaction volume. Owned payment, campaign, and messaging infrastructure with the reliability patterns that map to high-traffic live-entertainment and online-ticketing workloads.',
     bullets: [
       'Designed and built end-to-end payment processing infrastructure from scratch — scaled to $900K+ monthly volume, 1M+ transactions/month, 99%+ uptime',
-      'Built Campaign delivery service (email/SMS) on AWS Step Functions and SQS for high-volume async messaging — core outreach infrastructure for the platform',
+      'Owned REST/service APIs and domain services for customers, products, notifications, and payments across a multi-service backend',
+      'Built Campaign delivery service (email/SMS) on AWS Step Functions and SQS for high-volume async messaging — event-driven outreach at scale',
       'Integrated WhatsApp Business API (360dialog) for transactional and campaign messaging at scale',
       'Reduced system latency by 65% through Redis caching strategy and CDN optimisation',
       'Designed distributed rate limiting using Token Bucket algorithm for API stability at scale',
       'Built real-time observability stack (ELK + Grafana) monitoring health across all services',
-      'Implemented streaming CSV customer export to S3 using Step Functions and S3 multipart upload',
+      'Strengthened data handling and access controls across payment and customer services — privacy-aware handling of financial and PII workloads',
+      'Managed and mentored a team of up to 4 engineers on service ownership, reviews, and delivery practices',
       'Co-developed Customers, Notifications, and Products services alongside the core engineering team',
       'Led migration to micro-frontend architecture using Module Federation, improving deployment frequency by 300%',
-      'Managed and mentored a team of up to 4 engineers',
+      'Implemented streaming CSV customer export to S3 using Step Functions and S3 multipart upload',
     ],
-    skills: ['AWS', 'Microservices', 'Module Federation', 'Redis', 'TypeScript', 'Serverless'],
+    skills: ['AWS', 'Microservices', 'TypeScript', 'Node.js', 'Redis', 'PostgreSQL', 'MongoDB', 'Serverless', 'Module Federation'],
   },
   {
     title: 'AI Operator Consultant',
@@ -331,15 +342,9 @@ export const linkedInExperience: LinkedInExperience[] = [
 
 export const engineeringLanes: EngineeringLane[] = [
   {
-    layer: 'Interface',
-    tagline: 'Composable UIs, design systems, and micro-frontend surfaces',
-    stack: ['Vue', 'Nuxt', 'React', 'Svelte'],
-    icon: 'mdi:monitor-dashboard',
-  },
-  {
     layer: 'Services',
-    tagline: 'APIs, event-driven workflows, and distributed backends',
-    stack: ['Node.js', 'TypeScript', 'GraphQL', 'Hono'],
+    tagline: 'Node/TypeScript APIs, event-driven workflows, and distributed backends',
+    stack: ['Node.js', 'TypeScript', 'Express', 'GraphQL', 'REST', 'Hono'],
     icon: 'mdi:server-network',
   },
   {
@@ -350,9 +355,15 @@ export const engineeringLanes: EngineeringLane[] = [
   },
   {
     layer: 'Cloud & Edge',
-    tagline: 'Serverless, observability, and global delivery infrastructure',
-    stack: ['AWS', 'Cloudflare', 'Kubernetes', 'Serverless'],
+    tagline: 'AWS, containers, observability, and global delivery infrastructure',
+    stack: ['AWS', 'Docker', 'Kubernetes', 'Cloudflare', 'Serverless'],
     icon: 'mdi:cloud-sync-outline',
+  },
+  {
+    layer: 'Interface',
+    tagline: 'Composable UIs, design systems, and micro-frontend surfaces',
+    stack: ['Vue', 'Nuxt', 'React', 'Svelte'],
+    icon: 'mdi:monitor-dashboard',
   },
 ]
 
@@ -360,41 +371,63 @@ export const resumeLink =
   'https://docs.google.com/document/d/1Qpblrp82H-Cpgz1eRfoqbGezkNoiR8B0-rxU9fvdHL4/edit?usp=sharing'
 
 export const capabilities: string[] = [
+  'Backend Architecture',
+  'Microservices',
+  'GraphQL & REST APIs',
+  'Event-Driven Systems',
+  'Payment Infrastructure',
+  'Cloud-Native Delivery',
+  'Serverless Architecture',
+  'Full-Stack TypeScript',
   'AI Agent Systems',
   'GTM Automation',
   'Workflow Orchestration',
   'LLM Evaluation',
   'Module Federation',
-  'Serverless Architecture',
-  'Microservices',
-  'Edge Computing',
-  'GraphQL APIs',
   'Micro-Frontends',
-  'Event-Driven Systems',
-  'Payment Infrastructure',
-  'Cloud-Native Delivery',
-  'Full-Stack TypeScript',
+  'Edge Computing',
 ]
 
 export const techOrbit: TechOrbitItem[] = [
+  { name: 'Node.js', category: 'backend' },
+  { name: 'TypeScript', category: 'backend' },
+  { name: 'GraphQL', category: 'backend' },
+  { name: 'PostgreSQL', category: 'backend' },
+  { name: 'MongoDB', category: 'backend' },
+  { name: 'Redis', category: 'backend' },
+  { name: 'AWS', category: 'infra' },
+  { name: 'Docker', category: 'infra' },
+  { name: 'Kubernetes', category: 'infra' },
+  { name: 'Python', category: 'backend' },
   { name: 'LLMs', category: 'platform' },
   { name: 'Agents', category: 'platform' },
   { name: 'Vue', category: 'frontend' },
   { name: 'Nuxt', category: 'frontend' },
   { name: 'React', category: 'frontend' },
   { name: 'Svelte', category: 'frontend' },
-  { name: 'TypeScript', category: 'frontend' },
-  { name: 'Node.js', category: 'backend' },
-  { name: 'Python', category: 'backend' },
   { name: 'Rust', category: 'backend' },
-  { name: 'PostgreSQL', category: 'backend' },
-  { name: 'Redis', category: 'backend' },
-  { name: 'AWS', category: 'infra' },
   { name: 'Cloudflare', category: 'infra' },
-  { name: 'Kubernetes', category: 'infra' },
 ]
 
 export const architecturePillars: ArchitecturePillar[] = [
+  {
+    title: 'APIs & Microservices',
+    description:
+      'Node/TypeScript services with clear domain boundaries — REST and GraphQL APIs, resilient messaging, and observable pipelines that stay reliable under load.',
+    icon: 'mdi:graph-outline',
+  },
+  {
+    title: 'Payments & Reliability',
+    description:
+      'Payment rails, rate limiting, caching, and uptime discipline for high-traffic platforms — the same patterns that keep ticketing and live-event surges healthy.',
+    icon: 'mdi:shield-check-outline',
+  },
+  {
+    title: 'Serverless & Cloud',
+    description:
+      'Event-driven architectures on AWS with Docker/Kubernetes delivery — API gateways, background workers, and infra that scales without idle waste.',
+    icon: 'mdi:cloud-outline',
+  },
   {
     title: 'AI & GTM Systems',
     description:
@@ -402,28 +435,10 @@ export const architecturePillars: ArchitecturePillar[] = [
     icon: 'mdi:robot-outline',
   },
   {
-    title: 'Microservices',
-    description:
-      'Decompose monoliths into independently deployable services with clear domain boundaries, resilient communication, and observable pipelines.',
-    icon: 'mdi:graph-outline',
-  },
-  {
-    title: 'Serverless',
-    description:
-      'Event-driven, pay-per-use architectures on AWS and edge runtimes, from API gateways to background workers with zero idle cost.',
-    icon: 'mdi:cloud-outline',
-  },
-  {
     title: 'Micro-Frontends',
     description:
       'Module federation and independent frontend teams shipping Vue, React, and Svelte apps that compose into a unified product surface.',
     icon: 'mdi:view-grid-plus',
-  },
-  {
-    title: 'Edge / Cloud',
-    description:
-      'Global delivery via Cloudflare Workers, CDN caching, and cloud-native infra with low latency from browser to database.',
-    icon: 'mdi:earth',
   },
 ]
 
@@ -461,7 +476,7 @@ export const polyglotLanguages: PolyglotLanguage[] = [
 export const aiEngineering: AiEngineering = {
   headline: 'AI engineer, not AI user',
   summary:
-    'I do not sprinkle GPT calls on features. I engineer AI systems: agent orchestration, evaluation frameworks, inference pipelines, and the reliability layer that turns demos into production. Current work includes LLM eval and QA at Invisible Technologies — the same rigor I bring to client automations.',
+    'I do not sprinkle GPT calls on features. I engineer AI systems on top of solid platform foundations: agent orchestration, evaluation frameworks, inference pipelines, and the reliability layer that turns demos into production. Current work includes LLM eval and QA at Invisible Technologies — the same rigor I bring to client automations.',
   interests: [
     {
       title: 'Agent orchestration',
@@ -493,7 +508,7 @@ export const aiEngineering: AiEngineering = {
 export const gtmEngineering: GtmEngineering = {
   headline: 'Revenue infrastructure, not more headcount',
   summary:
-    'GTM engineering is where commercial instinct meets code. I build the automated systems behind outbound, inbound routing, CRM enrichment, approval workflows, and cross-department ops — wired with LLMs and APIs so marketing, sales, and operations run faster without hiring linearly.',
+    'GTM engineering is where commercial instinct meets platform code. I build the automated systems behind outbound, inbound routing, CRM enrichment, approval workflows, and cross-department ops — wired with LLMs and APIs so marketing, sales, and operations run faster without hiring linearly.',
   interests: [
     {
       title: 'Cross-department automation',
@@ -569,17 +584,18 @@ export const hobbies: Hobby[] = [
 
 export const experience: Experience[] = [
   {
-    role: 'Lead Full-Stack Engineer',
+    role: 'Lead Back-End / Full-Stack Engineer',
     company: 'HustleSasa',
     period: 'Jul 2023 – Present',
     startDate: '2023-07',
     endDate: null,
     highlights: [
-      'Architect and maintain more than 5 core backend services and micro-frontend surfaces powering fintech infrastructure',
-      'Scaled transaction volume of 1M+ transactions / month (18× growth)',
-      'Achieved 99%+ uptime across production services',
-      'Reduced API latency by 65% through query optimization and caching',
-      'Led micro-frontend migration with module federation, increasing deploy frequency by 300%',
+      'Architect and own 5+ core backend services and APIs powering payment, campaign, and messaging infrastructure across African markets',
+      'Scaled payment volume from $50K to $900K+/mo — 1M+ transactions/month with 99%+ uptime under high-traffic load',
+      'Built event-driven delivery on AWS Step Functions and SQS; cut API latency 65% via Redis caching and query optimization',
+      'Mentored up to 4 engineers on service ownership, reviews, and delivery practices',
+      'Strengthened data handling and access controls for financial and customer PII workloads',
+      'Shipped micro-frontend surfaces with Module Federation alongside core backend ownership',
     ],
     logo: '/logos/hustlesasa.png',
     url: 'https://hustlesasa.com',
@@ -696,6 +712,52 @@ export const projects: Project[] = [
 
 export const skills: SkillCategory[] = [
   {
+    category: 'Languages & Frameworks',
+    items: [
+      'TypeScript',
+      'Node.js',
+      'Express',
+      'Hono',
+      'GraphQL',
+      'Python',
+      'Rust',
+      'Mojo',
+      'Vue',
+      'Nuxt',
+      'React',
+      'Svelte',
+    ],
+  },
+  {
+    category: 'Databases & Caching',
+    items: ['PostgreSQL', 'MongoDB', 'Redis', 'DynamoDB'],
+  },
+  {
+    category: 'Cloud & Infrastructure',
+    items: [
+      'AWS',
+      'Docker',
+      'Kubernetes',
+      'Serverless',
+      'SST',
+      'Cloudflare',
+      'Edge Computing',
+    ],
+  },
+  {
+    category: 'Architecture & Patterns',
+    items: [
+      'Microservices',
+      'Event-Driven',
+      'Distributed Systems',
+      'Payment Infrastructure',
+      'REST & GraphQL APIs',
+      'Serverless',
+      'Micro-Frontends',
+      'Module Federation',
+    ],
+  },
+  {
     category: 'AI & Automation',
     items: [
       'AI Engineering',
@@ -711,51 +773,15 @@ export const skills: SkillCategory[] = [
     items: ['Clay', 'n8n', 'Make', 'HubSpot'],
   },
   {
-    category: 'Languages & Frameworks',
-    items: [
-      'TypeScript',
-      'Node.js',
-      'Rust',
-      'Python',
-      'Mojo',
-      'Vue',
-      'Nuxt',
-      'React',
-      'Svelte',
-      'Hono',
-      'Express',
-    ],
-  },
-  {
-    category: 'Cloud & Infrastructure',
-    items: [
-      'AWS',
-      'Kubernetes',
-      'Docker',
-      'Serverless',
-      'SST',
-      'Cloudflare',
-      'Edge Computing',
-    ],
-  },
-  {
-    category: 'Databases & Caching',
-    items: ['PostgreSQL', 'MongoDB', 'Redis', 'DynamoDB'],
-  },
-  {
-    category: 'Architecture & Patterns',
-    items: [
-      'Microservices',
-      'Micro-Frontends',
-      'Module Federation',
-      'Event-Driven',
-      'Serverless',
-      'Distributed Systems',
-      'GraphQL',
-    ],
-  },
-  {
     category: 'Practices & Domains',
-    items: ['Fintech', 'GTM Systems', 'AI Engineering', 'CI/CD', 'Test-Driven Development', 'Payment Infrastructure'],
+    items: [
+      'Fintech',
+      'Payment Infrastructure',
+      'CI/CD',
+      'Test-Driven Development',
+      'Data Security & Privacy',
+      'GTM Systems',
+      'AI Engineering',
+    ],
   },
 ]
