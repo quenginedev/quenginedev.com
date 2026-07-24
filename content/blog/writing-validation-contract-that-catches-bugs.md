@@ -1,256 +1,109 @@
 ---
-title: Writing a Validation Contract That Actually Catches Bugs
+title: Stop Accepting “Done” Without Checks That Can Fail
 description: >-
-  How to write implementation-agnostic assertions with stable IDs, verification
-  methods, and edge cases—so your mission harness blocks "looks done" handoffs
-  before they ship.
+  How a short written checklist—observable outcomes, how you’ll verify them,
+  and the shortcuts you’re afraid of—keeps AI (or human) work from shipping
+  as “finished” when it isn’t.
 date: 2026-06-23
 tags:
   - agents
-  - missions
-  - cursor
   - validation
   - harness
+  - process
+  - quality
 cover: /blog/validation-contract-cover.jpeg
 tldr: >-
-  A validation contract is the gate between "worker says done" and "actually done."
-  Write assertions with stable IDs, observable behavior (not implementation),
-  executable verify steps, and explicit edge cases so the laziest shortcut still
-  fails. Validators disprove each ID using the contract and diff only.
+  A validation contract is the gate between “someone said it’s done” and
+  “you can prove it.” Numbered checks describe visible behavior, how you’ll
+  test it, and the edge cases that usually break. Checkers try to disprove
+  each ID. Weak wording green-lights bugs.
+ctaHeadline: Want checks that actually catch bugs?
+ctaBody: >-
+  I help write validation contracts and review gates so “done” means behavior
+  you can prove—not a hopeful handoff that green-lights bugs.
+ctaLabel: Talk on LinkedIn
 ---
 
-In a [multi-agent harness](/blog/building-multi-agent-harness), the **validation contract** is the gate between "the worker said it's done" and "it's actually done." A weak contract lets bugs through with a clean handoff. A strong one turns vague success criteria into **checkable behavior** that workers, orchestrators, and validators can disagree about—with evidence.
+In a [multi-agent harness](/blog/building-multi-agent-harness), the **validation contract** is the gate between “the builder said it’s done” and “it’s actually done.” A weak list of hopes lets bad work through with a clean handoff. A strong one turns vague success into **checkable behavior**—so planner, builder, and checker can disagree with evidence, not vibes.
 
-This post is the follow-up I wish I'd had when I wrote my first contract: what makes an assertion *catch* something instead of just *documenting intent*.
+This is the follow-up I wished I’d had for my first contract: how to write checks that *catch* something instead of only documenting good intentions.
 
 ## What the contract is for
 
-`validation_contract.md` lives in `.missions/` (gitignored by default). It is written **after scope is stable** and **before any application code**. Each assertion gets:
+After scope is stable and **before** anyone edits the product, write a short approved checklist. Each item gets:
 
-- A **stable ID** (`A-01`, `A-02`, …) referenced by `active_plan.md` tasks and worker handoffs
-- A **behavior statement** — what the system must do, not how it's implemented
-- A **verification method** — command, test, or manual check that produces evidence
+- A **stable ID** (`A-01`, `A-02`, …) that tasks and handoffs point at
+- A **behavior statement** — what must be true for the user or the business, not which file or function did it
+- A **verification method** — a command, a click path, or a test that produces evidence
 
-The orchestrator does not accept a task until every linked assertion is **met**, with proof. Failed or unverified assertions require a remediation task—not a note in chat.
+The planner does not close a task until every linked ID is **met**, with proof. Failed or unchecked IDs become remake work—not a shrug in chat.
 
-That only works if the assertions were written to fail when the behavior is wrong.
+That only works if the checks were written to fail when the behavior is wrong.
 
-## Anatomy of a catchable assertion
+## What a catchable check looks like
 
-Use this shape every time:
+Say you care that unfinished blog posts stay off the public site.
 
-```markdown
-### A-12 — Draft exclusion
+**Weak:** “Blog supports drafts.” Verify: “code review.”
 
-Published blog queries exclude posts with `draft: true` in frontmatter.
-Posts without a `draft` field remain visible.
+A builder can add a draft flag, never hide it, mark the check met, and unfinished posts still show up in the list and the feed. The contract green-lit a bug.
 
-**Verify:** Add `draft: true` to a test post (or inspect query filter);
-index and RSS omit it.
-```
+**Strong:** “Published listings omit posts marked draft; posts with no draft flag stay visible.” Verify: mark one post as draft and confirm the index and feed drop it.
 
-Why this catches bugs:
+Why the strong version catches trouble:
 
-| Property | What it does |
-|----------|----------------|
-| **Named behavior** | "Draft exclusion" — you know what broke when A-12 fails |
-| **Observable outcome** | Published listings omit drafts; default is visible |
-| **Edge case explicit** | Missing `draft` field ≠ hidden — prevents the classic `if (draft)` footgun |
-| **Verify names an attack** | "Add `draft: true` to a test post" — a validator can actually try it |
+- You know **what broke** when the ID fails (draft exclusion, not “draft support”)
+- The outcome is **observable** (listings, not “we added a field”)
+- The **edge case** is spelled out (missing flag ≠ hidden—the classic shortcut that hides everything or nothing)
+- Verification names an **attack** someone can actually try
 
-Compare with a assertion that *sounds* fine but catches nothing:
+## Rules that keep checks honest
 
-```markdown
-### A-12 — Draft support
+**1. Behavior, not implementation.**  
+Bad: “Use this library to set social image tags.”  
+Good: “Post pages expose title, description, and image for social previews.”  
+The first can pass while tags are still missing. The second fails until you can see them in the page output.
 
-Blog supports draft posts via frontmatter.
+**2. One behavior per ID.**  
+“Nav link, readable type, and SEO” as one check is a trap. When it fails, nobody knows which third failed; builders mark it “partial” and move on. Split them. Each task owns specific IDs.
 
-**Verify:** Code review.
-```
+**3. Verification must be doable.**  
+Every verify line should answer: *What would I run or click to prove this false?* Builds, a quick fetch of a feed, or named manual steps are fine. “We implemented it” and “the builder confirmed” are not.
 
-The worker adds `draft` to the schema, never filters it, and marks A-12 met. Users see unfinished posts on `/blog` and in RSS. The contract green-lit a bug.
+**4. Write the failure you’re afraid of.**  
+Before you approve a check, ask: *If someone took the laziest correct-looking shortcut, what would break?* Drafts leaking live. Social tags on the homepage but not on posts. A table of contents that looks fine but whose links go nowhere. A related-items block that includes the current item. A local build that passes while the real hosting target fails. Write the contract like someone will try to pass without doing the work.
 
-## Rules that keep assertions honest
+**5. Map every success line.**  
+If “success” in the scope doc has no ID, it will get negotiated away under time pressure. Each line becomes at least one assertion.
 
-### 1. Behavior, not implementation
+## How checks move through the work
 
-**Bad:** "Post page uses `useSeoMeta` with `ogImage` from frontmatter."
+Scope defines success → the contract turns success into numbered IDs → the plan ties each small task to those IDs → the builder ships one task and cites evidence per ID → the checker argues against each ID using the contract and the change (not the builder’s private reasoning) → failed IDs become remake tasks; partial is not a silent accept.
 
-**Good:** "Blog post pages emit Open Graph meta including title, description, and image."
+Missing evidence for an ID means **unverified**—same as failed until proven.
 
-The first assertion passes when the meta tags are missing but the composable is imported. The second fails until a browser or `curl` shows `og:image` in the output.
+When I can, the checker runs on a **different model family** than the builder. Same idea as not letting the author of a report be the only auditor.
 
-Your orchestrator agent should enforce this explicitly: no function names, file paths, or framework hooks as requirements.
+## Before you approve a contract
 
-### 2. One behavior per ID (split compound assertions)
+- Every success line from scope maps to at least one ID
+- No check requires a specific file, function, or library
+- Every verify step is a command, test, or numbered procedure
+- Edge cases are explicit (defaults, empty lists, missing optional fields)
+- At least one check per feature would fail on a stub
+- Deploy/build checks match the **real** target, not a generic “build passes”
+- Plan tasks link to IDs—no orphans, no overloaded mega-checks
 
-**Bad:**
+## When to skip it
 
-```markdown
-### A-04 — Blog UX
+Not every change needs a long checklist. A typo, a one-line config tweak, or a throwaway spike—single agent, no contract. The overhead pays when scope spans many files, a second pair of eyes has value, or you need an audit trail.
 
-Blog has nav link, readable typography, and SEO.
-**Verify:** Looks good.
-```
+Use it when “done” is ambiguous and expensive to unwind.
 
-When A-04 fails, you don't know which third failed. Workers mark it "partial" and move on.
+## After the mission
 
-**Good:** Split into A-04 (nav link), A-09 (SEO metadata), A-10 (readability). Each task in `active_plan.md` links to the IDs it owns. Handoffs stay auditable.
+If a bug shipped and no check fired, **add a check** before the next similar job. If a check always passes without thought, merge or sharpen it. Contracts are living specs—not tombstones from kickoff.
 
-### 3. Verification must be executable
+The [harness post](/blog/building-multi-agent-harness) covered *why* roles and serial gates exist. The contract is *how* those gates know what to block. Write checks like tests for product behavior: specific, falsifiable, and rude to shortcuts.
 
-Every `**Verify:**` line should answer: *What would I run or click to prove this false?*
-
-| Tier | When to use | Example |
-|------|-------------|---------|
-| **Automated** | CI-safe, deterministic | `pnpm run build` exits 0 |
-| **Command** | Quick, scriptable | `curl -s /feed.xml \| head` shows `<rss` |
-| **Manual** | UX, visual, interaction | Click tag → filtered list; copy button fills clipboard |
-
-"We implemented it" is not a verification method. Neither is "worker confirmed."
-
-Automate what you can. For manual checks, name the **steps**, not the vibe.
-
-### 4. Write the failure you're afraid of
-
-Before you finalize an assertion, ask: *If the worker took the laziest correct-looking shortcut, what would break?*
-
-Examples from real missions:
-
-| Fear | Assertion that catches it |
-|------|---------------------------|
-| Draft posts leak to production | A-12 — explicit filter + "posts without `draft` remain visible" |
-| SEO works on homepage but not posts | A-14 — social meta **on post pages**, not "site has OG tags" |
-| TOC renders but anchors are dead | A-17 — "anchor links work", not "TOC visible" |
-| Related posts show the current post | A-24 — "excluding current post" |
-| Build passes locally but not on Cloudflare | A-29 — `pnpm run build` with **existing Cloudflare Pages preset** |
-
-The contract is adversarial input. Write it like someone will try to pass without doing the work.
-
-### 5. Map every success criterion
-
-When I scoped the first blog mission, success looked like:
-
-- HUD nav link to `/blog`
-- Index lists posts with cover, date, tags
-- Tutorial post covers harness architecture
-- Build passes on Cloudflare
-
-Each line became at least one assertion (A-02 through A-11). If a success criterion has no ID, it will be negotiated away under time pressure.
-
-## Good vs weak — side by side
-
-### Blog index (A-02)
-
-```markdown
-<!-- Weak -->
-### A-02 — Blog page
-Blog index exists at /blog.
-**Verify:** Route defined.
-
-<!-- Strong -->
-### A-02 — Blog index route
-Navigating to `/blog` shows a page listing blog posts with at least
-title and publication date for each entry.
-**Verify:** Manual — open `/blog` in dev or preview; one post visible.
-```
-
-The strong version fails if the route 404s, renders empty, or drops dates from the card layout.
-
-### Content coverage (A-06)
-
-Tutorial missions need **substance** assertions, not just "file exists":
-
-```markdown
-### A-06 — Tutorial content coverage
-The first post includes substantive sections covering: harness motivation,
-`/mission` bootstrap, agent roles (orchestrator/worker/validator), mission
-artifacts, serial execution gates, architecture diagram reference, and
-practical usage tips.
-**Verify:** Manual read of markdown source.
-```
-
-This caught a handoff where the worker stubbed headings with one-line placeholders. The route worked; the mission didn't.
-
-### Build compatibility (A-11 / A-29)
-
-```markdown
-### A-29 — Cloudflare build
-`pnpm run build` succeeds with existing Cloudflare Pages preset after all V2 changes.
-**Verify:** `pnpm run build` exits 0.
-```
-
-Naming the **preset** matters. A generic "build passes" misses Nitro/edge bundling failures that only show up under `cloudflare-pages`.
-
-## How assertions flow through the harness
-
-```text
-mission_profile.md (success definition)
-        ↓
-validation_contract.md (A-01 … A-N, approved)
-        ↓
-active_plan.md (tasks → assertion IDs)
-        ↓
-Worker implements ONE task → handoff cites A-IDs + evidence
-        ↓
-Orchestrator / Validator checks each A-ID → met | partial | failed
-        ↓
-Failed → remediation task. Partial → no silent accept.
-```
-
-Worker handoffs should look like:
-
-```markdown
-## Handoff — Task 5: Tags
-
-**Status:** complete
-**Assertions addressed:** A-19, A-20
-**Evidence:**
-- `/blog/tags/agents` lists only posts tagged `agents`
-- Index tag chips link to filter route (screenshot or path)
-**Recommendation:** accept
-```
-
-If evidence is missing for an ID, the assertion stays **unverified**—same as failed until proven.
-
-## Validator pass: use the contract as a script
-
-When a validator agent runs (ideally on a different model family than the worker), it should **not** read worker reasoning. It reads:
-
-- `validation_contract.md`
-- Git diff
-- Handoff facts only
-
-For each assertion, the validator tries to **disprove** met status:
-
-1. Run automated `**Verify:**` commands
-2. For manual assertions, perform the named steps
-3. Hunt counterexamples (draft post in RSS, broken prev/next on single-post blog, empty related section)
-
-If your contract has no disprovable steps, the validator has nothing to do except agree—and shared blind spots win.
-
-## Checklist before you approve a contract
-
-- [ ] Every success criterion from `mission_profile.md` maps to ≥1 assertion ID
-- [ ] No assertion mentions implementation (files, functions, libraries)
-- [ ] Each `**Verify:**` is a command, test, or numbered manual procedure
-- [ ] Edge cases are explicit (defaults, empty states, single-item lists, missing optional fields)
-- [ ] At least one assertion per feature would fail on a stub or partial implementation
-- [ ] Build/deploy assertions match your real target (Cloudflare preset, not generic `npm run build`)
-- [ ] `active_plan.md` tasks link to assertion IDs; no orphan IDs, no overloaded tasks
-
-## When to skip the contract
-
-Not every change needs eighteen assertions. A typo fix, a one-line config tweak, or a spike with throwaway code—single agent, no contract. The harness has overhead; use it when **multi-file scope**, **validator value**, or **audit trail** justify the gate.
-
-Use it when "done" is ambiguous and expensive to unwind.
-
-## Closing the loop
-
-After a mission, if an assertion never fired but a bug shipped anyway, **add an assertion** before the next similar mission. If an assertion always passes without thought, merge or sharpen it. Contracts are living specs—not tombstones from the scope phase.
-
-The harness post covered *why* roles and serial gates exist. The contract is *how* those gates know what to block. Write assertions like tests for product behavior: specific, falsifiable, and rude to shortcuts. Your future validator—and your production users—will thank you.
-
----
-
-**Previously:** [Building a Multi-Agent Harness Orchestration Framework](/blog/building-multi-agent-harness)
+Next in the series: [keeping work looping until the goal is actually met](/blog/loop-goal-harness-skills-and-scripts), and [surviving crashes with files as durable state](/blog/file-event-harness-local-durable-agents).

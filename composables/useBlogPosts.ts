@@ -10,6 +10,10 @@ export interface BlogPost {
 	draft?: boolean
 	ogImage?: string
 	canonical?: string
+	/** Footer CTA — missing fields use BlogCta defaults (LinkedIn). */
+	ctaHeadline?: string
+	ctaBody?: string
+	ctaLabel?: string
 	text?: string
 	body?: {
 		toc?: {

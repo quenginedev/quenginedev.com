@@ -1,186 +1,96 @@
 ---
-title: Building a Multi-Agent Harness Orchestration Framework
+title: Stop One AI Agent From Owning the Whole Job
 description: >-
-  A practical tutorial on the mission skill, Orchestrator–Worker–Validator roles,
-  serial execution gates, and the infrastructure harness that keeps multi-agent
-  coding sessions safe and shippable.
+  Why I split AI coding work into planner, builder, and checker roles—with
+  written gates and one editor at a time—so mistakes cost less and “done”
+  means something you can prove.
 date: 2026-06-22
 tags:
   - agents
   - orchestration
-  - cursor
-  - missions
-  - multi-agent
   - harness
+  - multi-agent
+  - process
 cover: /blog/multi-agent-cover.jpeg
 tldr: >-
-  Split agent work into Orchestrator (plan), Worker (code), and Validator (verify)
-  with serial gates and local `.missions/` state. No application code until the
-  validation contract is approved. Handoffs carry evidence, not vibes; one editor
-  mutates the tree at a time.
+  Don’t let one chat plan, build, and grade itself. Use three roles—planner,
+  builder, checker—plus a written checklist before any code, and only one
+  person (or agent) editing the project at a time. Evidence at the handoff,
+  not vibes.
+ctaHeadline: Need a multi-agent harness for your team?
+ctaBody: >-
+  I help set up planner, builder, and checker roles with written gates so AI
+  coding work ships with evidence—not one chat owning the whole job.
+ctaLabel: Message me on LinkedIn
 ---
 
-Single-agent coding sessions hit a ceiling fast: context drifts, edits collide, and “it works in chat” rarely survives review. A **multi-agent harness** separates **planning**, **implementation**, and **verification** into distinct roles with explicit artifacts and gates—so each agent does one job well and the system stays auditable.
+Ask one AI session to plan, build, and declare victory. It will sound confident. Reviews still find broken edges, missing scope, and edits that fight each other. The model isn’t uniquely evil. The **process** is: one actor holding the pen, the plan, and the grade.
 
-This post walks through how I structure that harness using the **mission skill** (`/mission`), the `.missions/` framework, and a loop-within-loop architecture you can adapt to your own stack.
+A **multi-agent harness** is just infrastructure for that process. It separates who plans, who builds, and who checks—and it forces a paper trail so “done” isn’t a vibe in chat.
 
-## Why a harness?
+I use a local mission folder (`.missions/`, gitignored) and a `/mission` trigger in the editor. You can copy the shape without my tooling. The point is roles, gates, and serial edits—not a product pitch.
 
-Without a harness, multiple agents (or repeated sessions) tend to:
+## What goes wrong without a harness
 
-- Edit the same files in parallel and corrupt the working tree
-- Skip validation because “the worker said it works”
-- Share reasoning chains, which amplifies blind spots instead of catching them
+Without rails, agents (or you, bouncing between chats) tend to:
 
-A harness adds **infrastructure**: state files, assertion contracts, serial handoffs, and tool sandboxes. Agents still use LLM reasoning inside their loops, but the **coordination layer** enforces order and evidence.
+- Edit the same files at once and leave the project half-broken
+- Skip a real check because “the builder said it works”
+- Reuse the same reasoning, so the same blind spots ship twice
 
-## The `/mission` trigger
+That’s risk and rework. Token spend and calendar time both climb.
 
-The mission skill intercepts prompts like:
+## Three roles, three jobs
 
-```text
-/mission Build a blog section with Nuxt Content
-```
+| Role | Job | Touches product code? |
+|------|-----|------------------------|
+| **Orchestrator** (planner) | Scope, checklist, task order, who runs next | No |
+| **Worker** (builder) | One small task from the plan | Yes |
+| **Validator** (checker) | Argue against the checklist using the diff and facts | No |
 
-On first run it bootstraps a local framework directory (gitignored so orchestration state never pollutes the repo):
+The planner never “just ships a quick fix.” The builder never grades their own work as final. The checker, when I can, runs on a **different model family** than the builder, and does **not** read the builder’s private reasoning—only the checklist, the change, and the handoff facts. Same idea as not letting the author of a report also be the only auditor.
 
-```text
-.missions/
-├── agents/          # Orchestrator, worker, validator instructions
-├── skills/          # Encoded learnings from completed tasks
-├── hooks/           # Assertion runners (e.g. run-assertions.sh)
-├── handoffs/        # Worker and validator logs
-├── mission_profile.md
-├── validation_contract.md
-├── active_plan.md
-└── mission_control.md
-```
+## Paper before code
 
-**Key idea:** application code lives in git; **mission state** stays local until you choose to commit docs or handoffs.
+Before anyone edits the product:
 
-## Roles — Orchestrator, Worker, Validator
+1. **Mission profile** — what we’re doing, what’s in/out, what “success” means
+2. **Validation contract** — numbered checks (`A-01`, `A-02`, …): observable behavior and how you’ll verify it. No coding until this is approved.
+3. **Active plan** — one task in progress at a time, each tied to those check IDs
 
-| Role | Responsibility | Writes app code? |
-|------|----------------|------------------|
-| **Orchestrator** | Scope, validation contract, serial plan, delegation | No |
-| **Worker** | One atomic task from `active_plan.md` | Yes |
-| **Validator** | Adversarial check against assertions only | No |
+When a builder finishes, they don’t send a novel. They send a short handoff: status, which checks they claim, where the evidence is, accept or rework. The planner marks checks met, partial, or failed. Failed checks become a remake task—not a shrug in the transcript.
 
-### Orchestrator loop
+I go deeper on writing checks that actually catch bad work in [Writing a Validation Contract That Actually Catches Bugs](/blog/writing-validation-contract-that-catches-bugs).
 
-1. **Observe** — Read mission profile, contract, plan, and handoffs
-2. **Decide** — Pick the single `in_progress` task and linked assertion IDs
-3. **Act** — Delegate to a worker with scope + assertions + handoff format
-4. **Verify** — On handoff, mark assertions met/partial/failed; accept or replan
+## One editor at a time
 
-### Worker loop
+Hard rules that keep the tree honest:
 
-1. **Observe** — Task description, assertions, current codebase
-2. **Decide** — Implementation approach within scope
-3. **Act** — Edit files, run commands in sandbox
-4. **Verify** — Self-check against assertions; emit structured handoff
+1. **One writer** — only one builder mutates files at a time
+2. **Clean start** — next builder inherits a known tree (or a declared, owned diff)
+3. **Checklist first** — contract before code; checks before “done”
+4. **Parallel is for reading** — search and review can run together; writes stay serial
 
-### Validator loop
+Think of it like a shop floor: two people welding the same joint without a lockout isn’t speed—it’s scrap.
 
-Runs on a **different model family** than the worker when possible, reads **only** the contract, diff, and handoff facts—not worker chain-of-thought—to hunt counterexamples.
+## Loops on top of infrastructure
 
-## Artifacts
-
-### `mission_profile.md`
-
-Living scope doc: objective, success definition, in/out of scope, technical boundaries. Populated during **Scope Phase** before any contract or code.
-
-### `validation_contract.md`
-
-Implementation-agnostic assertions with stable IDs (`A-01`, `A-02`, …), behavior statements, and verification methods. **No coding until this is approved.**
-
-Example assertion shape:
-
-```markdown
-### A-02 — Blog index route
-Navigating to `/blog` lists posts with title and date.
-**Verify:** Manual — open `/blog`; posts visible.
-```
-
-### `active_plan.md`
-
-Serial task table: one `in_progress` task at a time, each linked to assertion IDs, with done-when criteria aligned to the contract.
-
-### Handoffs
-
-Workers return:
-
-```markdown
-## Handoff — Task 2: Blog routes
-**Status:** complete
-**Assertions addressed:** A-02, A-03
-**Evidence:** build output, file paths
-**Recommendation:** accept
-```
-
-## Serial execution & gates
-
-Hard rules that keep the harness honest:
-
-1. **One editor** — Only one worker mutates the tree at a time
-2. **Clean slate** — Workers start from a verified tree (or declared task-owned diff)
-3. **Validation-first** — Contract before code; assertions before “done”
-4. **Read-only parallelism** — Search, docs, and reviews can run in parallel; writes are serial
-5. **Failed assertions** — Require a remediation task, not silent acceptance
-
-Hooks like `.missions/hooks/run-assertions.sh` can automate lint, typecheck, and tests at verification checkpoints.
-
-## Architecture — loops within a harness
-
-The coordination stack has three layers:
-
-1. **Orchestrator loop** (top) — User input → observe → decide → invoke worker → verify output
-2. **Worker loops** (middle) — Specialized agents (coder, researcher, scraper) each with their own observe/decide/act/verify cycle
-3. **Infrastructure harness** (bottom) — Shared state, tool providers, sandboxes, token/observability controls
+Each role runs a small loop: look → decide → act → verify. The harness underneath holds shared state, sandboxes, and logs so the next planner decision uses ground truth—not last night’s chat memory.
 
 ![Multi-agent orchestration architecture — Orchestrator loop, worker loops, and infrastructure harness](/blog/multi-agent-orchestration-architecture.png)
 
-**State management** — Mission files and per-worker state with explicit permissions (e.g. write-only to own ledger, read-only across workers).
+The next posts in this series add two more layers: [keeping the work looping until the goal is actually met](/blog/loop-goal-harness-skills-and-scripts), and [surviving crashes with files as durable state](/blog/file-event-harness-local-durable-agents).
 
-**Tool providers** — Docker, interpreters, API clients, MCP servers—workers act inside sandboxes, not on production blindly.
+## When this is worth it (and when it isn’t)
 
-**Observability** — Logging and token control feed back into Orchestrator **Observe**, so the next decision uses ground truth.
+**Use a harness** when the change spans many files, failure is expensive, or you want a trail of scope and proof.
 
-## Practical tips
+**Skip it** for a one-line fix, a typo, or a throwaway spike. Over-process is also cost.
 
-### When to use `/mission`
+Keep mission drafts and live handoffs local while the work is in flight. Keep product code—and anything you want others to reuse—in the repo.
 
-- Multi-file features with clear success criteria
-- Work that benefits from a validator pass
-- Missions where you want a paper trail of scope and evidence
+## Tradeoff, in one line
 
-### When a single agent is enough
+You pay a little coordination overhead up front. You buy fewer silent failures, clearer ownership, and a definition of done that survives the chat closing.
 
-- One-file fixes, typo edits, exploratory spikes
-- Tasks with no need for adversarial review
-
-### Local vs repo
-
-| Keep local (`.missions/`) | Keep in repo |
-|---------------------------|--------------|
-| Active plan during flight | Agent instruction templates |
-| Validation contract drafts | Application code |
-| Handoff logs | Published docs / blog posts |
-
-### Bootstrapping your own harness
-
-1. Add the mission skill and gitignore `.missions/`
-2. Copy orchestrator, worker, and validator agent definitions
-3. Run `/mission` with a small objective; resist coding until contract approval
-4. Encode recurring patterns into `.missions/skills/` after successful missions
-
-## What we shipped with this mission
-
-This very blog section was scoped and built through the harness:
-
-- Nuxt Content collection for `content/blog/*.md`
-- `/blog` index and `/blog/[slug]` routes
-- HUD nav link, SEO metadata, and prose styling
-- First post (this article) with cover placeholder you can swap via frontmatter
-
-The harness does not replace engineering judgment—it **channels** it: scope in the open, evidence at the gate, and one shippable step at a time.
+The harness doesn’t replace judgment. It channels it: scope in the open, evidence at the gate, one shippable step at a time.

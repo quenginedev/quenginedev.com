@@ -32,6 +32,11 @@
       <footer class="blog-article__footer">
         <BlogShare :title="page.title" :url="postUrl" />
         <BlogAuthor />
+        <BlogCta
+          :headline="page.ctaHeadline"
+          :body="page.ctaBody"
+          :label="page.ctaLabel"
+        />
         <BlogRelated :posts="allPosts ?? []" :current-path="contentPath" :tags="page.tags ?? []" />
         <BlogPostNav :posts="allPosts ?? []" :current-path="contentPath" />
       </footer>
