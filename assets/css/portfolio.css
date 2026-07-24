@@ -528,6 +528,20 @@ html.dark .hud-panel:hover {
   border-top: 1px solid var(--border);
 }
 
+/* Canvas UI ParticleReveal — content-region only (not full-viewport dual-GPU with Scene3D) */
+.hero__particle-reveal {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+}
+
+.hero__particle-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3xl);
+  width: 100%;
+}
+
 .hero__stage {
   position: relative;
   display: flex;

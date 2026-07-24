@@ -13,23 +13,80 @@
 
       <div class="hero__content">
         <SectionReveal :stagger="0.1" scroll-start="top 82%">
-          <div class="hero__foreground" data-reveal>
-            <h1 class="hero__name">
-              <span class="hero__name-line">ERNEST</span>
-              <span class="hero__name-line hero__name-line--accent">/ HAYFORD</span>
-            </h1>
-            <div class="hero__capabilities">
-              <span v-for="cap in capabilities.slice(0, 4)" :key="cap" class="hero__cap-tag">{{ cap }}</span>
-            </div>
-          </div>
+          <!-- ponytail: hero ParticleReveal only; Laser secondary skipped (Scene3D already on page) -->
+          <ClientOnly>
+            <CanvasuiParticleReveal
+              v-if="showHeroParticleReveal"
+              class="hero__particle-reveal"
+              background="#0a0c0f"
+              :radius="420"
+              :softness="0.7"
+              :scatter="16"
+              :drift="0.4"
+              :aberration="16"
+              :bend="22"
+            >
+              <div class="hero__particle-body">
+                <div class="hero__foreground" data-reveal>
+                  <h1 class="hero__name">
+                    <span class="hero__name-line">ERNEST</span>
+                    <span class="hero__name-line hero__name-line--accent">/ HAYFORD</span>
+                  </h1>
+                  <div class="hero__capabilities">
+                    <span v-for="cap in capabilities.slice(0, 4)" :key="cap" class="hero__cap-tag">{{ cap }}</span>
+                  </div>
+                </div>
 
-          <div class="hero__meta" data-reveal>
-            <p class="hero__title">{{ hero.headline }}</p>
-            <p class="hero__sub">{{ hero.subheadline }}</p>
-            <a :href="resumeLink" class="hero__resume-link" target="_blank" rel="noopener noreferrer">
-              View full résumé for metrics &amp; history ↗
-            </a>
-          </div>
+                <div class="hero__meta" data-reveal>
+                  <p class="hero__title">{{ hero.headline }}</p>
+                  <p class="hero__sub">{{ hero.subheadline }}</p>
+                  <a :href="resumeLink" class="hero__resume-link" target="_blank" rel="noopener noreferrer">
+                    View full résumé for metrics &amp; history ↗
+                  </a>
+                </div>
+              </div>
+            </CanvasuiParticleReveal>
+            <div v-else class="hero__particle-body">
+              <div class="hero__foreground" data-reveal>
+                <h1 class="hero__name">
+                  <span class="hero__name-line">ERNEST</span>
+                  <span class="hero__name-line hero__name-line--accent">/ HAYFORD</span>
+                </h1>
+                <div class="hero__capabilities">
+                  <span v-for="cap in capabilities.slice(0, 4)" :key="cap" class="hero__cap-tag">{{ cap }}</span>
+                </div>
+              </div>
+
+              <div class="hero__meta" data-reveal>
+                <p class="hero__title">{{ hero.headline }}</p>
+                <p class="hero__sub">{{ hero.subheadline }}</p>
+                <a :href="resumeLink" class="hero__resume-link" target="_blank" rel="noopener noreferrer">
+                  View full résumé for metrics &amp; history ↗
+                </a>
+              </div>
+            </div>
+            <template #fallback>
+              <div class="hero__particle-body">
+                <div class="hero__foreground" data-reveal>
+                  <h1 class="hero__name">
+                    <span class="hero__name-line">ERNEST</span>
+                    <span class="hero__name-line hero__name-line--accent">/ HAYFORD</span>
+                  </h1>
+                  <div class="hero__capabilities">
+                    <span v-for="cap in capabilities.slice(0, 4)" :key="cap" class="hero__cap-tag">{{ cap }}</span>
+                  </div>
+                </div>
+
+                <div class="hero__meta" data-reveal>
+                  <p class="hero__title">{{ hero.headline }}</p>
+                  <p class="hero__sub">{{ hero.subheadline }}</p>
+                  <a :href="resumeLink" class="hero__resume-link" target="_blank" rel="noopener noreferrer">
+                    View full résumé for metrics &amp; history ↗
+                  </a>
+                </div>
+              </div>
+            </template>
+          </ClientOnly>
 
           <div class="lanes-grid" data-reveal>
             <article v-for="lane in engineeringLanes" :key="lane.layer" class="lane-card panel panel--glow">
@@ -367,6 +424,9 @@
   } from '~/data/portfolio'
 
   const scrollProgress = useScrollProgress()
+  const { isMobilePerf } = usePerfProfile()
+  // Gate second WebGL vs Scene3D; ParticleReveal also self-crisps on reduced-motion.
+  const showHeroParticleReveal = computed(() => !isMobilePerf.value)
 
   const { data: latestPosts } = await useAsyncData('home-latest-post', () => fetchPublishedBlogPosts())
   const latestPost = computed(() => latestPosts.value?.[0] ?? null)
