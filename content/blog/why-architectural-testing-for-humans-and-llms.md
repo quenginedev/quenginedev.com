@@ -1,9 +1,9 @@
 ---
-title: Why You Need Architectural Testing (For Both Humans and LLMs)
+title: Why Architectural Testing Matters for Humans and LLMs
 description: >-
-  Architecture diagrams and ADRs describe intent—but they don't stop violations
+  Architecture diagrams and ADRs describe intent. They do not stop violations
   at build time. Executable architectural tests give humans and coding agents
-  the same fast, objective feedback loop that linters already provide.
+  the same fast pass/fail signal that linters already provide.
 date: 2026-07-30
 tags:
   - architecture
@@ -13,32 +13,32 @@ tags:
   - process
 cover: /blog/archunit.jpeg
 tldr: >-
-  Written architecture erodes under delivery pressure and can't stop violations
+  Written architecture erodes under delivery pressure. It cannot stop violations
   at edit time. Tools like ArchUnit and ts-arch turn layering rules into tests
-  that fail in CI—and in the agent loop—before bad structure ships.
-ctaHeadline: Want architectural rules that actually enforce themselves?
+  that fail in CI and in the agent loop before bad structure ships.
+ctaHeadline: Want architectural rules that enforce themselves?
 ctaBody: >-
-  I help teams turn layering and dependency rules into executable tests—so
-  humans and coding agents get the same fast pass/fail signal on structure,
-  not a diagram nobody reads under deadline pressure.
+  Teams can turn layering and dependency rules into executable tests. Humans and
+  coding agents get the same fast pass/fail signal on structure instead of a
+  diagram nobody reads under deadline pressure.
 ctaLabel: Talk on LinkedIn
 ---
 
-I've watched the same movie twice: a careful C4 diagram on Confluence, a folder structure everyone agreed to in sprint planning, and six weeks later a `routes/` file importing the database client directly because someone was in a hurry and the diagram wasn't in their editor.
+Teams often start with a C4 diagram in Confluence. They agree on a folder structure in sprint planning. Six weeks later, a `routes/` file imports the database client directly. The diagram is not in the editor.
 
-That's not a people problem. It's a **feedback** problem. Architecture documentation describes what you meant. It doesn't tell you—or an LLM—that you just broke it.
+That is not a people problem. It is a **feedback** problem. Architecture documentation describes what the team meant. It does not tell a developer or an LLM that the change broke the rule.
 
 ## When documentation is the only guardrail
 
-Under delivery pressure, written architecture is the first thing to slip. ADRs get skipped because "we'll write it after the spike." Layering rules live in a wiki page nobody opens during a hotfix. The team *knows* the domain layer shouldn't call HTTP clients, but nothing in the build fails when it does.
+Under delivery pressure, written architecture is the first thing to slip. ADRs get skipped because the team plans to write them after the spike. Layering rules live in a wiki page nobody opens during a hotfix. The team knows the domain layer should not call HTTP clients. Nothing in the build fails when it does.
 
-I've been that person. I've also reviewed PRs where the author genuinely didn't know they'd violated a boundary—because the boundary only existed in a Miro board from three months ago.
+Developers skip boundaries under deadline pressure. Reviewers also see PRs where the author did not know they violated a boundary. The boundary existed only on a Miro board from three months ago.
 
-Passive artifacts—C4 models, dependency graphs, ADRs, sequence diagrams—are valuable for **onboarding and alignment**. They answer "what did we decide and why?" They do not answer "did this commit respect the decision?" at the moment someone (or something) writes the code.
+C4 models, dependency graphs, ADRs, and sequence diagrams help **onboarding and alignment**. They answer what the team decided and why. They do not answer whether a commit respected that decision at edit time.
 
-## Executable rules vs. diagrams on the wall
+## Executable rules vs. passive diagrams
 
-**Architectural testing** closes that gap. Instead of documenting "controllers must not import repositories directly," you write a test that fails when they do. The rule lives in the repo, runs on every commit, and produces the same binary outcome as a unit test: pass or fail.
+**Architectural testing** closes that gap. Instead of documenting "controllers must not import repositories directly," teams write a test that fails when they do. The rule lives in the repo. It runs on every commit. It produces the same binary outcome as a unit test: pass or fail.
 
 In Java, [ArchUnit](https://www.archunit.org/) has been doing this for years:
 
@@ -68,50 +68,50 @@ it("domain should not depend on infrastructure", async () => {
 });
 ```
 
-These aren't full project setups—they're the shape of the constraint. One assertion, one failure mode, one place to look when someone (human or agent) routes a dependency the wrong way.
+These are not full project setups. They show the shape of the constraint. One assertion, one failure mode, one place to look when a human or agent routes a dependency the wrong way.
 
-## LLMs don't hold your architecture in working memory
+## LLMs do not hold architecture in working memory
 
-This matters more now that coding agents edit files in parallel. An LLM sees local context: the file open, nearby imports, the task description. It does not hold your entire layering model unless you force it into every prompt—and even then, it optimizes for "make the test pass" or "wire this endpoint," not "preserve the hexagonal boundary we agreed on in Q2."
+This matters more now that coding agents edit files in parallel. An LLM sees local context: the open file, nearby imports, the task description. It does not hold the full layering model unless every prompt forces it in. Even then, it optimizes for "make the test pass" or "wire this endpoint." It does not optimize for the hexagonal boundary from Q2.
 
-I've watched agents:
+Coding agents often:
 
-- Put database queries in route handlers because that's where the HTTP request lives
-- Bypass an event bus and call a service directly because it's fewer files
-- Stuff business logic into React hooks because the component was the only file in context
+- Put database queries in route handlers because the HTTP request lives there
+- Bypass an event bus and call a service directly because it uses fewer files
+- Put business logic in React hooks because the component was the only file in context
 
-None of this is malice. It's **architectural blindness**: no global constraint in the feedback loop, so local convenience wins.
+None of this is malice. It is **architectural blindness**. No global constraint sits in the feedback loop. Local convenience wins.
 
-A [validation contract](/blog/writing-validation-contract-that-catches-bugs) catches behavioral bugs at the handoff. Architectural tests catch **structural** bugs at edit time—before the behavior checks even run. In a [multi-agent harness](/blog/building-multi-agent-harness), that's the difference between an agent shipping a green handoff for the wrong shape of code and getting a hard fail on the first dependency violation.
+A [validation contract](/blog/writing-validation-contract-that-catches-bugs) catches behavioral bugs at the handoff. Architectural tests catch **structural** bugs at edit time. Behavior checks have not run yet. In a [multi-agent harness](/blog/building-multi-agent-harness), that separates two outcomes. An agent can ship a green handoff for the wrong code shape. A dependency violation can hard-fail before merge.
 
 ## Fast feedback for humans and machines
 
-Unit tests tell you a function returned the wrong value. Architectural tests tell you a **relationship** is wrong: this module shouldn't know about that one, this layer leaked, this cycle appeared.
+Unit tests show when a function returned the wrong value. Architectural tests show when a **relationship** is wrong. This module should not know about that one. This layer leaked. This cycle appeared.
 
-The feedback is immediate and objective. Run the suite locally—fail in two seconds. Wire it into CI—fail before merge. Wire it into the agent loop—fail before the handoff says "done."
+The feedback is immediate and objective. Run the suite locally. Fail in two seconds. Wire it into CI. Fail before merge. Wire it into the agent loop. Fail before the handoff says done.
 
-Humans get a guardrail that doesn't depend on remembering a diagram. LLMs get a **machine-readable** constraint they can't negotiate away in chat. "The architecture says…" becomes "the test failed with this import edge."
+Humans get a guardrail that does not depend on remembering a diagram. LLMs get a **machine-readable** constraint they cannot negotiate away in chat. "The architecture says…" becomes "the test failed with this import edge."
 
-That loop is what makes the investment pay off under pressure, when wiki pages are ignored but red builds are not.
+That loop pays off under pressure. Wiki pages get ignored. Red builds do not.
 
-## What you actually gain
+## What teams gain
 
-**Onboarding.** New engineers—and new agents—learn boundaries by running tests, not by hunting Confluence. A failing arch test names the violation in plain terms.
+**Onboarding.** New engineers and new agents learn boundaries by running tests. They do not hunt Confluence. A failing arch test names the violation in plain terms.
 
-**Cheaper reviews.** Reviewers stop playing dependency archaeologist. If the architectural suite is green, structural arguments move off the PR thread.
+**Cheaper reviews.** Reviewers stop tracing dependency chains by hand. If the architectural suite is green, structural arguments move off the PR thread.
 
-**Safer refactors.** Move a folder, rename a package, split a module—the tests tell you what you broke globally, not what your IDE happened to highlight.
+**Safer refactors.** Move a folder, rename a package, split a module. The tests show what broke globally. The IDE may only highlight local files.
 
-**Agent safety net.** When an LLM generates ten files in one task, architectural tests are the structural equivalent of typechecking: automatic, repeatable, not vibes.
+**Agent safety net.** When an LLM generates ten files in one task, architectural tests are the structural equivalent of typechecking. They are automatic and repeatable.
 
-**Self-documenting rules.** The test *is* the spec. It doesn't drift from the codebase because it runs against the codebase.
+**Self-documenting rules.** The test is the spec. It does not drift from the codebase because it runs against the codebase.
 
 ## Automate it like Prettier
 
-I don't ask engineers to manually enforce semicolon style. Prettier runs on save and in CI; violations get fixed or the build stops. Architectural rules deserve the same treatment.
+Teams do not manually enforce semicolon style. Prettier runs on save and in CI. Violations get fixed or the build stops. Architectural rules deserve the same treatment.
 
-Diagrams and ADRs still belong in the process—for context, history, and the "why." But **enforcement** belongs in executable tests that nobody has to remember to apply when the sprint is on fire.
+Diagrams and ADRs still belong in the process. They carry context, history, and the why. **Enforcement** belongs in executable tests. Nobody has to remember to apply them when the sprint is on fire.
 
-Start with three rules you already argue about in review: no domain-to-UI imports, no circular dependencies between packages, no direct DB access from presentation code. Write one test per rule. Put them in the same pipeline as lint and typecheck.
+Start with three rules the team already argues about in review. Block domain-to-UI imports, package cycles, and direct DB access from presentation code. Write one test per rule. Put them in the same pipeline as lint and typecheck.
 
-The first time an agent—or a tired human— tries to shortcut a layer and the build goes red in ten seconds, you'll wonder why the diagram was ever the only lock on the door.
+The first time an agent or a tired human shortcuts a layer, the build goes red in ten seconds. Teams then see why a diagram alone was never enough.

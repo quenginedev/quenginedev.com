@@ -162,7 +162,7 @@ export const hero: Hero = {
   subheadline:
     'APIs, payments & event-driven platforms at scale · AI systems · GTM automation',
   summary:
-    '8+ years owning backend architecture, APIs, and production reliability — sole architect of HustleSasa services that scaled payments of 1M+ transactions daily with 99%+ uptime. I design Node/TypeScript microservices, payment rails, and cloud-native infrastructure for high-traffic platforms across African markets, with affinity for live entertainment and online ticketing workloads. AI engineering and GTM automation remain secondary lanes: agent workflows, eval gates, and revenue systems that give teams 5–10× leverage.',
+    '8+ years of backend architecture, APIs, and production reliability. Sole architect of HustleSasa services scaling 1M+ payment transactions daily at 99%+ uptime. Node/TypeScript microservices, payment rails, and cloud-native infrastructure for high-traffic platforms across African markets. Live entertainment and online ticketing workloads are a focus area. AI engineering and GTM automation remain secondary lanes: agent workflows, eval gates, and revenue systems that give teams 5–10× leverage.',
   avatar: '/me.png',
 }
 
@@ -171,20 +171,20 @@ export const overview: Overview = {
 }
 
 export const architectureLead =
-  'From Node/TypeScript APIs, payment services, and event-driven backends on Postgres, Mongo, Redis, and AWS/Kubernetes to Vue, React, and Svelte surfaces — plus AI agent pipelines and GTM automations when the problem needs them. I build systems that scale across every layer — platform first, commercial and technical.'
+  'Node/TypeScript APIs, payment services, and event-driven backends on Postgres, Mongo, Redis, and AWS/Kubernetes. Vue, React, and Svelte surfaces plus AI agent pipelines and GTM automations when the problem needs them. Systems scale across every layer — platform first, commercial and technical.'
 
 export const contactSection: ContactSection = {
   headline: ['Build', 'Platform', 'Systems'],
   subline:
-    'Open to Lead Back-End and platform engineering roles first; AI engineering and GTM automation consulting still welcome.',
+    'Open to Lead Back-End and platform engineering roles. AI engineering and GTM automation consulting remain available.',
 }
 
 export const linkedInProfile: LinkedInProfile = {
   headline:
     'Lead Back-End · AI · GTM Engineer | APIs, payments & scalable platforms — plus AI systems and revenue automations',
-  about: `I own backend architecture — APIs, services, payments, and reliability — and still ship AI and GTM systems when teams need leverage.
+  about: `Backend architecture covers APIs, services, payments, and reliability. AI and GTM systems ship when teams need leverage.
 
-Lead back-end / platform engineer first: Node/TypeScript microservices, REST and GraphQL APIs, event-driven messaging, Postgres/Mongo/Redis, and AWS/Docker/Kubernetes delivery. AI engineer and GTM engineer in the same seat when the bottleneck is automation, agents, or revenue ops.
+Lead back-end and platform engineering: Node/TypeScript microservices, REST and GraphQL APIs, event-driven messaging, Postgres/Mongo/Redis, and AWS/Docker/Kubernetes delivery. AI engineering and GTM engineering when the bottleneck is automation, agents, or revenue ops.
 
 What that looks like in practice:
 → Backend platforms: payment rails, campaign/messaging services, caching and rate limiting, observability, and high-traffic reliability
@@ -192,14 +192,14 @@ What that looks like in practice:
 → GTM automation stacks: Clay enrichment, n8n/Make orchestration, HubSpot CRM wiring, LLM agents for research and personalization
 
 Proof points:
-→ Sole architect of HustleSasa backend services on a fintech platform serving African markets — scaled payments from $50K to $900K+/mo, 1M+ transactions/month, 99%+ uptime; experience that maps cleanly to live-entertainment and online-ticketing scale patterns
+→ Sole architect of HustleSasa backend services on a fintech platform serving African markets — scaled payments from $50K to $900K+/mo, 1M+ transactions/month, 99%+ uptime; experience that maps to live-entertainment and online-ticketing scale patterns
 → Mentored up to 4 engineers on practices, reviews, and service ownership
 → AI Operator Consultant at Invisible Technologies — LLM evaluation frameworks and QA pipelines for production AI
 → 8+ years shipping across fintech, agritech, automotive, and client GTM engagements
 
-I engineer systems companies can run on — services, data, and infra first; AI and GTM as retained secondary lanes.
+Systems companies can run on — services, data, and infra first; AI and GTM as retained secondary lanes.
 
-Open to: Lead Back-End and platform roles first; AI automation consulting, fractional GTM engineering, and partnerships where engineering moves revenue.
+Open to: Lead Back-End and platform roles; AI automation consulting, fractional GTM engineering, and partnerships where engineering moves revenue.
 
 Accra, Ghana · quenginedev.com`,
   featuredSkills: [
@@ -234,7 +234,7 @@ export const linkedInExperience: LinkedInExperience[] = [
     period: 'Jun 2023 – Present',
     location: 'Nairobi County, Kenya · Remote',
     description:
-      'Sole architect of 5+ core backend services (and micro-frontend surfaces) on a fintech platform serving African markets — scaled from $50K to $900K+ in monthly transaction volume. Owned payment, campaign, and messaging infrastructure with the reliability patterns that map to high-traffic live-entertainment and online-ticketing workloads.',
+      'Sole architect of 5+ core backend services and micro-frontend surfaces on a fintech platform serving African markets. Scaled monthly transaction volume from $50K to $900K+. Payment, campaign, and messaging infrastructure uses reliability patterns for high-traffic live-entertainment and online-ticketing workloads.',
     bullets: [
       'Designed and built end-to-end payment processing infrastructure from scratch — scaled to $900K+ monthly volume, 1M+ transactions/month, 99%+ uptime',
       'Owned REST/service APIs and domain services for customers, products, notifications, and payments across a multi-service backend',
@@ -258,7 +258,7 @@ export const linkedInExperience: LinkedInExperience[] = [
     period: 'Sep 2023 – May 2025',
     location: 'United States · Remote',
     description:
-      'Contract role focused on production AI systems: LLM evaluation, safety testing, quality benchmarking, and eval frameworks for models shipping to real users — the same rigor applied to GTM agent workflows and automations.',
+      'Contract role focused on production AI systems: LLM evaluation, safety testing, quality benchmarking, and eval frameworks for models shipping to real users. The same rigor applies to GTM agent workflows and automations.',
     bullets: [
       'Developed structured evaluation frameworks to benchmark LLM output accuracy, factual grounding, and reasoning quality',
       'Built QA pipelines and eval gates for model output validation before production release',
@@ -275,7 +275,7 @@ export const linkedInExperience: LinkedInExperience[] = [
     period: 'Sep 2021 – Jun 2023',
     location: 'Atlanta, Georgia, United States · Remote',
     description:
-      'US automotive lending automation platform — helps auto dealerships submit loan applications to multiple lenders automatically without re-filling forms manually. Built the workflow automation engine that eliminated repetitive manual work and drove platform revenue growth.',
+      'US automotive lending automation platform. Auto dealerships submit loan applications to multiple lenders automatically without re-filling forms manually. The workflow automation engine eliminated repetitive manual work and drove platform revenue growth.',
     bullets: [
       'Automation Team (Jun 2021 – Sep 2021): Co-developed the core Autofill Engine (with 2 engineers) — a multi-threaded system that reads JSON instruction templates to automatically fill lender websites, eliminating manual form duplication across lenders',
       'Contributed to maintaining the in-house autofill core library using clean architecture principles',
@@ -315,12 +315,12 @@ export const linkedInExperience: LinkedInExperience[] = [
     period: 'Jan 2019 – Present',
     location: 'Accra, Ghana · Remote',
     description:
-      'Independent consulting alongside full-time roles — full-stack products, AI agent workflows, and GTM automations for startups and SMEs across West Africa and remote US/EU clients.',
+      'Independent consulting alongside full-time roles: full-stack products, AI agent workflows, and GTM automations for startups and SMEs across West Africa and remote US/EU clients.',
     bullets: [
-      'Design GTM automation stacks: Clay enrichment, n8n/Make orchestration, HubSpot CRM wiring, LLM agents for lead research and personalized outbound',
-      'Build department workflows and internal tools that deliver 5–10× operational leverage for marketing, sales, and ops teams',
+      'Designed GTM automation stacks: Clay enrichment, n8n/Make orchestration, HubSpot CRM wiring, LLM agents for lead research and personalized outbound',
+      'Built department workflows and internal tools that deliver 5–10× operational leverage for marketing, sales, and ops teams',
       'Shipped My Approval — serverless platform for automating approval and workflow routing across departments (myapproval.app)',
-      'Deliver full-stack solutions: API design, payment integrations, cloud infrastructure, and production AI systems with eval gates',
+      'Delivered full-stack solutions: API design, payment integrations, cloud infrastructure, and production AI systems with eval gates',
     ],
     skills: ['GTM Engineering', 'Clay', 'n8n', 'HubSpot', 'AI Engineering', 'TypeScript', 'Python'],
   },
@@ -413,7 +413,7 @@ export const architecturePillars: ArchitecturePillar[] = [
   {
     title: 'APIs & Microservices',
     description:
-      'Node/TypeScript services with clear domain boundaries — REST and GraphQL APIs, resilient messaging, and observable pipelines that stay reliable under load.',
+      'Node/TypeScript services with clear domain boundaries. REST and GraphQL APIs, resilient messaging, and observable pipelines stay reliable under load.',
     icon: 'mdi:graph-outline',
   },
   {
@@ -431,7 +431,7 @@ export const architecturePillars: ArchitecturePillar[] = [
   {
     title: 'AI & GTM Systems',
     description:
-      'Agent workflows, enrichment pipelines, and cross-department automations that wire CRMs, outbound tools, and LLMs into one revenue engine with guardrails and measurable outcomes.',
+      'Agent workflows, enrichment pipelines, and cross-department automations. CRMs, outbound tools, and LLMs wire into one revenue engine with guardrails and measurable outcomes.',
     icon: 'mdi:robot-outline',
   },
   {
@@ -447,21 +447,21 @@ export const polyglotLanguages: PolyglotLanguage[] = [
     name: 'TypeScript',
     proficiency: 'production',
     focus:
-      'Home base for full-stack delivery: typed Vue/React frontends, Node services, shared contracts, and the layer where most production systems are designed and shipped.',
+      'Primary language for full-stack delivery: typed Vue/React frontends, Node services, shared contracts, and most production systems.',
     icon: 'mdi:language-typescript',
   },
   {
     name: 'Rust',
     proficiency: 'experimenting',
     focus:
-      'Hands-on experimentation with systems programming: memory safety, concurrency, and performance patterns before committing them to production paths.',
+      'Systems programming experimentation: memory safety, concurrency, and performance patterns before production use.',
     icon: 'mdi:language-rust',
   },
   {
     name: 'Python',
     proficiency: 'active',
     focus:
-      'Heavy use when the problem calls for it: AI agent pipelines, GTM automations, data scripting, and fast backend prototyping — the default reach for LLM-powered systems.',
+      'AI agent pipelines, GTM automations, data scripting, and backend prototyping — the default reach for LLM-powered systems.',
     icon: 'mdi:language-python',
   },
   {
@@ -476,30 +476,30 @@ export const polyglotLanguages: PolyglotLanguage[] = [
 export const aiEngineering: AiEngineering = {
   headline: 'AI engineer, not AI user',
   summary:
-    'I do not sprinkle GPT calls on features. I engineer AI systems on top of solid platform foundations: agent orchestration, evaluation frameworks, inference pipelines, and the reliability layer that turns demos into production. Current work includes LLM eval and QA at Invisible Technologies — the same rigor I bring to client automations.',
+    'Production AI systems sit on solid platform foundations: agent orchestration, evaluation frameworks, inference pipelines, and reliability layers that turn demos into production. Current work includes LLM eval and QA at Invisible Technologies — the same rigor applied to client automations.',
   interests: [
     {
       title: 'Agent orchestration',
       description:
-        'Multi-step LLM workflows for research, enrichment, routing, and follow-up — with tool use, guardrails, and human handoff when confidence is low.',
+        'Multi-step LLM workflows for research, enrichment, routing, and follow-up. Tool use, guardrails, and human handoff when confidence is low.',
       icon: 'mdi:robot-outline',
     },
     {
       title: 'Evaluation & benchmarking',
       description:
-        'Designing rigorous eval frameworks for LLM outputs: quality scoring, regression detection, and production safety gates before anything ships.',
+        'Eval frameworks for LLM outputs: quality scoring, regression detection, and production safety gates before release.',
       icon: 'mdi:chart-timeline-variant-shimmer',
     },
     {
       title: 'Inference engineering',
       description:
-        'Latency, context windows, batching, and deployment patterns for making models fast, observable, and dependable in real products.',
+        'Latency, context windows, batching, and deployment patterns for fast, observable, dependable models in real products.',
       icon: 'mdi:speedometer',
     },
     {
       title: 'Model mechanics',
       description:
-        'Transformers, attention, embeddings, and how architecture choices shape capability and cost — so production systems are designed with limits in mind.',
+        'Transformers, attention, embeddings, and architecture choices that shape capability and cost. Production systems are designed with limits in mind.',
       icon: 'mdi:brain',
     },
   ],
@@ -508,24 +508,24 @@ export const aiEngineering: AiEngineering = {
 export const gtmEngineering: GtmEngineering = {
   headline: 'Revenue infrastructure, not more headcount',
   summary:
-    'GTM engineering is where commercial instinct meets platform code. I build the automated systems behind outbound, inbound routing, CRM enrichment, approval workflows, and cross-department ops — wired with LLMs and APIs so marketing, sales, and operations run faster without hiring linearly.',
+    'GTM engineering combines commercial instinct with platform code. Automated systems cover outbound, inbound routing, CRM enrichment, approval workflows, and cross-department ops. LLMs and APIs wire marketing, sales, and operations to run faster without linear hiring.',
   interests: [
     {
       title: 'Cross-department automation',
       description:
-        'Marketing, sales, CS, finance, HR — any team with repetitive workflows gets custom tooling. I map the bottleneck and ship the system, not a one-size template.',
+        'Marketing, sales, CS, finance, and HR teams with repetitive workflows get custom tooling. The bottleneck is mapped and the system ships — not a one-size template.',
       icon: 'mdi:sitemap-outline',
     },
     {
       title: 'AI-native GTM plays',
       description:
-        'Lead research, personalization, enrichment cascades, and signal-triggered outbound — encoded as agent workflows with eval gates, not one-off prompts.',
+        'Lead research, personalization, enrichment cascades, and signal-triggered outbound. Encoded as agent workflows with eval gates, not one-off prompts.',
       icon: 'mdi:target-account',
     },
     {
       title: 'Revenue stack integration',
       description:
-        'CRM, enrichment, outbound, analytics, internal APIs — composed into one pipeline. Data flows in, qualified action flows out.',
+        'CRM, enrichment, outbound, analytics, and internal APIs compose into one pipeline. Data flows in; qualified action flows out.',
       icon: 'mdi:pipe',
     },
     {
@@ -547,7 +547,7 @@ export const hobbies: Hobby[] = [
   {
     name: 'FIFA',
     category: 'gaming',
-    detail: 'Football on the couch: tactics, seasons, and the occasional rage quit.',
+    detail: 'Football on the couch: tactics, seasons, and competitive matches.',
     icon: 'mdi:soccer',
   },
   {
@@ -559,25 +559,25 @@ export const hobbies: Hobby[] = [
   {
     name: 'Swimming',
     category: 'fitness',
-    detail: 'Laps for clarity: low-impact cardio and a reset from the screen.',
+    detail: 'Laps for clarity: low-impact cardio and a break from the screen.',
     icon: 'mdi:pool',
   },
   {
     name: 'Football',
     category: 'fitness',
-    detail: 'Pickup matches with friends, the real kind, on grass.',
+    detail: 'Pickup matches with friends on grass.',
     icon: 'mdi:soccer-field',
   },
   {
     name: 'Basketball',
     category: 'fitness',
-    detail: 'Casual runs and shoot-arounds: competition without the league fees.',
+    detail: 'Casual runs and shoot-arounds: competition without league fees.',
     icon: 'mdi:basketball',
   },
   {
     name: 'Jogging',
     category: 'fitness',
-    detail: 'Early morning or evening runs to clear the head and stay sharp.',
+    detail: 'Morning or evening runs for focus and fitness.',
     icon: 'mdi:run',
   },
 ]
@@ -590,7 +590,7 @@ export const experience: Experience[] = [
     startDate: '2023-07',
     endDate: null,
     highlights: [
-      'Architect and own 5+ core backend services and APIs powering payment, campaign, and messaging infrastructure across African markets',
+      'Sole architect of 5+ core backend services and APIs for payment, campaign, and messaging across African markets',
       'Scaled payment volume from $50K to $900K+/mo — 1M+ transactions/month with 99%+ uptime under high-traffic load',
       'Built event-driven delivery on AWS Step Functions and SQS; cut API latency 65% via Redis caching and query optimization',
       'Mentored up to 4 engineers on service ownership, reviews, and delivery practices',
@@ -607,9 +607,9 @@ export const experience: Experience[] = [
     startDate: '2024-10',
     endDate: null,
     highlights: [
-      'Design and implement LLM evaluation frameworks for production AI systems',
-      'Build quality assurance pipelines for model output validation',
-      'Architect agent workflows with eval gates for reliable GTM and ops automation',
+      'Designed and implemented LLM evaluation frameworks for production AI systems',
+      'Built quality assurance pipelines for model output validation',
+      'Architected agent workflows with eval gates for reliable GTM and ops automation',
     ],
   },
   {
@@ -658,8 +658,8 @@ export const experience: Experience[] = [
     startDate: '2017-01',
     endDate: null,
     highlights: [
-      'Deliver full-stack and AI automation solutions for startups and SMEs across West Africa',
-      'Build GTM systems, internal tools, and department workflows that multiply team output',
+      'Delivered full-stack and AI automation solutions for startups and SMEs across West Africa',
+      'Built GTM systems, internal tools, and department workflows that multiply team output',
       'Specialized in API design, agent orchestration, cloud infrastructure, and payment integrations',
     ],
     logo: '/logos/quengiendev.jpeg',
@@ -683,7 +683,7 @@ export const projects: Project[] = [
   {
     name: 'Agent Revenue Pipeline',
     description:
-      'Consulting GTM system: Clay enrichment and signal triggers feed n8n orchestration and HubSpot CRM, with LLM agents handling lead research, personalized outbound, and inbound routing — eval gates before anything reaches a prospect.',
+      'GTM system: Clay enrichment and signal triggers feed n8n orchestration and HubSpot CRM. LLM agents handle lead research, outbound, and inbound routing. Eval gates run before any prospect contact.',
     stack: ['Clay', 'n8n', 'Make', 'HubSpot', 'Python', 'TypeScript', 'LLM APIs'],
     logo: '/logos/quengiendev.jpeg',
   },
