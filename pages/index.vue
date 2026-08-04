@@ -256,7 +256,7 @@
           <h2 class="section-title" data-reveal>Polyglot</h2>
         </div>
         <p class="section-lead" data-reveal>
-          TypeScript is home base, but I reach into other languages when the problem
+          TypeScript is home base. Other languages fit when the problem
           demands a different shape: memory safety, numeric performance, or AI-native tooling.
         </p>
         <div class="polyglot-grid">
@@ -276,25 +276,25 @@
       </SectionReveal>
     </section>
 
-    <!-- GTM Engineering -->
-    <section id="gtm" class="section section--ai">
+    <!-- Software Factory Engineering -->
+    <section id="software-factory" class="section section--ai">
       <SectionReveal :stagger="0.07">
         <div class="section-header">
-          <h2 class="section-title" data-reveal>GTM Engineering</h2>
+          <h2 class="section-title" data-reveal>Software Factory</h2>
         </div>
         <div class="ai-depth-layout">
           <div class="ai-depth-kicker" data-reveal>
-            <span>Revenue</span>
-            <span>Automation</span>
-            <span>Scale</span>
+            <span>Harness</span>
+            <span>Validation</span>
+            <span>Delivery</span>
           </div>
           <div data-reveal>
-            <h3 class="ai-depth-headline">{{ gtmEngineering.headline }}</h3>
-            <p class="ai-depth-summary">{{ gtmEngineering.summary }}</p>
+            <h3 class="ai-depth-headline">{{ softwareFactoryEngineering.headline }}</h3>
+            <p class="ai-depth-summary">{{ softwareFactoryEngineering.summary }}</p>
           </div>
         </div>
         <div class="ai-interests-grid">
-          <article v-for="interest in gtmEngineering.interests" :key="interest.title"
+          <article v-for="interest in softwareFactoryEngineering.interests" :key="interest.title"
             class="ai-interest panel panel--glow" data-reveal>
             <Icon :name="interest.icon" class="ai-interest__icon" size="26" />
             <h4 class="ai-interest__title">{{ interest.title }}</h4>
@@ -419,7 +419,7 @@
     resumeLink,
     polyglotLanguages,
     aiEngineering,
-    gtmEngineering,
+    softwareFactoryEngineering,
     hobbies,
   } from '~/data/portfolio'
 

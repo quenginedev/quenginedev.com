@@ -86,16 +86,16 @@ export interface AiEngineering {
   interests: AiInterest[]
 }
 
-export interface GtmInterest {
+export interface SoftwareFactoryInterest {
   title: string
   description: string
   icon: string
 }
 
-export interface GtmEngineering {
+export interface SoftwareFactoryEngineering {
   headline: string
   summary: string
-  interests: GtmInterest[]
+  interests: SoftwareFactoryInterest[]
 }
 
 export interface Overview {
@@ -135,7 +135,7 @@ export interface Hobby {
 
 export const contact: Contact = {
   name: 'Ernest De-Graft Hayford',
-  title: 'Lead Back-End · AI · GTM Engineer',
+  title: 'Lead Back-End · Software Factory Engineer',
   location: 'Accra, Ghana',
   email: 'quenginedev@gmail.com',
   site: 'https://quenginedev.com',
@@ -158,48 +158,48 @@ export const socialLinks: SocialLink[] = [
 
 
 export const hero: Hero = {
-  headline: 'Lead Back-End · AI · GTM Engineer',
+  headline: 'Lead Back-End · Software Factory Engineer',
   subheadline:
-    'APIs, payments & event-driven platforms at scale · AI systems · GTM automation',
+    'APIs, payments, and event-driven platforms · agent harnesses · validation gates',
   summary:
-    '8+ years of backend architecture, APIs, and production reliability. Sole architect of HustleSasa services scaling 1M+ payment transactions daily at 99%+ uptime. Node/TypeScript microservices, payment rails, and cloud-native infrastructure for high-traffic platforms across African markets. Live entertainment and online ticketing workloads are a focus area. AI engineering and GTM automation remain secondary lanes: agent workflows, eval gates, and revenue systems that give teams 5–10× leverage.',
+    'Eight years of backend architecture, APIs, and production reliability. Sole architect of HustleSasa backend services scaling 1M+ payment transactions daily at 99%+ uptime. Node/TypeScript microservices, payment rails, and cloud-native infrastructure serve high-traffic platforms across African markets. Live entertainment and online ticketing workloads are a focus area. Software factory work covers agent harnesses, validation contracts, and eval gates that help teams ship verified changes.',
   avatar: '/me.png',
 }
 
 export const overview: Overview = {
-  kicker: ['Back-End Platforms', 'APIs & Scale', 'AI · GTM'],
+  kicker: ['Back-End Platforms', 'APIs & Scale', 'Software Factory'],
 }
 
 export const architectureLead =
-  'Node/TypeScript APIs, payment services, and event-driven backends on Postgres, Mongo, Redis, and AWS/Kubernetes. Vue, React, and Svelte surfaces plus AI agent pipelines and GTM automations when the problem needs them. Systems scale across every layer — platform first, commercial and technical.'
+  'Node/TypeScript APIs, payment services, and event-driven backends on Postgres, Mongo, Redis, and AWS/Kubernetes. Vue, React, and Svelte surfaces plus agent harnesses and validation gates when teams adopt agent-native delivery. Systems scale across every layer — platform first.'
 
 export const contactSection: ContactSection = {
   headline: ['Build', 'Platform', 'Systems'],
   subline:
-    'Open to Lead Back-End and platform engineering roles. AI engineering and GTM automation consulting remain available.',
+    'Open to Lead Back-End, platform engineering, and software factory roles. AI systems consulting remains available.',
 }
 
 export const linkedInProfile: LinkedInProfile = {
   headline:
-    'Lead Back-End · AI · GTM Engineer | APIs, payments & scalable platforms — plus AI systems and revenue automations',
-  about: `Backend architecture covers APIs, services, payments, and reliability. AI and GTM systems ship when teams need leverage.
+    'Lead Back-End · Software Factory Engineer | APIs, payments, scalable platforms — agent harnesses and validation gates',
+  about: `Backend architecture covers APIs, services, payments, and reliability. Software factory systems ship when teams need agent-native delivery at scale.
 
-Lead back-end and platform engineering: Node/TypeScript microservices, REST and GraphQL APIs, event-driven messaging, Postgres/Mongo/Redis, and AWS/Docker/Kubernetes delivery. AI engineering and GTM engineering when the bottleneck is automation, agents, or revenue ops.
+Lead back-end and platform engineering: Node/TypeScript microservices, REST and GraphQL APIs, event-driven messaging, Postgres/Mongo/Redis, and AWS/Docker/Kubernetes delivery. Software factory engineering when the bottleneck is harness design, validation gates, or agent orchestration.
 
 What that looks like in practice:
 → Backend platforms: payment rails, campaign/messaging services, caching and rate limiting, observability, and high-traffic reliability
+→ Agent harnesses: orchestrator, worker, and validator roles with serial gates and validation contracts
 → Production AI systems with eval gates — not chatbots bolted onto features
-→ GTM automation stacks: Clay enrichment, n8n/Make orchestration, HubSpot CRM wiring, LLM agents for research and personalization
 
 Proof points:
 → Sole architect of HustleSasa backend services on a fintech platform serving African markets — scaled payments from $50K to $900K+/mo, 1M+ transactions/month, 99%+ uptime; experience that maps to live-entertainment and online-ticketing scale patterns
 → Mentored up to 4 engineers on practices, reviews, and service ownership
 → AI Operator Consultant at Invisible Technologies — LLM evaluation frameworks and QA pipelines for production AI
-→ 8+ years shipping across fintech, agritech, automotive, and client GTM engagements
+→ Eight years shipping across fintech, agritech, automotive, and client automation engagements
 
-Systems companies can run on — services, data, and infra first; AI and GTM as retained secondary lanes.
+Systems companies can run on — services, data, and infra first; software factory and AI as core delivery lanes.
 
-Open to: Lead Back-End and platform roles; AI automation consulting, fractional GTM engineering, and partnerships where engineering moves revenue.
+Open to: Lead Back-End and platform roles; software factory consulting and partnerships where engineering improves delivery velocity.
 
 Accra, Ghana · quenginedev.com`,
   featuredSkills: [
@@ -218,8 +218,9 @@ Accra, Ghana · quenginedev.com`,
     'Kubernetes',
     'GraphQL',
     'Full-Stack Development',
-    'AI Engineering',
-    'GTM Engineering',
+    'Software Factory Engineering',
+    'Agent Harness Design',
+    'Validation Contracts',
     'LLM Evaluation',
     'Workflow Automation',
     'Serverless Architecture',
@@ -258,7 +259,7 @@ export const linkedInExperience: LinkedInExperience[] = [
     period: 'Sep 2023 – May 2025',
     location: 'United States · Remote',
     description:
-      'Contract role focused on production AI systems: LLM evaluation, safety testing, quality benchmarking, and eval frameworks for models shipping to real users. The same rigor applies to GTM agent workflows and automations.',
+      'Contract role focused on production AI systems: LLM evaluation, safety testing, quality benchmarking, and eval frameworks for models shipping to real users. The same rigor applies to agent workflows and software factory validation gates.',
     bullets: [
       'Developed structured evaluation frameworks to benchmark LLM output accuracy, factual grounding, and reasoning quality',
       'Built QA pipelines and eval gates for model output validation before production release',
@@ -309,20 +310,20 @@ export const linkedInExperience: LinkedInExperience[] = [
     skills: ['TypeScript', 'GCP', 'Infrastructure as Code', 'USSD', 'CI/CD'],
   },
   {
-    title: 'Freelance Software Engineer · AI & GTM Automation Consultant',
+    title: 'Freelance Software Engineer · AI & Software Factory Consultant',
     company: 'Self Employed',
     employmentType: 'Part-time',
     period: 'Jan 2019 – Present',
     location: 'Accra, Ghana · Remote',
     description:
-      'Independent consulting alongside full-time roles: full-stack products, AI agent workflows, and GTM automations for startups and SMEs across West Africa and remote US/EU clients.',
+      'Independent consulting alongside full-time roles: full-stack products, agent harnesses, and automation systems for startups and SMEs across West Africa and remote US/EU clients.',
     bullets: [
-      'Designed GTM automation stacks: Clay enrichment, n8n/Make orchestration, HubSpot CRM wiring, LLM agents for lead research and personalized outbound',
-      'Built department workflows and internal tools that deliver 5–10× operational leverage for marketing, sales, and ops teams',
+      'Designed agent harnesses with orchestrator, worker, and validator roles plus validation contracts before merge',
+      'Built department workflows and internal tools that multiply team output for marketing, sales, and ops teams',
       'Shipped My Approval — serverless platform for automating approval and workflow routing across departments (myapproval.app)',
       'Delivered full-stack solutions: API design, payment integrations, cloud infrastructure, and production AI systems with eval gates',
     ],
-    skills: ['GTM Engineering', 'Clay', 'n8n', 'HubSpot', 'AI Engineering', 'TypeScript', 'Python'],
+    skills: ['Software Factory Engineering', 'Agent Harness Design', 'n8n', 'AI Engineering', 'TypeScript', 'Python'],
   },
   {
     title: 'Freelance Software Developer',
@@ -380,7 +381,8 @@ export const capabilities: string[] = [
   'Serverless Architecture',
   'Full-Stack TypeScript',
   'AI Agent Systems',
-  'GTM Automation',
+  'Software Factory Systems',
+  'Agent Harness Design',
   'Workflow Orchestration',
   'LLM Evaluation',
   'Module Federation',
@@ -429,9 +431,9 @@ export const architecturePillars: ArchitecturePillar[] = [
     icon: 'mdi:cloud-outline',
   },
   {
-    title: 'AI & GTM Systems',
+    title: 'Software Factory Systems',
     description:
-      'Agent workflows, enrichment pipelines, and cross-department automations. CRMs, outbound tools, and LLMs wire into one revenue engine with guardrails and measurable outcomes.',
+      'Agent harnesses, validation contracts, and orchestration loops. Intake, implementation, checks, and review gates help teams produce verified changes without linear headcount.',
     icon: 'mdi:robot-outline',
   },
   {
@@ -461,7 +463,7 @@ export const polyglotLanguages: PolyglotLanguage[] = [
     name: 'Python',
     proficiency: 'active',
     focus:
-      'AI agent pipelines, GTM automations, data scripting, and backend prototyping — the default reach for LLM-powered systems.',
+      'AI agent pipelines, harness scripts, data tooling, and backend prototyping — the default reach for LLM-powered systems.',
     icon: 'mdi:language-python',
   },
   {
@@ -476,7 +478,7 @@ export const polyglotLanguages: PolyglotLanguage[] = [
 export const aiEngineering: AiEngineering = {
   headline: 'AI engineer, not AI user',
   summary:
-    'Production AI systems sit on solid platform foundations: agent orchestration, evaluation frameworks, inference pipelines, and reliability layers that turn demos into production. Current work includes LLM eval and QA at Invisible Technologies — the same rigor applied to client automations.',
+    'Production AI systems sit on solid platform foundations: agent orchestration, evaluation frameworks, inference pipelines, and reliability layers that turn demos into production. LLM eval and QA work applies the same gate pattern as software factory validation contracts.',
   interests: [
     {
       title: 'Agent orchestration',
@@ -505,34 +507,34 @@ export const aiEngineering: AiEngineering = {
   ],
 }
 
-export const gtmEngineering: GtmEngineering = {
-  headline: 'Revenue infrastructure, not more headcount',
+export const softwareFactoryEngineering: SoftwareFactoryEngineering = {
+  headline: 'Build the factory, not every feature',
   summary:
-    'GTM engineering combines commercial instinct with platform code. Automated systems cover outbound, inbound routing, CRM enrichment, approval workflows, and cross-department ops. LLMs and APIs wire marketing, sales, and operations to run faster without linear hiring.',
+    'Software factory engineering designs the system that produces software. Intake rules, agent orchestration, validation harnesses, and review gates turn backlog into verified output. Platform discipline keeps the line reliable under load.',
   interests: [
     {
-      title: 'Cross-department automation',
+      title: 'Agent harness design',
       description:
-        'Marketing, sales, CS, finance, and HR teams with repetitive workflows get custom tooling. The bottleneck is mapped and the system ships — not a one-size template.',
-      icon: 'mdi:sitemap-outline',
+        'Orchestrator, worker, and validator roles with serial gates. Tasks carry acceptance criteria before any agent edits code.',
+      icon: 'mdi:cog-transfer-outline',
     },
     {
-      title: 'AI-native GTM plays',
+      title: 'Validation contracts',
       description:
-        'Lead research, personalization, enrichment cascades, and signal-triggered outbound. Encoded as agent workflows with eval gates, not one-off prompts.',
-      icon: 'mdi:target-account',
+        'Numbered checks gate done from proven. Eval gates run before merge, release, or outbound contact.',
+      icon: 'mdi:clipboard-check-outline',
     },
     {
-      title: 'Revenue stack integration',
+      title: 'Durable orchestration',
       description:
-        'CRM, enrichment, outbound, analytics, and internal APIs compose into one pipeline. Data flows in; qualified action flows out.',
-      icon: 'mdi:pipe',
+        'File-backed state and loop-until-goal runs survive crashes and long jobs without chat memory.',
+      icon: 'mdi:file-sync-outline',
     },
     {
-      title: '5–10× operational leverage',
+      title: 'Platform governance',
       description:
-        'Replace weeks of manual work with autonomous workflows. Outcomes: hours saved, pipeline velocity, conversion lift — engineered, measured, iterated.',
-      icon: 'mdi:chart-arc',
+        'CI/CD pipelines, sandboxes, observability, and autonomy policies control what agents can change and ship.',
+      icon: 'mdi:shield-account-outline',
     },
   ],
 }
@@ -609,7 +611,7 @@ export const experience: Experience[] = [
     highlights: [
       'Designed and implemented LLM evaluation frameworks for production AI systems',
       'Built quality assurance pipelines for model output validation',
-      'Architected agent workflows with eval gates for reliable GTM and ops automation',
+      'Architected agent workflows with eval gates for reliable ops automation',
     ],
   },
   {
@@ -659,7 +661,7 @@ export const experience: Experience[] = [
     endDate: null,
     highlights: [
       'Delivered full-stack and AI automation solutions for startups and SMEs across West Africa',
-      'Built GTM systems, internal tools, and department workflows that multiply team output',
+      'Built software factory patterns, internal tools, and agent workflows that multiply team output',
       'Specialized in API design, agent orchestration, cloud infrastructure, and payment integrations',
     ],
     logo: '/logos/quengiendev.jpeg',
@@ -683,7 +685,7 @@ export const projects: Project[] = [
   {
     name: 'Agent Revenue Pipeline',
     description:
-      'GTM system: Clay enrichment and signal triggers feed n8n orchestration and HubSpot CRM. LLM agents handle lead research, outbound, and inbound routing. Eval gates run before any prospect contact.',
+      'Agent workflow: Clay enrichment and signal triggers feed n8n orchestration and HubSpot CRM. LLM agents handle lead research, routing, and outbound. Eval gates run before any prospect contact.',
     stack: ['Clay', 'n8n', 'Make', 'HubSpot', 'Python', 'TypeScript', 'LLM APIs'],
     logo: '/logos/quengiendev.jpeg',
   },
@@ -761,16 +763,17 @@ export const skills: SkillCategory[] = [
     category: 'AI & Automation',
     items: [
       'AI Engineering',
-      'GTM Engineering',
+      'Software Factory Engineering',
       'Agent Orchestration',
+      'Agent Harness Design',
       'LLM Evaluation',
       'Workflow Automation',
-      'Prompt Engineering',
+      'Validation Contracts',
     ],
   },
   {
-    category: 'GTM Stack',
-    items: ['Clay', 'n8n', 'Make', 'HubSpot'],
+    category: 'Software Factory',
+    items: ['Agent Harness', 'Validation Contracts', 'CI/CD Gates', 'Orchestration'],
   },
   {
     category: 'Practices & Domains',
@@ -780,7 +783,7 @@ export const skills: SkillCategory[] = [
       'CI/CD',
       'Test-Driven Development',
       'Data Security & Privacy',
-      'GTM Systems',
+      'Software Factory Systems',
       'AI Engineering',
     ],
   },
