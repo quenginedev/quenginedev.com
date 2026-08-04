@@ -181,7 +181,7 @@ export const contactSection: ContactSection = {
 
 export const linkedInProfile: LinkedInProfile = {
   headline:
-    'Lead Back-End · Software Factory Engineer | APIs, payments, scalable platforms — agent harnesses and validation gates',
+    'Lead Back-End · Software Factory Engineer | Agent harnesses, validation gates, and platforms that ship verified changes',
   about: `Backend architecture covers APIs, services, payments, and reliability. Software factory systems ship when teams need agent-native delivery at scale.
 
 Lead back-end and platform engineering: Node/TypeScript microservices, REST and GraphQL APIs, event-driven messaging, Postgres/Mongo/Redis, and AWS/Docker/Kubernetes delivery. Software factory engineering when the bottleneck is harness design, validation gates, or agent orchestration.
