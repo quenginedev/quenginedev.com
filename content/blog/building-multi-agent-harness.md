@@ -16,18 +16,28 @@ tldr: >-
   One chat should not plan, build, and grade itself. Use three roles plus a
   written checklist before code. Only one agent edits the project at a time.
   Handoffs carry evidence, not chat claims.
-ctaHeadline: Need a multi-agent harness for your team?
+ctaHeadline: Need a custom payment rail or GTM automation built for your platform?
 ctaBody: >-
-  Teams can set up planner, builder, and checker roles with written gates. AI
-  coding work ships with evidence instead of one chat owning the whole job.
-ctaLabel: Talk on LinkedIn
+  Message me on LinkedIn for an Architectural Discovery Call. I scope backend
+  architecture, payment infrastructure, and GTM pipeline work for your stack.
+ctaLabel: Message me on LinkedIn
 ---
 
 Ask one AI session to plan, build, and declare victory. It will sound confident. Reviews still find broken edges, missing scope, and edits that fight each other. The model is not the root problem. The **process** is: one actor holds the pen, the plan, and the grade.
 
 A **multi-agent harness** is infrastructure for that process. It separates who plans, who builds, and who checks. It forces a paper trail so done is not a chat claim alone.
 
-Teams can use a local mission folder (`.missions/`, gitignored) and a `/mission` trigger in the editor. Copy the shape without specific tooling. The point is roles, gates, and serial edits—not a product pitch.
+Teams can use a local mission folder (`.missions/`, gitignored) and a `/mission` trigger in the editor. Copy the shape without specific tooling. The point is roles, gates, and serial edits, not a product pitch.
+
+## Key Takeaways
+
+| Topic | Takeaway |
+|-------|----------|
+| Roles | Split planning, building, and checking across three roles. |
+| Gates | Write a validation contract before any product code edits. |
+| Serial edits | Allow only one builder to mutate files at a time. |
+| Evidence | Handoffs cite check IDs and proof, not chat claims. |
+| When to skip | Use for multi-file work; skip one-line fixes. |
 
 ## What goes wrong without a harness
 
@@ -53,11 +63,11 @@ The planner never ships a quick fix by default. The builder never grades their o
 
 Before anyone edits the product:
 
-1. **Mission profile** — mission scope, what is in and out, what success means
-2. **Validation contract** — numbered checks (`A-01`, `A-02`, …): observable behavior and how to verify it. No coding until this is approved.
-3. **Active plan** — one task in progress at a time, each tied to those check IDs
+1. **Mission profile**: mission scope, what is in and out, what success means
+2. **Validation contract**: numbered checks (`A-01`, `A-02`, …): observable behavior and how to verify it. No coding until this is approved.
+3. **Active plan**: one task in progress at a time, each tied to those check IDs
 
-When a builder finishes, they send a short handoff. It lists status, which checks they claim, and where the evidence lives. The planner marks checks met, partial, or failed. Failed checks become a remake task—not a note in the transcript.
+When a builder finishes, they send a short handoff. It lists status, which checks they claim, and where the evidence lives. The planner marks checks met, partial, or failed. Failed checks become a remake task, not a note in the transcript.
 
 See [Writing a Validation Contract That Actually Catches Bugs](/blog/writing-validation-contract-that-catches-bugs) for checks that catch bad work.
 
@@ -65,18 +75,18 @@ See [Writing a Validation Contract That Actually Catches Bugs](/blog/writing-val
 
 Hard rules that keep the tree honest:
 
-1. **One writer** — only one builder mutates files at a time
-2. **Clean start** — the next builder inherits a known tree or a declared, owned diff
-3. **Checklist first** — contract before code; checks before done
-4. **Parallel is for reading** — search and review can run together; writes stay serial
+1. **One writer**: only one builder mutates files at a time
+2. **Clean start**: the next builder inherits a known tree or a declared, owned diff
+3. **Checklist first**: contract before code; checks before done
+4. **Parallel is for reading**: search and review can run together; writes stay serial
 
 Two builders editing the same files without a lock breaks the tree. Serial writes are slower than parallel reads but safer.
 
 ## Loops on top of infrastructure
 
-Each role runs a small loop: look → decide → act → verify. The harness holds shared state, sandboxes, and logs. The next planner decision uses ground truth—not last night's chat memory.
+Each role runs a small loop: look → decide → act → verify. The harness holds shared state, sandboxes, and logs. The next planner decision uses ground truth, not last night's chat memory.
 
-![Multi-agent orchestration architecture — Orchestrator loop, worker loops, and infrastructure harness](/blog/multi-agent-orchestration-architecture.png)
+![Multi-agent orchestration architecture: Orchestrator loop, worker loops, and infrastructure harness](/blog/multi-agent-orchestration-architecture.png)
 
 The next posts add two layers: [keeping the work looping until the goal is met](/blog/loop-goal-harness-skills-and-scripts), and [surviving crashes with files as durable state](/blog/file-event-harness-local-durable-agents).
 
@@ -86,7 +96,7 @@ The next posts add two layers: [keeping the work looping until the goal is met](
 
 **Skip it** for a one-line fix, a typo, or a throwaway spike. Over-process is also cost.
 
-Keep mission drafts and live handoffs local while the work is in flight. Keep product code—and anything others should reuse—in the repo.
+Keep mission drafts and live handoffs local while the work is in flight. Keep product code, and anything others should reuse, in the repo.
 
 ## Tradeoff, in one line
 

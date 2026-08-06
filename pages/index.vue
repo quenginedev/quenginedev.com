@@ -478,20 +478,25 @@
       )
   })
 
+  const pageTitle =
+    'Ernest Hayford | Freelance Lead Backend Architect & GTM Engineer (Node.js, AWS, AI)'
+  const pageDescription =
+    'Freelance Lead Backend Architect and GTM Engineer available for contract consulting. Node.js payment infrastructure, AWS microservices, AI agent orchestration, and production LLM evals. Accra-based, remote worldwide.'
+
   useHead({
-    title: `${contact.name} — ${contact.title}`,
+    title: pageTitle,
     meta: [
       {
         name: 'description',
-        content: hero.summary,
+        content: pageDescription,
       },
       {
         property: 'og:title',
-        content: `${contact.name} — ${contact.title}`,
+        content: pageTitle,
       },
       {
         property: 'og:description',
-        content: hero.subheadline,
+        content: pageDescription,
       },
       {
         property: 'og:type',
@@ -507,11 +512,11 @@
       },
       {
         name: 'twitter:title',
-        content: `${contact.name} — ${contact.title}`,
+        content: pageTitle,
       },
       {
         name: 'twitter:description',
-        content: hero.subheadline,
+        content: pageDescription,
       },
     ],
     link: [

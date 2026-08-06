@@ -1,9 +1,9 @@
 ---
-title: Stop Accepting Done Without Checks That Can Fail
+title: How to Solve False Done Claims using Validation Contracts
 description: >-
-  A short written checklist keeps AI or human work from shipping as finished
-  when behavior is not proven. Observable outcomes, verification steps, and
-  feared shortcuts turn vague success into checkable behavior.
+  Vague done claims green-light bugs in AI and human handoffs. Validation
+  contracts turn success into numbered, falsifiable behavior checks with proof
+  paths.
 date: 2026-06-23
 tags:
   - agents
@@ -16,24 +16,34 @@ tldr: >-
   A validation contract gates done from proven. Numbered checks describe
   visible behavior, test steps, and edge cases. Checkers try to disprove each
   ID. Weak wording green-lights bugs.
-ctaHeadline: Want checks that actually catch bugs?
+ctaHeadline: Need a custom payment rail or GTM automation built for your platform?
 ctaBody: >-
-  Teams can write validation contracts and review gates so done means behavior
-  they can prove, not a hopeful handoff that green-lights bugs.
-ctaLabel: Talk on LinkedIn
+  Message me on LinkedIn for an Architectural Discovery Call. I scope backend
+  architecture, payment infrastructure, and GTM pipeline work for your stack.
+ctaLabel: Message me on LinkedIn
 ---
 
 In a [multi-agent harness](/blog/building-multi-agent-harness), the **validation contract** is the gate between "the builder said it is done" and "it is actually done." A weak list of hopes lets bad work through with a clean handoff. A strong one turns vague success into **checkable behavior**. The planner, builder, and checker can disagree with evidence, not vibes.
 
 This post shows how to write checks that catch something instead of only documenting good intentions.
 
+## Key Takeaways
+
+| Topic | Takeaway |
+|-------|----------|
+| Purpose | Gate done with numbered, falsifiable behavior checks. |
+| IDs | Stable IDs link tasks, handoffs, and verification steps. |
+| Behavior | Each check states observable outcome, not implementation. |
+| Attack | Write the shortcut the team fears; verify with a real path. |
+| Checker | Different model family than builder when possible. |
+
 ## What the contract is for
 
 After scope is stable and **before** anyone edits the product, write a short approved checklist. Each item gets:
 
 - A **stable ID** (`A-01`, `A-02`, …) that tasks and handoffs point at
-- A **behavior statement** — what must be true for the user or the business, not which file or function did it
-- A **verification method** — a command, a click path, or a test that produces evidence
+- A **behavior statement**: what must be true for the user or the business, not which file or function did it
+- A **verification method**: a command, a click path, or a test that produces evidence
 
 The planner does not close a task until every linked ID is **met**, with proof. Failed or unchecked IDs become remake work, not a shrug in chat.
 
@@ -53,7 +63,7 @@ Why the strong version catches trouble:
 
 - The team knows **what broke** when the ID fails (draft exclusion, not "draft support")
 - The outcome is **observable** (listings, not "we added a field")
-- The **edge case** is spelled out (missing flag does not mean hidden—the classic shortcut that hides everything or nothing)
+- The **edge case** is spelled out (missing flag does not mean hidden. The classic shortcut hides everything or nothing)
 - Verification names an **attack** someone can actually try
 
 ## Rules that keep checks honest
@@ -79,7 +89,7 @@ If "success" in the scope doc has no ID, it will get negotiated away under time 
 
 Scope defines success. The contract turns success into numbered IDs. The plan ties each small task to those IDs. The builder ships one task and cites evidence per ID. The checker argues against each ID using the contract and the change, not the builder's private reasoning. Failed IDs become remake tasks. Partial is not a silent accept.
 
-Missing evidence for an ID means **unverified**—same as failed until proven.
+Missing evidence for an ID means **unverified**, same as failed until proven.
 
 When possible, the checker runs on a **different model family** than the builder. Same idea as not letting the author of a report be the only auditor.
 
@@ -91,11 +101,11 @@ When possible, the checker runs on a **different model family** than the builder
 - Edge cases are explicit (defaults, empty lists, missing optional fields)
 - At least one check per feature would fail on a stub
 - Deploy and build checks match the **real** target, not a generic "build passes"
-- Plan tasks link to IDs—no orphans, no overloaded mega-checks
+- Plan tasks link to IDs, no orphans, no overloaded mega-checks
 
 ## When to skip it
 
-Not every change needs a long checklist. A typo, a one-line config tweak, or a throwaway spike—single agent, no contract. The overhead pays when scope spans many files, a second pair of eyes has value, or the team needs an audit trail.
+Not every change needs a long checklist. A typo, a one-line config tweak, or a throwaway spike: single agent, no contract. The overhead pays when scope spans many files, a second pair of eyes has value, or the team needs an audit trail.
 
 Use it when "done" is ambiguous and expensive to unwind.
 

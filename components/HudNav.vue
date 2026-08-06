@@ -31,6 +31,24 @@
 
     <div class="hud-nav__corner hud-nav__corner--br">
       <div class="hud-panel hud-contact">
+        <NuxtLink to="/hire" class="hud-contact__link hud-contact__link--cta">
+          Work with me
+        </NuxtLink>
+        <details class="hud-services">
+          <summary class="hud-contact__link">
+            Services
+          </summary>
+          <div class="hud-services__menu">
+            <NuxtLink
+              v-for="link in serviceNavLinks"
+              :key="link.path"
+              :to="link.path"
+              class="hud-contact__link"
+            >
+              {{ link.label }}
+            </NuxtLink>
+          </div>
+        </details>
         <NuxtLink to="/blog" class="hud-contact__link">
           Blog
         </NuxtLink>
@@ -47,12 +65,25 @@
   lang="ts"
 >
   import { socialLinks, resumeLink } from '~/data/portfolio'
+  import { services } from '~/data/services'
 
   const props = defineProps<{
     scrollProgress?: number
   }>()
 
   const navSocialLinks = socialLinks
+
+  // ponytail: short labels for compact HUD corner nav
+  const serviceNavLabels: Record<string, string> = {
+    'gtm-engineering': 'GTM Engineering',
+    'backend-architecture': 'Backend Architecture',
+    'ai-engineering-evals': 'AI & Evals',
+  }
+
+  const serviceNavLinks = services.map((svc) => ({
+    path: svc.path,
+    label: serviceNavLabels[svc.slug] ?? svc.slug,
+  }))
 
   const scrollPercent = computed(() =>
     Math.round((props.scrollProgress ?? 0) * 100),
@@ -72,5 +103,26 @@
     object-fit: cover;
     flex-shrink: 0;
     margin-right: 0.5rem;
+  }
+
+  .hud-contact__link--cta {
+    color: var(--accent-bright);
+  }
+
+  .hud-services summary {
+    list-style: none;
+    cursor: pointer;
+  }
+
+  .hud-services summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .hud-services__menu {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.25rem;
+    margin-top: 0.25rem;
   }
 </style>

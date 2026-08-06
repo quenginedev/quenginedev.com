@@ -24,9 +24,10 @@ const props = defineProps<{
 }>()
 
 // ponytail: flat optional fields; nested cta: unused
-const DEFAULT_HEADLINE = 'Working on agent harnesses?'
+const DEFAULT_HEADLINE =
+	'Need a custom payment rail or GTM automation built for your platform?'
 const DEFAULT_BODY =
-	'I consult on multi-agent setup, validation gates, and durable local agents. Happy to talk through your use case.'
+	'Message me on LinkedIn for an Architectural Discovery Call. I scope backend architecture, payment infrastructure, and GTM pipeline work for your stack.'
 const DEFAULT_LABEL = 'Message me on LinkedIn'
 
 const linkedInUrl =

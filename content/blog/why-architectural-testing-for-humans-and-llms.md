@@ -1,9 +1,9 @@
 ---
-title: Why Architectural Testing Matters for Humans and LLMs
+title: How to Solve Layer Violations using ArchUnit and ts-arch
 description: >-
-  Architecture diagrams and ADRs describe intent. They do not stop violations
-  at build time. Executable architectural tests give humans and coding agents
-  the same fast pass/fail signal that linters already provide.
+  Layer violations slip past wiki diagrams under delivery pressure. ArchUnit and
+  ts-arch turn dependency rules into executable tests that fail in CI and agent
+  loops.
 date: 2026-07-30
 tags:
   - architecture
@@ -16,17 +16,26 @@ tldr: >-
   Written architecture erodes under delivery pressure. It cannot stop violations
   at edit time. Tools like ArchUnit and ts-arch turn layering rules into tests
   that fail in CI and in the agent loop before bad structure ships.
-ctaHeadline: Want architectural rules that enforce themselves?
+ctaHeadline: Need a custom payment rail or GTM automation built for your platform?
 ctaBody: >-
-  Teams can turn layering and dependency rules into executable tests. Humans and
-  coding agents get the same fast pass/fail signal on structure instead of a
-  diagram nobody reads under deadline pressure.
-ctaLabel: Talk on LinkedIn
+  Message me on LinkedIn for an Architectural Discovery Call. I scope backend
+  architecture, payment infrastructure, and GTM pipeline work for your stack.
+ctaLabel: Message me on LinkedIn
 ---
 
 Teams often start with a C4 diagram in Confluence. They agree on a folder structure in sprint planning. Six weeks later, a `routes/` file imports the database client directly. The diagram is not in the editor.
 
 That is not a people problem. It is a **feedback** problem. Architecture documentation describes what the team meant. It does not tell a developer or an LLM that the change broke the rule.
+
+## Key Takeaways
+
+| Topic | Takeaway |
+|-------|----------|
+| Problem | Diagrams describe intent; they do not fail builds on violation. |
+| Tooling | ArchUnit and ts-arch turn layering rules into CI tests. |
+| Agents | LLMs optimize local context; arch tests enforce global structure. |
+| Feedback | Red builds beat wiki pages under deadline pressure. |
+| Start | Write three rules the team already argues about in review. |
 
 ## When documentation is the only guardrail
 
